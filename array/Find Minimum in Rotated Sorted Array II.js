@@ -4,6 +4,8 @@
  */
 var findMin = function(nums) {
 
+  var l = nums.length;
+
   var go = function (left, right) {
 
     if (left === right) {
@@ -17,9 +19,11 @@ var findMin = function(nums) {
     var mid = Math.floor((left + right) / 2);
 
     if (nums[left] < nums[right]) {
-      // not rotate
       return nums[left];
-    } else if (nums[mid] > nums[left]) {
+    } else if (nums[left] === nums[right]) {
+      // shift one
+      return go(left + 1, right);
+    } else if (nums[left] <= nums[mid]) {
       // go right
       return go(mid, right);
     } else {
@@ -29,6 +33,6 @@ var findMin = function(nums) {
 
   };
 
-  return go(0, nums.length - 1);
+  return go(0, l - 1);
 
 };
