@@ -45,13 +45,6 @@ var insertionSortList = function(head) {
 
       small.next = tmp;
 
-
-      // cursor.next = small.next;
-
-      // small.next = pre.next;
-
-      // pre.next = small;
-
     } else {
       // continue;
       cursor = cursor.next;

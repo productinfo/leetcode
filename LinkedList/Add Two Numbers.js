@@ -33,7 +33,7 @@ var addTwoNumbers = function(l1, l2){
 
     cursor.next = new ListNode(sum % 10);
 
-    cur = cursor.next;
+    cursor = cursor.next;
 
     l1 = l1.next;
 
@@ -41,30 +41,19 @@ var addTwoNumbers = function(l1, l2){
 
   }
 
-  while (l1) {
-
-    sum = l1.val + adv;
-
-    cursor.next = new ListNode(sum % 10);
-
-    adv = Math.floor(sum / 10);
-
-    l1 =l1.next;
-
-  }
-
-  while (l2) {
-
-      sum = l2.val + adv;
-
-      cursor.next = new ListNode(sum % 10);
-
-      adv = Math.floor(sum / 10);
-
-      l2 =l2.next;
-  }
-
-  if (adv) {
+  if (l1) {
+    if (adv !== 0) {
+      cursor.next = addTwoNumbers(l1, new ListNode(adv));
+    } else {
+      cursor.next = l1;
+    }
+  } else if (l2) {
+    if (adv !== 0) {
+      cursor.next = addTwoNumbers(l2, new ListNode(adv));
+    } else {
+      cursor.next = l2;
+    }
+  } else if (adv !== 0) {
     cursor.next = new ListNode(adv);
   }
 

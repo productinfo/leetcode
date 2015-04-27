@@ -30,7 +30,7 @@ var detectCycle = function(head) {
     
     slow = head;
     
-    while (slow != fase) {
+    while (slow != fast) {
 
       slow = slow.next;
       fast = fast.next;
