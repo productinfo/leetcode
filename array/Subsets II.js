@@ -4,7 +4,7 @@
  */
 var subsetsWithDup = function(S) {
 
-  var result = [[]];
+  var result = [];
 
   if (S.length === 0) {
     return result;
@@ -16,7 +16,7 @@ var subsetsWithDup = function(S) {
     return a - b;
   });
 
-  var rec = function (S, start) {
+  var rec = function (start) {
 
     result.push([].concat(sub));
 
@@ -28,14 +28,14 @@ var subsetsWithDup = function(S) {
 
       sub.push(S[i]);
 
-      rec(S, i + 1);
+      rec(i + 1);
 
       sub.pop();
 
     }
   };
 
-  rec(S, 0);
+  rec(0);
 
   return result;
 

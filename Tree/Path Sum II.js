@@ -28,6 +28,7 @@ var pathSum = function(root, sum) {
       var copy = [].concat(sub);
       copy.push(root.val);
       result.push(copy);
+      return;
     }
 
     sub.push(root.val);

@@ -17,26 +17,26 @@ var combinationSum2 = function(candidates, target) {
     return a - b;
   });
 
-  var go = function (cand, start, target) {
+  var go = function (start, target) {
 
     if (target === 0) {
       result.push([].concat(sub));
       return;
     }
 
-    for (var i = start ; i < cand.length ; i++) {
+    for (var i = start ; i < candidates.length ; i++) {
 
-      if (i > start && cand[i] === cand[i - 1]) {
+      if (i > start && candidates[i] === candidates[i - 1]) {
         continue;
       }
 
-      if (target < cand[i]) {
+      if (target < candidates[i]) {
         return;
       }
 
-      sub.push(cand[i]);
+      sub.push(candidates[i]);
 
-      go(cand, i + 1, target - cand[i]);
+      go(i + 1, target - candidates[i]);
 
       sub.pop();
 
@@ -44,7 +44,7 @@ var combinationSum2 = function(candidates, target) {
 
   };
 
-  go(candidates, 0, target);
+  go(0, target);
 
   return result;
 };
