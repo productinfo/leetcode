@@ -15,3 +15,15 @@ var climbStairs = function(n) {
   return ans[n];
 
 };
+
+function stairs(n,array) { 
+   if(array===undefined) array=[]; 
+   if(n>=1) { 
+      stairs(n-1,["1"].concat(array)); 
+   } 
+   if(n>=2) { 
+      stairs(n-2,["2"].concat(array)); 
+   } 
+   if(n==0) console.log(array.join("")); 
+}
+stairs(5);

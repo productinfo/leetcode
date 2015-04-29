@@ -30,6 +30,7 @@ var generateTrees = function(n) {
       return res;
     }
 
+    // we can choose any i node to be root node as long as 1 < i < n
     for (var i = min ; i <= max ; i++) {
 
       var lefts = go(min, i - 1);
