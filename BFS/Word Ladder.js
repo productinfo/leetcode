@@ -10,47 +10,56 @@ var ladderLength = function(beginWord, endWord, wordDict) {
     return 0;
   }
 
-  var chars = 'abcdefghijklmnopqrstuvwxyz';
+  var chars = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  var charsLen = chars.length;
 
-  var q = [];
-  q.push(beginWord);
-  delete wordDict[beginWord];
+  wordDict.add(endWord);
 
-  var total = 0;
+  var wordQ = [], totalQ = [];
 
-  while (q.length > 0) {
+  wordQ.push(beginWord);
+  totalQ.push(1);
 
-    var count = q.length;
+  var res = Number.MAX_VALUE;
+  var i, j;
 
-    for (var i = 0 ; i < count ; i++) {
+  while (wordQ.length > 0) {
 
-      var current = q.shift();
+    var currWord = wordQ.shift();
+    var currTotal = totalQ.shift();
 
-      for (var j = 0 ; j < current.length ; j++) {
-        for (var c = 0 ; c <= chars.length ; c++) {
-          if (chars[c] === current[j]) {
-            continue;
-          }
+    if (currWord === endWord) {
+      res = Math.min(res, currTotal);
+    }
 
-          var tmp = current.replace(current[j], chars[c]);
+    var cl = currWord.length;
 
-          if (tmp === endWord) {
-            return total += 1;
-          }
 
-          if (wordDict.hasOwnProperty(tmp)) {
-            q.push(tmp);
-            delete wordDict[tmp];
-          }
+    for (i = 0 ; i < cl ; i++) {
+
+      for (j = 0 ; j < charsLen ; j++) {
+
+        var newWord = currWord.substring(0, i) + chars[j] + currWord.substring(i + 1);
+
+        if (wordDict.has(newWord)) {
+
+          wordQ.push(newWord);
+          totalQ.push(currTotal + 1);
+          wordDict.delete(newWord);
+
         }
+
+
       }
 
     }
 
-    total++;
-
   }
 
-  return 0;
+  if (res < Number.MAX_VALUE) {
+    return res;
+  } else {
+    return 0;
+  }
 
 };
