@@ -17,7 +17,7 @@ var combinationSum2 = function(candidates, target) {
     return a - b;
   });
 
-  var go = function (start, target) {
+  var dfs = function (start, target) {
 
     if (target === 0) {
       result.push([].concat(sub));
@@ -36,7 +36,7 @@ var combinationSum2 = function(candidates, target) {
 
       sub.push(candidates[i]);
 
-      go(i + 1, target - candidates[i]);
+      dfs(i + 1, target - candidates[i]);
 
       sub.pop();
 
@@ -44,7 +44,7 @@ var combinationSum2 = function(candidates, target) {
 
   };
 
-  go(0, target);
+  dfs(0, target);
 
   return result;
 };

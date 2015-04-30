@@ -16,14 +16,22 @@ var climbStairs = function(n) {
 
 };
 
-function stairs(n,array) { 
-   if(array===undefined) array=[]; 
-   if(n>=1) { 
-      stairs(n-1,["1"].concat(array)); 
-   } 
-   if(n>=2) { 
-      stairs(n-2,["2"].concat(array)); 
-   } 
-   if(n==0) console.log(array.join("")); 
-}
-stairs(5);
+// function x (n, dd) {
+  
+//   var arr = dd || [];
+  
+//   if (n === 0) {
+//     console.log(arr.join(''));
+//   }
+  
+//   if (n >= 1) {
+//       x(n - 1, ['1'].concat(arr));
+//   }
+  
+//   if (n >= 2) {
+//       x(n - 2, ['2'].concat(arr));
+//   }
+  
+// }
+
+// x(3);

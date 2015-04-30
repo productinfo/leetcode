@@ -4,7 +4,7 @@
  */
 var findMin = function(nums) {
 
-  var go = function (left, right) {
+  var binary = function (left, right) {
 
     if (left === right) {
       return nums[left];
@@ -21,14 +21,14 @@ var findMin = function(nums) {
       return nums[left];
     } else if (nums[mid] > nums[left]) {
       // go right
-      return go(mid, right);
+      return binary(mid, right);
     } else {
       // go left
-      return go(left, mid);
+      return binary(left, mid);
     }
 
   };
 
-  return go(0, nums.length - 1);
+  return binary(0, nums.length - 1);
 
 };

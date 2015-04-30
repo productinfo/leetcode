@@ -3,6 +3,21 @@
  * @return {number}
  */
 
+// sort array, since majority element must over half size of array
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+
+  nums = nums.sort();
+
+  return nums[Math.floor(nums.length / 2)];
+
+};
+
+
+
 // n / 2
 
 var findCand = function (n) {

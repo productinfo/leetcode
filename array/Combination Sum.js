@@ -15,28 +15,28 @@ var combinationSum = function(candidates, target) {
     return a - b;
   });
 
-  var go = function (cand, start, target) {
+  var dfs = function (start, target) {
     if (target === 0) {
       result.push([].concat(sub));
       return;
     }
 
-    if (target < cand[i]) {
+    for (var i = start ; i < candidates.length ; i++) {
+
+      if (target < candidates[i]) {
         return;
       }
 
-    for (var i = start ; i < cand.length ; i++) {
+      sub.push(candidates[i]);
 
-      sub.push(cand[i]);
-
-      go(cand, i, target - cand[i]);
+      dfs(i, target - candidates[i]);
 
       sub.pop();
 
     }
   };
 
-  go(candidates, 0, target);
+  dfs(0, target);
   return result;
 
 };

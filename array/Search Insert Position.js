@@ -29,17 +29,17 @@ var searchInsert = function(A, target) {
 
   // console.log(left, right);
 
-  var ans;
+  // var ans;
 
-  if (target > A[right]) {
-    ans = right + 1;
-  } else if (target < A[left]) {
-    ans = left;
-  } else {
-    ans = left + 1
-  }
+  // if (target > A[right]) {
+  //   ans = right + 1;
+  // } else if (target < A[left]) {
+  //   ans = left;
+  // } else {
+  //   ans = left + 1
+  // }
 
-  return ans;
+  return left;
   // return target > A[right] ? right + 1 : left + 1;
 
 };

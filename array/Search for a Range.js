@@ -17,17 +17,11 @@ var searchRange = function(A, target) {
       var left = mid, right = mid;
 
       while (left >= 0 && A[left] === target) {
-        if (A[left] === target) {
-          left--;
-        }
+        left--;
       }
 
       while (right < A.length && A[right] === target) {
-
-        if (A[right] === target) {
-          right++;
-        }
-
+        right++;
       }
 
       return [left + 1, right - 1];

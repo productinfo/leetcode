@@ -3,35 +3,28 @@
  * @param {number} target
  * @return {boolean}
  */
-
 var searchMatrix = function(matrix, target) {
 
-  var yl = matrix.length, xl = matrix[0].length;
+  var yl = matrix.length;
+  var xl = matrix[0].length;
 
-  if (!matrix || yl < 0 || xl < 0) {
-    return false;
-  }
+  var start = 0, end = yl * xl - 1,
+      mid, mX, mY;
 
-  var low = 0, right = yl * xl - 1, mid;
+  while (start <= end) {
 
-  var mx, my;
+    mid = Math.floor((start + end) / 2);
 
-  while (low <= right) {
+    mY = Math.floor(mid / xl);
 
-    mid = Math.floor((low + right) / 2);
+    mX = mid % xl;
 
-    mx = Math.floor(mid / xl);
-
-    my = mid % xl;
-
-    if (target === matrix[my][mx]) {
-
+    if (matrix[mY][mX] === target) {
       return true;
-
-    } else if (target > matrix[my][mx]) {
-      low = mid + 1;
+    } else if (matrix[mY][mX] < target) {
+      start = mid + 1;
     } else {
-      high = mid - 1;
+      end = mid - 1;
     }
 
   }
@@ -39,71 +32,3 @@ var searchMatrix = function(matrix, target) {
   return false;
 
 };
-
-var bs = function (n, t) {
-
-  var low = 0, high = n.length - 1, mid;
-
-  while (low <= high) {
-
-    mid = Math.floor((low + high) / 2);
-
-    if (n[mid] === t) {
-      return mid;
-    } else if (t > n[mid]) {
-      low = mid + 1;
-    } else {
-      high = mid - 1;
-    }
-
-  }
-
-  return -1;
-
-};
-
-// var searchMatrix = function(matrix, target) {
-
-//   var yl = matrix.length, xl = matrix[0].length;
-
-//   if (!matrix || yl < 0 || xl < 0) {
-//     return false;
-//   }
-
-//   var x;
-
-//   for (var i = 0 ; i < matrix.length ; i++) {
-
-//     x = bs(matrix[i], target);
-
-//     if (x !== -1) {
-//       return true;
-//     }
-
-//   }
-
-//   return false;
-
-// };
-
-// var bs = function (n, t) {
-
-//   var low = 0, high = n.length - 1, mid;
-
-//   while (low <= high) {
-
-//     mid = Math.floor((low + high) / 2);
-
-//     if (n[mid] === t) {
-//       return mid;
-//     } else if (t > n[mid]) {
-//       low = mid + 1;
-//     } else {
-//       high = mid - 1;
-//     }
-
-//   }
-
-//   return -1;
-
-// };
