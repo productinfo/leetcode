@@ -27,7 +27,7 @@ var fractionToDecimal = function(numerator, denominator) {
   var d = Math.abs(denominator);
 
   // quotient
-  var ans = Math.floor(n / d);
+  var ans = (n / d) >> 0;
   res += ans;
 
   // if remainder is 0, return
@@ -54,7 +54,7 @@ var fractionToDecimal = function(numerator, denominator) {
     // continue
     map[rem] = res.length;
 
-    ans = Math.floor(rem / d);
+    ans = (rem / d) >> 0;
 
     res += ans;
 

@@ -75,8 +75,8 @@ var valid = function (b, x, y, c) {
     }
   }
 
-  var yy = Math.floor(y / 3);
-  var xx = Math.floor(x / 3);
+  var yy = (y / 3) >> 0;
+  var xx = (x / 3) >> 0;
 
   // check box
   for (j = yy * 3 ; j < yy * 3 + 3 ; j++) {

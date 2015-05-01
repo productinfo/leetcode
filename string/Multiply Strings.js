@@ -48,7 +48,7 @@ var multiply = function(num1, num2) {
   // console.log(tmp);
   for (var z = 0 ; z < tmp.length ; z++) {
     var d = tmp[z] % 10;
-    carry = Math.floor(tmp[z] / 10);
+    carry = (tmp[z] / 10) >> 0;
     res = d + res;
     if (z < tmp.length - 1) {
       tmp[z + 1] += carry;

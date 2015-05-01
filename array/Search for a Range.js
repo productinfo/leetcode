@@ -9,7 +9,7 @@ var searchRange = function(A, target) {
 
   while (low <= high) {
 
-    mid = Math.floor((low + high) / 2);
+    mid = (low + high) >> 1;
 
     if (target === A[mid]) {
       // return mid;

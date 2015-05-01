@@ -11,8 +11,8 @@ var trailingZeroes = function(n) {
   var i = 5, five = 0;
 
   // count how may 5's
-  for (; Math.floor(n / i) >= 1 ; i *= 5) {
-    five += Math.floor(n / i);
+  for (; (n / i) >> 0 >= 1 ; i *= 5) {
+    five += (n / i) >> 0;
   }
 
   return five;

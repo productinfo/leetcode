@@ -13,9 +13,9 @@ var searchMatrix = function(matrix, target) {
 
   while (start <= end) {
 
-    mid = Math.floor((start + end) / 2);
+    mid = (start + end) >> 1;
 
-    mY = Math.floor(mid / xl);
+    mY = (mid / xl) >> 0;
 
     mX = mid % xl;
 

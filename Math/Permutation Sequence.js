@@ -18,7 +18,7 @@ var getPermutation = function(n, k) {
 
   var s = '';
 
-  t = Math.floor(t / n); // n - 1
+  t = (t / n) >> 0; // n - 1
 
   k--;
 
@@ -26,7 +26,7 @@ var getPermutation = function(n, k) {
 
   for (i = n - 1 ; i >= 1 ; i--) {
 
-    index = Math.floor(k / t);
+    index = (k / t) >> 0;
 
     d = nums[index]
 
@@ -35,7 +35,7 @@ var getPermutation = function(n, k) {
     nums.splice(index, 1);
 
     k %= t;
-    t = Math.floor(t / i);
+    t = (t / i) >> 0;
 
   }
   

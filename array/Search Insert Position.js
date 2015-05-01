@@ -15,7 +15,7 @@ var searchInsert = function(A, target) {
 
   while (left <= right) {
 
-    mid = Math.floor((right + left) / 2);
+    mid = (right + left) >> 1;
 
     if (target === A[mid]) {
       return mid;

@@ -22,7 +22,7 @@ var findPeakElement = function(nums) {
 
   while (low <= high) {
 
-    mid = Math.floor((low + high) / 2);
+    mid = (low + high) >> 1;
 
     if (
       (mid === 0 || nums[mid] > nums[mid - 1]) && (mid === l - 1 || nums[mid] > nums[mid + 1])

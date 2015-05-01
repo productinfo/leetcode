@@ -50,7 +50,7 @@ var swap = function (n, a, b) {
 
 var rev = function (n, s, e) {
 
-  var mid = Math.floor((s + e) / 2);
+  var mid = (s + e) >> 1;
 
   for (var i = s ; i <= mid ; i++) {
     swap(n, i, s + e - i);

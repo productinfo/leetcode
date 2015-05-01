@@ -20,7 +20,7 @@ var build = function (num, start, end) {
     return null;
   }
 
-  var mid = Math.floor((start + end) / 2);
+  var mid = (start + end) >> 1;
 
   var r = new TreeNode(num[mid]);
 

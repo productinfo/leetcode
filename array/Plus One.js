@@ -18,7 +18,7 @@ var plusOne = function(digits) {
 
     digits[i] = sum % 10;
 
-    add = Math.floor(sum / 10);
+    add = (sum / 10) >> 0;
 
     if (add === 0) {
       return digits;

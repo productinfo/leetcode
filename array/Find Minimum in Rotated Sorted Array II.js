@@ -16,7 +16,7 @@ var findMin = function(nums) {
       return Math.min(nums[left], nums[right]);
     }
 
-    var mid = Math.floor((left + right) / 2);
+    var mid = (left + right) >> 1;
 
     if (nums[left] < nums[right]) {
       return nums[left];

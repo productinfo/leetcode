@@ -29,7 +29,7 @@ var addTwoNumbers = function(l1, l2){
 
     var sum = l1.val + l2.val + adv;
 
-    adv = Math.floor(sum / 10);
+    adv = (sum / 10) >> 0;
 
     cursor.next = new ListNode(sum % 10);
 

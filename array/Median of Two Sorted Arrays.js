@@ -1,76 +1,62 @@
 /**
- * @param {number[]} A
- * @param {number[]} B
+ * @param {number[]} nums1
+ * @param {number[]} nums2
  * @return {number}
  */
-var findMedianSortedArrays = function(A, B) {
-    
-  var la = A.length,
-      lb = B.length,
-      total = la + lb;
+var findMedianSortedArrays = function(nums1, nums2) {
 
-  // if (la === 0 && lb === 0) {
-  //   return 0;
-  // }
+  var m = nums1.length,
+      n = nums2.length,
+      k = m + n;
 
-  if (total % 2 === 0) {
-
+  if (k % 2 === 0) {
     // even
-    return floor(fms(A, 0, la, B, 0, lb, floor(total)) + fms(A, 0, la, B, 0, lb, floor(total) + 1));
-
+    return (go(nums1, 0, m, nums2, 0, n, k >> 1) + go(nums1, 0, m, nums2, 0, n, (k >> 1) + 1)) / 2;
   } else {
-
     // odd
-    return fms(A, 0, la, B, 0, lb, floor(total) + 1);
-
+    return go(nums1, 0, m, nums2, 0, n, (k + 1) >> 1);
   }
 
 };
 
-var floor = function (x) {
-  return Math.floor(x / 2);
-};
+var go = function (A, as, ae, B, bs, be, k) {
 
-var fms = function (A, as, ae, B, bs, be, k) {
+  var al = ae - as;
+  var bl = be - bs;
 
-  var n = ae - as,
-      m = be - bs;
-
-  if (n <= 0) {
+  if (al <= 0) {
     return B[bs + k - 1];
   }
 
-  if (m <= 0) {
-    return A[as + k - 1]
+  if (bl <= 0) {
+    return A[as + k - 1];
   }
 
   if (k === 1) {
     return Math.min(A[as], B[bs]);
   }
 
-  var am = (as + ae) / 2,
-      bm = floor(bs + be);
+  var midA = (as + ae) >> 1;
+  var midB = (bs + be) >> 1;
 
-  if (am <= bm) {
+  if (A[midA] <= B[midB]) {
 
-    if ((floor(m + n) + 1) >= k) {
-      // disgard b2
-      return fms(A, as, ae, B, bs, bm, k);
+    if ((al >> 1) + (bl >> 1) + 1 >= k) {
+      return go(A, as, ae, B, bs, midB, k);
     } else {
-      // disgard a1
-      return fms(A, am + 1, ae, B, bs, bm, k - n / 2 - 1);
+      return go(A, midA + 1, ae, B, bs, be, k - (al >> 1) - 1);
     }
 
   } else {
-    if ((floor(m + n) + 1) >= k) {
 
-      // disgard a2
-      return fms(A, as, am, B, bs, be, k);
-
+    if ((al >> 1) + (bl >> 1) + 1 >= k) {
+      return go(A, as, midA, B, bs, be, k);
     } else {
-      
-      // disgard b1
-      return fms(A, as, ae, B, bm + 1, be, k - m / 2 - 1);
+      return go(A, as, ae, B, midB + 1, be, k - (bl >> 1) - 1);
     }
+
   }
+
+
+
 };

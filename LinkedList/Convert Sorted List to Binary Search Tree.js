@@ -38,7 +38,7 @@ var sortedListToBST = function(head) {
     }
 
     // get mid point
-    var mid = Math.floor((start + end) / 2);
+    var mid = (start + end) >> 1;
 
     var left = build(start, mid - 1);
 

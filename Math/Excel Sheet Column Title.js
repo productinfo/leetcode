@@ -44,7 +44,7 @@ var convertToTitle = function(n) {
   while (n) {
 
     var r = n % 26;
-    n = Math.floor(n / 26);
+    n = (n / 26) >> 0;
     if (r === 0) {
       n--;
     }

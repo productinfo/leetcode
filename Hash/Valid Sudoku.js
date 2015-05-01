@@ -26,7 +26,7 @@ var isValidSudoku = function(board) {
 
       if (board[y][x] !== '.') {
 
-        nArea = Math.floor(y / 3) * 3 + Math.floor(x / 3);
+        nArea = (y / 3) >> 0 * 3 + (x / 3) >> 0;
 
         if (
           yChecker[y].indexOf(board[y][x]) !== -1
