@@ -24,7 +24,7 @@ var isNumber = function(s) {
 
   
 
-  var map = {}, i,
+  var i,
       t = '0123456789e.+-'.split(''),
       len,
       ecounter = 0;
@@ -38,13 +38,9 @@ var isNumber = function(s) {
 
   len = s.length;
 
-  for (i = 0 ; i < t.length ; i++) {
-    map[t[i]] = true;
-  }
-
   for (i = 0 ; i < len ; i++) {
-    if (!map.hasOwnProperty(s[i])) {
-      return false;
+    if (t.indexOf(s[i]) === -1) {
+      return false
     }
     if (s[i] === 'e') {
       ecounter++;
@@ -61,9 +57,6 @@ var isNumber = function(s) {
   } else {
     // has e
     var es = s.split('e');
-    if (es.length <= 1) {
-      return false;
-    }
 
     for (i = 0 ; i < es[1].length ; i++) {
       if (es[1][i] === '.') {
@@ -79,22 +72,10 @@ var isNumber = function(s) {
 
 var check = function (str) {
 
-  var l = str.length, i, m = {},
+  var l = str.length, i,
       t = '0123456789.'.split('');
 
   if (l === 0) {
-    return false;
-  }
-
-  var dot = 0;
-
-  for (i = 0 ; i < l ; i++) {
-    if (str[i] === '.') {
-      dot++;
-    }
-  }
-
-  if (dot > 1) {
     return false;
   }
 
@@ -106,14 +87,21 @@ var check = function (str) {
     return false;
   }
 
-  for (i = 0 ; i < t.length ; i++) {
-    m[t[i]] = true;
-  }
+  var dot = 0;
 
-  for (i = 0 ; i < str.length ; i++) {
-    if (!m.hasOwnProperty(str[i])) {
+  l = str.length;
+
+  for (i = 0 ; i < l ; i++) {
+    if (t.indexOf(str[i]) === -1) {
       return false;
     }
+    if (str[i] === '.') {
+      dot++;
+    }
+  }
+
+  if (dot > 1) {
+    return false;
   }
 
   return true;

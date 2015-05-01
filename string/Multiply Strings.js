@@ -18,10 +18,6 @@ var multiply = function(num1, num2) {
   var n1 = num1.length;
   var n2 = num2.length;
 
-  // if (n2 > n1) {
-  //   return multiply(num2, num1);
-  // }
-
   num1 = num1.split('').reverse().join('');
   num2 = num2.split('').reverse().join('');
 
@@ -36,7 +32,7 @@ var multiply = function(num1, num2) {
   for (i = 0; i < n1 ; i++) {
 
     a = parseInt(num1[i]);
-    // console.log(a);
+
     for (j = 0 ; j < n2 ; j++) {
 
       b = parseInt(num2[j]);
@@ -45,7 +41,7 @@ var multiply = function(num1, num2) {
     }
 
   }
-  // console.log(tmp);
+
   for (var z = 0 ; z < tmp.length ; z++) {
     var d = tmp[z] % 10;
     carry = (tmp[z] / 10) >> 0;
@@ -53,16 +49,12 @@ var multiply = function(num1, num2) {
     if (z < tmp.length - 1) {
       tmp[z + 1] += carry;
     }
-
   }
 
-  var index;
+  var index = 0;
 
-  for (var p = 0 ; p < res.length ; p++) {
-    if (res[p] !== '0') {
-      index = p;
-      break;
-    }
+  while (index < res.length && res[index] === '0') {
+    index++;
   }
 
   return res.substring(index);

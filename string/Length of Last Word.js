@@ -14,12 +14,12 @@ var lengthOfLastWord = function(s) {
     return 0;
   }
 
-  var go = end;
+  var go = end - 1;
 
-  while (go - 1 >= 0 && s[go - 1] !== ' ') {
+  while (go >= 0 && s[go] !== ' ') {
     go--;
   }
 
-  return end - go + 1;
+  return end - go;
 
 };
