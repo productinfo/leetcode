@@ -12,18 +12,25 @@ var isPalindrome = function(x) {
     return true;
   }
 
-  var s = x.toString();
+  var l = 1;
 
-  var start = 0, last = s.length - 1;
+  while (x / l >= 10) {
+    l *= 10;
+  }
 
-  while (start < last) {
+  while (x !== 0) {
 
-    if (s[start] !== s[last]) {
+    var right = x % 10;
+    var left = (x / l) >> 0;
+
+    if (left !== right) {
       return false;
     }
 
-    start++;
-    last--;
+    x %= l;
+    x = (x / 10) >> 0;
+
+    l = (l / 100) >> 0;
 
   }
 

@@ -44,27 +44,29 @@ var minWindow = function(s, t) {
 
   for (i = 0 ; i < sl ; i++) {
 
-    if (alreadyFind.hasOwnProperty(s[i])) {
+    var curChar = s[i];
 
-      alreadyFind[s[i]] += 1;
+    if (alreadyFind.hasOwnProperty(curChar)) {
 
-      if (alreadyFind[s[i]] <= needFind[s[i]]) {
+      alreadyFind[curChar] += 1;
+
+      if (alreadyFind[curChar] <= needFind[curChar]) {
         len++;
       }
 
       if (len === tl) {
 
-        while (!needFind[s[go]] || alreadyFind[s[go]] > needFind[s[go]]) {
+        while (!needFind.hasOwnProperty(s[go]) || alreadyFind[s[go]] > needFind[s[go]]) {
 
           if (needFind[s[go]]) {
             alreadyFind[s[go]] -= 1;
           }
 
-          start++:
+          go++;
 
         }
 
-        if (i - start < end - len) {
+        if (i - go < end - start) {
           start = go;
           end = i;
         }
@@ -79,6 +81,6 @@ var minWindow = function(s, t) {
     return '';
   }
 
-  return s.substring(start, end);
+  return s.substring(start, end + 1);
 
 };
