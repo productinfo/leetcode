@@ -15,7 +15,7 @@ var buildTree = function(preorder, inorder) {
 
   function build (ps, pe, is, ie) {
   
-    if (ps >= pe || is >= ie) {
+    if (ps > pe || is > ie) {
       return null;
     }
 
@@ -29,14 +29,14 @@ var buildTree = function(preorder, inorder) {
 
     }
 
-    root.left = build(ps + 1, ps + 1 + i - is, is, i);
-    root.right = build(ps + 1 + i - is, pe, i + 1, ie);
+    root.left = build(ps + 1, ps + i - is, is, i - 1);
+    root.right = build(ps + i - is + 1, pe, i + 1, ie);
 
     return root;
 
   }
 
-  return build(0, preorder.length, 0, inorder.length);
+  return build(0, preorder.length - 1, 0, inorder.length - 1);
 
 };
 

@@ -6,28 +6,22 @@ var removeDuplicates = function(A) {
 
   var l = A.length;
 
-  if (l === 0) {
-    return 0;
-  } 
+  if (l <= 2) {
+    return l;
+  }
 
-  var occur = 1, index = 0;
+  var pv = 1, cur = 2;
 
-  for (var i = 1 ; i < l ; i++) {
+  while (cur < l) {
 
-    if (A[index] === A[i]) {
-
-      if (occur === 2) {
-        continue;
-      }
-      occur++;
-
+    if (A[cur] === A[pv] && A[cur] === A[pv - 1]) {
+      cur++;
     } else {
-      occur = 1;
+      A[++pv] = A[cur++]
     }
-    A[++index] = A[i];
 
   }
 
-  return index + 1;
+  return pv + 1;
 
 };

@@ -6,28 +6,40 @@ var maxProfit = function(prices) {
 
   var l = prices.length;
 
+  var left = [0], right = [];
+
+  right[l - 1] = 0;
+
+  var min = prices[0];
+
+  var max = prices[l - 1];
+
   var i;
-
-  var res = [];
-
-  var lowest = prices[0];
-
-  var maxProfit = 0;
-
-  var profit;
 
   for (i = 1 ; i < l ; i++) {
 
-    profit = prices[i] - lowest;
+    min = Math.min(min, prices[i]);
 
-    if (profit > maxProfit) {
-      maxProfit = profit;
-    }
+    left[i] = Math.max(prices[i] - min, left[i - 1]);
 
-    res.push(maxProfit);
-    if (prices[i] < lowest) {
-      lowest = prices[i];
-    }
   }
+
+  for (i = l - 2 ; i >= 0 ; i--) {
+
+    max = Math.max(max, prices[i]);
+
+    right[i] = Math.max(max - prices[i], right[i + 1]);
+
+  }
+
+  var profit = 0;
+
+  for (i = 0 ; i < l ; i++) {
+
+    profit = Math.max(profit, left[i] + right[i]);
+
+  }
+
+  return profit;
 
 };

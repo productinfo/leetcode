@@ -1,9 +1,3 @@
-/**
- * @param {number[][]} grid
- * @return {number}
- */
-
-// time n^2, space n
 var minPathSum = function(grid) {
 
   var yl = grid.length;
@@ -13,53 +7,25 @@ var minPathSum = function(grid) {
     return 0;
   }
 
-  var res = [0];
-  var i, j;
+  var dp = [0];
 
-  for (i = 1 ; i < xl ; i++) {
-    res.push(Number.MAX_VALUE);
+  var x, y;
+
+  for (x = 1 ; x < xl ; x++) {
+    dp.push(Number.MAX_VALUE);
   }
 
-  for (j = 0 ; j < yl ; j++) {
+  for (y = 0 ; y < yl ; y++) {
 
-    res[0] = res[0] + grid[j][0];
+    dp[0] = dp[0] + grid[y][0];
 
-    for (i = 1 ; i < xl ; i++) {
+    for (x = 1 ; x < xl ; x++) {
 
-      res[i] = grid[j][i] + Math.min(res[i], res[i - 1]);
+      dp[x] = grid[y][x] + Math.min(dp[x - 1], dp[x]);
 
     }
-
   }
 
-  return res[xl - 1];
+  return dp[xl - 1];
 
 };
-
-// time n^2, space n^2
-// var minPathSum = function(grid) {
-
-//   var yl = grid.length;
-//   var xl = grid[0].length;
-
-//   if (yl < 0 || xl < 0) {
-//     return 0;
-//   }
-
-//   var res = [];
-//   var i, j;
-
-//   for (i = 0 ; i < yl ; i++) {
-
-//     res.push([]);
-
-//     for (j = 0 ; j < xl ; j++) {
-
-//       res[j][i] = 0;
-
-//     }
-//   }
-
-//   console.log(res);
-
-// };

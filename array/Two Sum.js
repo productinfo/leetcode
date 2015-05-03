@@ -5,18 +5,15 @@
  */
 var twoSum = function(numbers, target) {
   
-  var map = {}, result = [];
+  var map = {};
 
-  for (var i = 0 ; i < numbers ; i++) {
+  for (var i = 0 ; i < numbers.length ; i++) {
 
     if (map.hasOwnProperty(numbers[i])) {
+      
+      return [map[numbers[i]] + 1, i + 1];
 
-      result.push(map[numbers[i]] + 1);
-      result.push(i + 1);
-
-      return result;
-
-    } else if (!map.hasOwnProperty(target - numbers[i]])) {
+    } else if (!map.hasOwnProperty(target - numbers[i])) {
 
       map[target - numbers[i]] = i;
 
@@ -25,6 +22,6 @@ var twoSum = function(numbers, target) {
 
   }
 
-  return result;
+  return [-1, -1];
 
 };

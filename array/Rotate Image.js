@@ -4,39 +4,36 @@
  */
 var rotate = function(matrix) {
   
-  if (matrix.length === 0 || matrix[0].length === 0) {
+  if (!matrix) {
     return;
   }
 
+  var yl = matrix.length;
+  var xl = matrix[0].length;
+
   var x, y, tmp;
 
-  // swap left and right
-  for (x = 0 ; x < matrix[0].length ; x++) {
-  
-    for (y = 0 ; y < matrix.length / 2 ; y++) {
+  // swap up and down
+  for (y = 0 ; y < yl >> 1 ; y++) {
+    for (x = 0 ; x < xl ; x++) {
 
       tmp = matrix[y][x];
 
-      matrix[y][x] = matrix[matrix.length - 1 - y][x];
+      matrix[y][x] = matrix[yl - 1 - y][x];
 
-      matrix[matrix.length - 1 - y][x] = tmp;
-    }   
-
+      matrix[yl - 1 - y][x] = tmp;
+    }
   }
 
-  // flip matrix
-  for (y = 1 ; y < matrix.length ; y++) {
+  // flip
+  for (y = 1 ; y < yl ; y++) {
+    for (x = 0 ; x < y ; x++) {
+      tmp = matrix[y][x];
 
-      for (x = 0 ; x < y ; x++) {
+      matrix[y][x] = matrix[x][y];
 
-        tmp = matrix[y][x];
-
-        matrix[y][x] = matrix[x][y];
-
-        matrix[x][y] = tmp;
-
-      }
-
-  }   
+      matrix[x][y] = tmp;
+    }
+  }
 
 };

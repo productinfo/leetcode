@@ -12,7 +12,7 @@ var majorityElement = function(nums) {
 
   nums = nums.sort();
 
-  return nums[Math.floor(nums.length / 2)];
+  return nums[nums.length >> 1];
 
 };
 
