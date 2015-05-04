@@ -43,12 +43,10 @@ var multiply = function(num1, num2) {
   }
 
   for (var z = 0 ; z < tmp.length ; z++) {
-    var d = tmp[z] % 10;
-    carry = (tmp[z] / 10) >> 0;
+    var s = tmp[z] + carry;
+    var d = s % 10;
+    carry = (s / 10) >> 0;
     res = d + res;
-    if (z < tmp.length - 1) {
-      tmp[z + 1] += carry;
-    }
   }
 
   var index = 0;

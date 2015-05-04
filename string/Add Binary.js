@@ -17,7 +17,7 @@ var addBinary = function(a, b) {
 
     d = da + db + adv;
 
-    r = (d % 2 === 0 ? 0 : 1) + r;
+    r = (d % 2) + r;
 
     adv = d >> 1;
 
@@ -26,14 +26,14 @@ var addBinary = function(a, b) {
   while (i >= 0) {
     da = parseInt(a[i--]);
     d = da + adv;
-    r = (d % 2 === 0 ? 0 : 1) + r;
+    r = (d % 2) + r;
     adv = d >> 1;
   }
 
   while (j >= 0) {
     db = parseInt(b[j--]);
     d = db + adv;
-    r = (d % 2 === 0 ? 0 : 1) + r;
+    r = (d % 2) + r;
     adv = d >> 1;
   }
 

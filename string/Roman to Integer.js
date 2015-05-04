@@ -1,9 +1,3 @@
-/**
- * Given a roman numeral, convert it to an integer.
- * 
- * Input is guaranteed to be within the range from 1 to 3999.
- */
-
 function map (char) {
   
   switch (char) {
@@ -34,19 +28,14 @@ function map (char) {
  * @return {number}
  */
 var romanToInt = function(s) {
-
   var r = 0;
-
-  for (var i = 0 ; i < s.length ; i++) {
-
+  var l = s.length;
+  for (var i = 0 ; i < l ; i++) {
+    r += map(s[i]);
     if (i > 0 && map(s[i]) > map(s[i - 1])) {
-      r += map(s[i]) - 2 * map(s[i - 1]);
-    } else {
-      r += map(s[i]);
+      r -= 2 * map(s[i - 1]);
     }
-
   }
 
   return r;
-
 };

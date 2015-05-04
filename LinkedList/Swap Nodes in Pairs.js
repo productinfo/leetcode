@@ -12,10 +12,8 @@
  */
 var swapPairs = function(head) {
 
-  if (!head) {
-    return null;
-  } else if (!head.next) {
-    return head;
+  if (!head || !head.next) {
+      return head;
   } else {
 
     var list = swapPairs(head.next.next);

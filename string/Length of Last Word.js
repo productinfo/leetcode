@@ -4,15 +4,15 @@
  */
 var lengthOfLastWord = function(s) {
   
-  var end = s.length - 1;
+  s = s.trim();
 
-  while (end >= 0 && s[end] == ' ') {
-    end--;
-  }
+  var l = s.length;
 
-  if (end < 0) {
+  if (l === 0) {
     return 0;
   }
+  
+  var end = s.length - 1;
 
   var go = end - 1;
 

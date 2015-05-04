@@ -11,17 +11,12 @@ var compareVersion = function(version1, version2) {
 
     t1 = parseInt(v1[index] || 0);
     t2 = parseInt(v2[index] || 0);
-
+    index++;
     if (t1 < t2) {
       return -1;
     } else if (t1 > t2) {
       return 1;
-    } else {
-
-      index++;
-
     }
-
   }
 
   return 0;

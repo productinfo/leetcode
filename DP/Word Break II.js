@@ -15,7 +15,9 @@ var wordBreak = function(s, wordDict) {
     return res;
   }
 
-  var dp = [[]];
+  var dp = [];
+
+  dp[0] = [];
 
   for (var i = 0 ; i < l ; i++) {
 
@@ -23,8 +25,8 @@ var wordBreak = function(s, wordDict) {
       continue;
     }
 
-    for (let word of wordDict) {
-
+    for (var j = 0 ; j < wl ; j++) {
+      var word = wordDict[j];
       var len = word.length;
       var end = i + len;
 

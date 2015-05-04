@@ -16,22 +16,22 @@ var climbStairs = function(n) {
 
 };
 
-// function x (n, dd) {
+function x (n, dd) {
   
-//   var arr = dd || [];
+  var arr = dd || [];
   
-//   if (n === 0) {
-//     console.log(arr.join(''));
-//   }
+  if (n === 0) {
+    console.log(arr.join(''));
+  }
   
-//   if (n >= 1) {
-//       x(n - 1, ['1'].concat(arr));
-//   }
+  if (n >= 1) {
+      x(n - 1, ['1'].concat(arr));
+  }
   
-//   if (n >= 2) {
-//       x(n - 2, ['2'].concat(arr));
-//   }
+  if (n >= 2) {
+      x(n - 2, ['2'].concat(arr));
+  }
   
-// }
+}
 
-// x(3);
+x(3);
