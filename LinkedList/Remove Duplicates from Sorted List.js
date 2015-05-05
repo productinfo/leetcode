@@ -25,15 +25,15 @@ var deleteDuplicates = function(head) {
 
       // remove
       pv.next = cur.next;
-      cur = cur.next;
 
     } else {
 
       // go next
-      cur = cur.next;
       pv = pv.next;
 
     }
+    
+    cur = cur.next;
 
   }
 

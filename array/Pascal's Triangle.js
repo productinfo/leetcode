@@ -11,16 +11,14 @@ var generate = function(numRows) {
   var result = [];
 
   for (var i = 0 ; i < numRows ; i++) {
-
-    var tmp = [];
+    
+    result.push([]);
 
     for (var j = 0 ; j <= i ; j++) {
 
-      tmp.push(1);
+      result[i].push(1);
 
     }
-
-    result.push(tmp);
 
   }
 
@@ -29,7 +27,7 @@ var generate = function(numRows) {
     var prev = result[k - 1];
     var curr = result[k];
 
-    for (var m = 1 ; m < curr.length - 1 ; m++) {
+    for (var m = 1 ; m < prev.length ; m++) {
 
       curr[m] = prev[m - 1] + prev[m];
 

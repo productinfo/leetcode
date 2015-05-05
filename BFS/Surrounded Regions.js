@@ -32,13 +32,14 @@ var solve = function(board) {
 
   var bfs = function (x, y) {
 
-    if (board[y][x] === 'O') {
-      q.push([x, y]);
-      fill(x, y);
-    }
+    fill(x, y);
+
+    // if (board[y][x] === 'O') {
+    //   q.push([x, y]);
+      
+    // }
 
     while (q.length > 0) {
-
       var curr = q.shift();
       var currX = curr[0];
       var currY = curr[1];
@@ -46,7 +47,6 @@ var solve = function(board) {
       fill(currX - 1, currY);
       fill(currX, currY + 1);
       fill(currX, currY - 1);
-
     }
 
   };
@@ -54,21 +54,31 @@ var solve = function(board) {
   var i, j;
 
   for (i = 0 ; i < xl ; i++) {
-    bfs(i, 0);
-    bfs(i, yl - 1);
+    if (board[0][i] === 'O') {
+      bfs(i, 0);
+    }
+
+    if (board[yl - 1][i] === 'O') {
+      bfs(i, yl - 1);
+    }
   }
 
   for (i = 1 ; i < yl - 1 ; i++) {
-    bfs(0, i);
-    bfs(xl - 1, i);
+    if (board[i][0] === 'O') {
+      bfs(0, i);
+    }
+
+    if (board[i][xl - 1] === 'O') {
+      bfs(xl - 1, i);
+    }
   }
 
   for (i = 0 ; i < yl ; i++) {
     for (j = 0 ; j < xl ; j++) {
       if (board[i][j] === '?') {
-        board[i][j] === 'O';
+        board[i][j] = 'O';
       } else if (board[i][j] === 'O') {
-        board[i][j] === 'X';
+        board[i][j] = 'X';
       }
     }
 
