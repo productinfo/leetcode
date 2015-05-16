@@ -25,6 +25,10 @@ var allFactors = function (n) {
     }
 
   }
+
+  if (n > 2) {
+    s += n;
+  }
   
   return s.trim();
 
