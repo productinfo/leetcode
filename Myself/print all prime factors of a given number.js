@@ -2,7 +2,7 @@ var allFactors = function (n) {
 
   var s = '';
   
-  var temp = n;
+  var temp = Math.sqrt(n);
 
   while (n % 2 === 0) {
 
@@ -14,7 +14,7 @@ var allFactors = function (n) {
 
   var i = 3;
   
-  for (; i <= Math.sqrt(temp) ; i += 2) {
+  for (; i <= temp ; i += 2) {
     
     while (n % i === 0) {
 
@@ -33,3 +33,5 @@ var allFactors = function (n) {
   return s.trim();
 
 };
+
+console.log(allFactors(12));
