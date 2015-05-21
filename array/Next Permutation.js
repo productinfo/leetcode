@@ -13,7 +13,7 @@ var nextPermutation = function(num) {
   var k = -1;
   var i;
 
-  for (i = 0 ; i < l ; i++) {
+  for (i = 0 ; i < l - 1 ; i++) {
 
     if (num[i] < num[i + 1]) {
       k = Math.max(k, i);
@@ -27,7 +27,7 @@ var nextPermutation = function(num) {
 
     var p = 0;
 
-    for (i = 0 ; i < l ; i++) {
+    for (i = k ; i < l ; i++) {
 
       if (num[i] > num[k]) {
         p = Math.max(p, i);
