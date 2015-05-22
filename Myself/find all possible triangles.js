@@ -1,3 +1,8 @@
+/**
+ * eg: 9 8 10 7 
+ * ans: 9 8 10, 9 8 7, 9 10 7, 7 8 10 
+ */
+
 var triangle = function (arr) {
 
   var len = arr.length;
