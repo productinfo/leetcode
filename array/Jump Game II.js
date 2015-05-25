@@ -17,7 +17,7 @@ var jump = function(nums) {
 
   var reach = 0;
   var step = 0;
-  var last = 0
+  var last = 0;
 
   for (var i = 0 ; i <= reach && i < l ; i++) {
 
