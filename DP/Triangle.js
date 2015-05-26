@@ -12,11 +12,7 @@ var minimumTotal = function(triangle) {
 
   var i, j;
 
-  var res = [];
-
-  for (i = 0 ; i < triangle[ll - 1].length ; i++) {
-    res[i] = triangle[ll - 1][i];
-  }
+  var res = triangle[ll - 1];
 
   // from last second row
   for (i = ll - 2 ; i >= 0 ; i--) {

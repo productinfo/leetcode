@@ -41,7 +41,7 @@ var isPa = function (str) {
 
   var len = str.length, i = 0;
 
-  for (; i < len / 2 ; i++) {
+  for (; i < len >> 1 ; i++) {
 
     if (str[i] !== str[len - 1 - i]) {
       return false;
