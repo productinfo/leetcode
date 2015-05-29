@@ -10,18 +10,14 @@ var ladderLength = function(beginWord, endWord, wordDict) {
     return 0;
   }
 
-  var chars = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  var charsLen = chars.length;
-
   wordDict.add(endWord);
 
-  var wordQ = [], totalQ = [];
-
-  wordQ.push(beginWord);
-  totalQ.push(1);
-
-  var res = Number.MAX_VALUE;
-  var i, j;
+  var chars = 'abcdefghijklmnopqrstuvwxyz'.split(''),
+      charsLen = chars.length,
+      wordQ = [beginWord],
+      totalQ = [1],
+      res = Number.MAX_VALUE,
+      i, j;
 
   while (wordQ.length > 0) {
 
