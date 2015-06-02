@@ -6,7 +6,7 @@ var TrieNode = function() {
     return {
       isWordEnd: false,
       children: {}
-    }
+    };
 };
 
 var Trie = function() {
