@@ -24,7 +24,7 @@ MinStack.prototype.push = function(x) {
     list.push(new XYZ(x, x));
   } else {
 
-    var m = Math.min(list[len - 1].min, x);
+    var m = Math.min(this.getMin(), x);
     this.list.push(new XYZ(x, m));
 
   }
