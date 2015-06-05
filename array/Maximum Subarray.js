@@ -19,7 +19,7 @@ var maxSubArray = function(nums) {
     total += nums[i];
 
     if (total < nums[i]) {
-      total = nums[i]
+      total = nums[i];
     }
 
     if (total > max) {
