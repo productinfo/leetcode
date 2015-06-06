@@ -1,33 +1,40 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * function TreeNode(val) {
  *     this.val = val;
  *     this.left = this.right = null;
  * }
  */
-
 /**
- * @param {number[]} num
- * @returns {TreeNode}
+ * @param {number[]} nums
+ * @return {TreeNode}
  */
-var sortedArrayToBST = function(num) {
-  return build(num, 0, num.length);
-};
+var sortedArrayToBST = function(nums) {
 
-var build = function (num, start, end) {
-
-  if (start >= end) {
-    return null;
-  }
-
-  var mid = (start + end) >> 1;
-
-  var r = new TreeNode(num[mid]);
-
-  r.left = build(num, start, mid);
-
-  r.right = build(num, mid + 1, end);
-
-  return r;
+    var len = nums.length;
+    
+    if (len === 0) {
+        return null;
+    }
+    
+    var build = function (start, end) {
+       
+        if (start >= end) {
+            return null;
+        }
+        
+        var mid = (start + end) >> 1;
+        
+        var root = new TreeNode(nums[mid]);
+        
+        root.left = build(start, mid);
+        
+        root.right = build(mid + 1, end);
+        
+        return root;
+        
+    };
+    
+    return build(0, len);
 
 };
