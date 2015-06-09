@@ -14,7 +14,7 @@ var reverseWords = function(str) {
 
   var sp = str.split(' ');
   var sl = sp.length;
-  var i = sl - 1
+  var i = sl - 1;
 
   for (; i >= 0 ; i--) {
 
@@ -25,4 +25,14 @@ var reverseWords = function(str) {
   }
 
   return res.trim();
+};
+
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+var reverseWords = function(str) {
+    return str.trim().split(' ').filter(function (v) {
+        return v !== '';
+    }).reverse().join(' ');
 };
