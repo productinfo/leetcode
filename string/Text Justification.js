@@ -1,4 +1,5 @@
 /**
+ * console.log(fullJustify(["This", "is", "an", "example", "of", "text", "justification."], 3));
  * @param {string[]} words
  * @param {number} maxWidth
  * @return {string[]}
