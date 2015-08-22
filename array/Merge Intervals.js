@@ -22,29 +22,28 @@ var merge = function(intervals) {
     return a.start - b.start;
   });
 
-  var i = 1, result = [];
-
-  result.push(intervals[0]);
+  var i = 1, result = [], pv = intervals[0];
 
   for (; i < len ; i++) {
 
-    var cur = intervals[i],
-        pv = result.pop();
+    var cur = intervals[i];
 
-    if (cur.start < pv.end) {
+    if (cur.start <= pv.end) {
 
       // has overlap, merge and push
-      pv.end = Math.max(cur.end, pv.end);
-      result.push(pv);
+      pv = new Interval(Math.min(cur.start, pv.start), Math.max(cur.end, pv.end));
 
     } else {
 
       // push
-      result.push(cur);
+      result.push(pv);
+      pv = cur;
 
     }
 
   }
+
+  result.push(pv);
 
   return result;
 };
