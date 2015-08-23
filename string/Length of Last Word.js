@@ -3,7 +3,7 @@
  * @return {number}
  */
 var lengthOfLastWord = function(s) {
-  
+
   s = s.trim();
 
   var l = s.length;
@@ -11,15 +11,13 @@ var lengthOfLastWord = function(s) {
   if (l === 0) {
     return 0;
   }
-  
+
   var end = s.length - 1;
 
-  var go = end - 1;
-
-  while (go >= 0 && s[go] !== ' ') {
-    go--;
+  while (end >= 0 && s[end] !== ' ') {
+    end--;
   }
 
-  return end - go;
+  return s.substring(end + 1).length;
 
 };
