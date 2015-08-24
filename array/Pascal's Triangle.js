@@ -8,33 +8,30 @@ var generate = function(numRows) {
     return [];
   }
 
-  var result = [];
+  var pv = [1], cur, pvLength,
+      result = [pv], i = 2, j;
 
-  for (var i = 0 ; i < numRows ; i++) {
-    
-    result.push([]);
+  for (; i <= numRows ; i++) {
 
-    for (var j = 0 ; j <= i ; j++) {
+    cur = [1];
 
-      result[i].push(1);
+    pvLength = pv.length;
 
-    }
+    for (j = 0 ; j < pvLength - 1 ; j++) {
 
-  }
-
-  for (var k = 2 ; k < numRows ; k++) {
-
-    var prev = result[k - 1];
-    var curr = result[k];
-
-    for (var m = 1 ; m < prev.length ; m++) {
-
-      curr[m] = prev[m - 1] + prev[m];
+      cur.push(pv[j] + pv[j + 1]);
 
     }
 
+    cur.push(1);
+
+    result.push(cur);
+
+    pv = cur;
+
   }
+
 
   return result;
-  
+
 };
