@@ -3,7 +3,7 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-  
+
   var map = {
     ')': '(',
     ']': '[',
@@ -12,11 +12,8 @@ var isValid = function(s) {
 
   var len = s.length;
 
-  if (len === 0) {
-    return true;
-  } else if (len === 1) {
-    return false;
-  }
+  if (len === 0) return true;
+	if (len === 1) return false;
 
   var stack = [], i = 0;
 
@@ -24,15 +21,11 @@ var isValid = function(s) {
 
     if (s[i] === '(' || s[i] === '[' || s[i] === '{') {
       stack.push(s[i]);
-    } else if (s[i] === ')' || s[i] === ']' || s[i] === '}') {
-      var x = stack.pop();
-      if (x !== map[s[i]]) {
-        return false;
-      }
+    } else {
+      if (stack.pop() !== map[s[i]]) return false;
     }
 
   }
 
-  return stack.length === 0 ? true : false;
-
+  return stack.length === 0;
 };
