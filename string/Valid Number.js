@@ -22,8 +22,6 @@
  */
 var isNumber = function(s) {
 
-  
-
   var i,
       t = '0123456789e.+-'.split(''),
       len,
