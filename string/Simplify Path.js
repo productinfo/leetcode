@@ -39,13 +39,5 @@ var simplifyPath = function(path) {
     }
   }
 
-  if (stack.length === 0) {
-    return '/';
-  }
-
-  while (stack.length > 0) {
-    res += '/' + stack.shift();
-  }
-
-  return res;
+  return stack.length === 0 ? '/' : '/' + stack.join('/');
 };
