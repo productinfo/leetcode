@@ -4,57 +4,46 @@
  * @return {string}
  */
 var multiply = function(num1, num2) {
-    
+
   var res = '';
 
-  if (!num1 || !num2) {
-    return res;
-  }
+  if (!num1 || !num2) return res;
 
-  if (num1 === '0' || num2 === '0') {
-    return '0';
-  }
+  if (num1 === '0' || num2 === '0') return '0';
 
-  var n1 = num1.length;
-  var n2 = num2.length;
-
-  num1 = num1.split('').reverse().join('');
-  num2 = num2.split('').reverse().join('');
-
-  var i, j, a, b;
-
-  var carry = 0, tmp = [];
-
-  for (var g = 0 ; g < n1 + n2 ; g++) {
-    tmp[g] = 0;
-  }
+  var n1 = num1.length,
+      n2 = num2.length,
+      i, j, a, b, tl, sum,
+      carry = 0, tmp = [];
 
   for (i = 0; i < n1 ; i++) {
 
-    a = parseInt(num1[i]);
+    a = parseInt(num1[i], 10);
 
     for (j = 0 ; j < n2 ; j++) {
 
-      b = parseInt(num2[j]);
-      tmp[i + j] += a * b;
+      b = parseInt(num2[j], 10);
+
+      if (tmp[i + j]) {
+        tmp[i + j] += a * b;
+      } else {
+        tmp[i + j] = a * b;
+      }
 
     }
 
   }
 
-  for (var z = 0 ; z < tmp.length ; z++) {
-    var s = tmp[z] + carry;
-    var d = s % 10;
-    carry = (s / 10) >> 0;
-    res = d + res;
+  tl = tmp.length;
+
+  for (i = tl - 1 ; i >= 0 ; i--) {
+    sum = tmp[i] + carry;
+    carry = (sum / 10) >> 0;
+    res = (sum % 10) + res;
   }
 
-  var index = 0;
+  // if (carry) res = carry + res;
 
-  while (index < res.length && res[index] === '0') {
-    index++;
-  }
-
-  return res.substring(index);
+  return carry ? carry + res : res;
 
 };
