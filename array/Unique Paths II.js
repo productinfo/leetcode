@@ -1,6 +1,6 @@
 /**
  * @param {number[][]} obstacleGrid
- * @returns {number}
+ * @return {number}
  */
 var uniquePathsWithObstacles = function(obstacleGrid) {
 
@@ -11,46 +11,31 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
     return 0;
   }
 
-  var res = [];
+  if (obstacleGrid[0][0] === 1) return 0;
+  if (obstacleGrid[yl - 1][xl - 1] === 1) return 0;
 
-  var i, j;
+  var block = false, x, y;
 
-  for (i = 0 ; i < yl ; i++) {
-    res.push([]);
+  for (x = 1 ; x < xl ; x++) {
+    if (obstacleGrid[0][x] === 1) block = true;
+    obstacleGrid[0][x] = block ? 0 : 1;
   }
 
-  for (i = 0 ; i < xl ; i++) {
-
-    if (obstacleGrid[0][i] !== 1) {
-      res[0][i] = 1;
-    } else {
-      res[0][i] = 0;
-    }
-
+  block = false;
+  for (y = 1 ; y < yl ; y++) {
+    if (obstacleGrid[y][0] === 1) block = true;
+    obstacleGrid[y][0] = block ? 0 : 1;
   }
 
-  for (i = 0 ; i < yl ; i++) {
+  obstacleGrid[0][0] = 1;
 
-    if (obstacleGrid[i][0] !== 1) {
-      res[i][0] = 1;
-    } else {
-      res[i][0] = 1;
-    }
+  for (y = 1 ; y < yl ; y++) {
+    for (x = 1 ; x < xl ; x++) {
 
-  }
-
-  for (i = 1 ; i < xl ; i++) {
-    for (j = 1 ; j < yl ; j++) {
-
-      if (obstacleGrid[j][i] === 1) {
-        res[j][i] = 0;
-      } else {
-        res[j][i] = res[j - 1][i] + res[j][i - 1];
-      }
+      obstacleGrid[y][x] = obstacleGrid[y][x] === 1 ? 0 : obstacleGrid[y - 1][x] + obstacleGrid[y][x - 1];
 
     }
   }
 
-  return res[yl - 1][xl - 1];
-
+  return obstacleGrid[yl - 1][xl - 1];
 };
