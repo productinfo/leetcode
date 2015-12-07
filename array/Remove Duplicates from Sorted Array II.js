@@ -17,7 +17,7 @@ var removeDuplicates = function(A) {
     if (A[cur] === A[pv] && A[cur] === A[pv - 1]) {
       cur++;
     } else {
-      A[++pv] = A[cur++]
+      A[++pv] = A[cur++];
     }
 
   }
