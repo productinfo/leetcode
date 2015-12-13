@@ -3,30 +3,39 @@
  * For example, given [0, 1, 3, 50, 75], return [“2”, “4->49”, “51->74”, “76->99”]
  */
 
+function Range(start, end) {
+  this.start = start;
+  this.end = end;
+}
+
+Range.prototype.toString = function () {
+  return this.start === this.end ? this.start + '' : this.start + '->' + this.end;
+};  
+
 var findMissingRanges = function (nums, start, end) {
 
-  var pv = start - 1;
-  var l = nums.length;
-  var i = 0;
-  var cur;
-  var res = [];
+  var l = nums.length,
+      res = [], i = 0,
+      cur = new Range(start, end);
 
-  for (; i <= l ; i++) {
+  for (; i < l ; i++) {
 
-    cur = i === l ? end + 1 : nums[i];
+    if (nums[i] > cur.end) break;
 
-    if (cur - pv >= 2) {
-      res.push(getRange(pv + 1, cur - 1));
+    if (nums[i] >= cur.start) {
+
+      var r = new Range(cur.start, nums[i] - 1);
+
+      if (r.end >= r.start) res.push(r.toString());
+
+      cur.start = nums[i] + 1;
+
     }
-
-    pv = cur;
 
   }
 
+  if (cur.end >= cur.start) res.push(cur.toString());
+
   return res;
 
-};
-
-var getRange = function (from, to) {
-  return from === to ? (from + '') : (from + '->' + to);
 };
