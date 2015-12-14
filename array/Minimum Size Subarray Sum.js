@@ -2,35 +2,29 @@
  * @param {number} s
  * @param {number[]} nums
  * @return {number}
- * [2,3,1,2,4,3] and s = 7 -> [4, 3]
  */
 var minSubArrayLen = function(s, nums) {
-    
-  var len = nums.length;
 
-  if (len === 0) {
-    return 0;
-  }
+  var len = nums.length,
+      reach = len,
+      i = 0, sum = 0, index = 0;
 
-  var curSum = 0, start = 0, end = 0, min = 0;
+  for (; i < len ; i++) {
 
-  while (end < len) {
+    sum += nums[i];
 
-    while (curSum < s && end < len) {
-      curSum += nums[end++];
-    }
+    if (sum >= s) {
 
-    while (curSum >= s && start < end) {
-
-      if (end - start < min || min === 0) {
-        min = end - start;
+      while (sum - nums[index] >= s) {
+        sum -= nums[index++];
       }
 
-      curSum -= nums[start++];
+      reach = Math.min(reach, i - index + 1);
 
     }
 
   }
 
-  return min;
+  return reach >= len ? 0 : reach;
+
 };
