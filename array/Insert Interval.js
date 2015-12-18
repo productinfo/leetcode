@@ -13,23 +13,23 @@
  */
 
 var insert = function(intervals, newInterval) {
-    
-  var len = intervals.length, result = [], temp = newInterval;
+
+  var len = intervals.length, result = [];
 
   for (var i = 0 ; i < len ; i++) {
 
-    if (intervals[i].end < temp.start) {
+    if (intervals[i].end < newInterval.start) {
       result.push(intervals[i]);
-    } else if (temp.end < intervals[i].start) {
-      result.push(temp);
-      temp = intervals[i];
+    } else if (newInterval.end < intervals[i].start) {
+      result.push(newInterval);
+      newInterval = intervals[i];
     } else {
-      temp = new Interval(Math.min(temp.start, intervals[i].start), Math.max(temp.end, intervals[i].end));
+      newInterval = new Interval(Math.min(newInterval.start, intervals[i].start), Math.max(newInterval.end, intervals[i].end));
     }
 
   }
-  
-  result.push(temp);
+
+  result.push(newInterval);
 
   return result;
 
