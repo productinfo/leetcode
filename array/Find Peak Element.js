@@ -1,42 +1,30 @@
 
-/**
- * binary search
- * O(nlogn)
- */
 
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var findPeakElement = function(nums) {
-    
-  var l = nums.length;
 
-  if (l < 2) {
-    return 0;
-  }
+  if (!nums) return 0;
 
-  var low = 0,
-      high = l - 1,
-      mid;
+  var len = nums.length;
 
-  while (low <= high) {
+  if (len < 2) return 0;
 
-    mid = (low + high) >> 1;
+  var helper = function (from, to) {
 
-    if (
-      (mid === 0 || nums[mid] > nums[mid - 1]) && (mid === l - 1 || nums[mid] > nums[mid + 1])
-      ) {
-      return mid;
-    } else if (mid > 0 && nums[mid] < nums[mid - 1]) {
-      high = mid - 1;
-    } else {
-      low = mid + 1;
-    }
+    if (to - from === 1) return nums[from] > nums[to] ? from : to;
+
+    var mid = (from + to) >> 1,
+        l = helper(from, mid),
+        r = helper(mid, to);
+
+    if (nums[l] > nums[r]) return l;
+    else return r;
 
   }
 
-  return mid;
-
+  return helper(0, len - 1);
 
 };
