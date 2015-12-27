@@ -6,7 +6,7 @@ var findMin = function(nums) {
 
   var binary = function (left, right) {
 
-    if (left === right) {
+    if (left === right || nums[left] < nums[right]) {
       return nums[left];
     }
 
@@ -16,10 +16,7 @@ var findMin = function(nums) {
 
     var mid = (left + right) >> 1;
 
-    if (nums[left] < nums[right]) {
-      // not rotate
-      return nums[left];
-    } else if (nums[mid] > nums[left]) {
+    if (nums[mid] > nums[left]) {
       // go right
       return binary(mid, right);
     } else {
