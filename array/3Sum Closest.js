@@ -12,13 +12,13 @@ var threeSumClosest = function (num, target) {
     return a - b;
   });
 
-  for (var i = 0 ; i < len ; i++) {
+  for (var i = 0 ; i < len - 2 ; i++) {
 
     var j = i + 1,
         k = len - 1;
 
     while (j < k) {
-      
+
       var sum = num[i] + num[j] + num[k];
 
       var diff = Math.abs(target - sum);
@@ -32,7 +32,7 @@ var threeSumClosest = function (num, target) {
         result = sum;
       }
 
-      if (sum <= target) {
+      if (sum < target) {
         j++;
       } else {
         k--;
