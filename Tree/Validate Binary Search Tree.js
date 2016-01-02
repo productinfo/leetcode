@@ -1,15 +1,42 @@
 /**
- * Definition for binary tree
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
+* Definition for a binary tree node.
+* function TreeNode(val) {
+*     this.val = val;
+*     this.left = this.right = null;
+* }
+*/
 
 /**
- * @param {TreeNode} root
- * @returns {boolean}
- */
+* @param {TreeNode} root
+* @return {boolean}
+*/
+var isValidBST = function(root) {
+
+ var valid = true, pv;
+
+ var inorder = function (node) {
+
+   if (!node || !valid) return;
+
+   inorder(node.left);
+
+   if (pv && pv.val >= node.val) valid = false;
+   pv = node;
+
+   inorder(node.right);
+
+ };
+
+ inorder(root);
+
+ return valid;
+};
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
 var isValidBST = function(root) {
 
   if (!root) {
