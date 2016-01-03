@@ -6,7 +6,7 @@
  * }
  */
 
-// time O(n) space O(log(n)) Accepted
+// time O(n)
 
 /**
  * @param {TreeNode} root
@@ -14,26 +14,15 @@
  */
 var isSymmetric = function(root) {
 
-  if (root) {
-    return same(root.left, root.right);
-  } else {
-    return true;
-  }
-
+  if (root) return same(root.left, root.right);
+  else return true;
+  
 };
 
 var same = function (t1, t2) {
 
-  if (!t1 && !t2) {
-    return true;
-  } else if (!t1 || !t2) {
-    return false;
-  } else {
-
-    return t1.val === t2.val
-        && same(t1.left, t2.right)
-        && same(t1.right, t2.left);
-
-  }
+  if (!t1 && !t2) return true;
+  if (!t1 || !t2) return false;
+  return t1.val === t2.val && same(t1.left, t2.right) && same(t1.right, t2.left);
 
 };
