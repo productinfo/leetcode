@@ -11,9 +11,36 @@
  * @returns {number}
  */
 
+ var sumNumbers = function(root) {
+
+   if (!root) return null;
+
+   var total = 0;
+
+   var dfs = function (node, tmp) {
+
+     if (!node) return 0;
+
+     tmp = tmp * 10 + node.val;
+
+     if (!node.left && !node.right) return total + tmp;
+
+     return dfs(node.left, tmp) + dfs(node.right, tmp);
+
+   };
+
+   return dfs(root, 0);
+ };
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+
+
 // recursive
 
-var sumNumbers = function(root) {  
+var sumNumbers = function(root) {
   return dfs(root, 0);
 };
 
@@ -36,7 +63,7 @@ var dfs = function (r, total) {
 // stack version
 
 // var sumNumbers = function(root) {
-  
+
 //   var stack = [], sum = 0;
 
 //   if (!root) {
