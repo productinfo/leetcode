@@ -1,3 +1,4 @@
+
 /**
  * Definition for binary tree
  * function TreeNode(val) {
@@ -6,7 +7,7 @@
  * }
  */
 
-// time O(n) space O(log(n)) Accepted
+// time O(n)
 
 /**
  * @param {TreeNode} p
@@ -15,12 +16,8 @@
  */
 var isSameTree = function(p, q) {
 
-  if (!p && !q) {
-    return true;
-  } else if (!p || !q) {
-    return false;
-  } else {
-    return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-  }
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 
 };
