@@ -1,4 +1,40 @@
 ////////////////////////////////////////
+// time: `O(logn)`
+////////////////////////////////////////
+
+var getCount = function (root) {
+  if (!root) return 0;
+  return getCount(root.left) + getCount(root.right) + 1;
+};
+
+var kthSmallest = function(root, k) {
+
+  if (!root || !k) return 0;
+
+  var cur = root, lc;
+
+  while (cur) {
+
+    lc = getCount(cur.left);
+
+    if (lc + 1 === k) {
+      return cur.val;
+    } else if (k > lc) {
+      // There are less nodes on left subtree Go to right subtree
+      k -= (lc + 1);
+      cur = cur.right;
+    } else {
+      // go left
+      cur = cur.left;
+    }
+
+  }
+
+  return -1;
+
+};
+
+////////////////////////////////////////
 // use inorder
 // time: `O(n)`
 ////////////////////////////////////////
@@ -33,7 +69,7 @@ var kthSmallest = function(root, k) {
 
 ////////////////////////////////////////
 // use Iterator
-// time: `O(1)`, space: `O(h)`
+// time: `O(n)`, space: `O(h)`
 ////////////////////////////////////////
 
 function Iterator(root) {
