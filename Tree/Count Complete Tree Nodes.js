@@ -10,28 +10,26 @@
  * @return {number}
  */
 var countNodes = function(root) {
-  
+
   if (!root) {
     return 0;
   }
 
   var hl = 0, hr = 0,
-      l = root, r = root;
+      cur = root;
 
-  while (l) {
-    l = l.left;
+  while (cur) {
+    cur = cur.left;
     hl++;
   }
 
-  while (r) {
-    r = r.right;
+  cur = root;
+
+  while (cur) {
+    cur = cur.right;
     hr++;
   }
 
-  if (hl === hr) {
-    return Math.pow(2, hl) - 1;
-  }
+  return hl === hr ? (1 << hl) - 1 : 1 + countNodes(root.left) + countNodes(root.right);
 
-  return 1 + countNodes(root.left) + countNodes(root.right);
-    
 };
