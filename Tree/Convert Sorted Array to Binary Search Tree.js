@@ -11,30 +11,17 @@
  */
 var sortedArrayToBST = function(nums) {
 
-    var len = nums.length;
-    
-    if (len === 0) {
-        return null;
-    }
-    
-    var build = function (start, end) {
-       
-        if (start >= end) {
-            return null;
-        }
-        
-        var mid = (start + end) >> 1;
-        
-        var root = new TreeNode(nums[mid]);
-        
-        root.left = build(start, mid);
-        
-        root.right = build(mid + 1, end);
-        
-        return root;
-        
-    };
-    
-    return build(0, len);
+  var len = nums.length;
 
+  if (len === 0) {
+      return null;
+  }
+
+  var mid = len >> 1,
+      root = new TreeNode(nums[mid]);
+
+  root.left = sortedArrayToBST(nums.slice(0, mid));
+  root.right = sortedArrayToBST(nums.slice(mid + 1));
+
+  return root;
 };
