@@ -11,7 +11,7 @@
  * @param {TreeNode} root - root of the binary search tree
  */
 var BSTIterator = function(root) {
-    
+
   this.stack = [];
 
   while (root) {
@@ -37,23 +37,17 @@ BSTIterator.prototype.hasNext = function() {
  * @returns {number} - the next smallest number
  */
 BSTIterator.prototype.next = function() {
-    
-  var node = this.stack.pop();
 
-  var ans = node.val
+  var node = this.stack.pop(), v = node.val;
 
-  if (node.right) {
+  node = node.right;
 
-    node = node.right;
-
-    while (node) {
-      this.stack.push(node);
-      node = node.left;
-    }
-
+  while (node) {
+    this.stack.push(node);
+    node = node.left;
   }
 
-  return ans;
+  return v;
 };
 
 /**
