@@ -1,34 +1,20 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * function TreeNode(val) {
  *     this.val = val;
  *     this.left = this.right = null;
  * }
  */
-
-// time O(nlog(n)) space O(log(n)) Accepted
-
 /**
  * @param {TreeNode} root
- * @returns {number[][]}
+ * @return {boolean}
  */
-var isBalanced = function(root) {
-
-  if (!root) {
-    return true;
-  }
-
-  return isBalanced(root.left)
-      && isBalanced(root.right)
-      && Math.abs(height(root.left) - height(root.right)) <= 1;
+var getDepth = function (root) {
+    if (!root) return 0;
+    return Math.max(getDepth(root.left), getDepth(root.right)) + 1;
 };
-
-var height = function (root) {
-
-  if (!root) {
-    return 0;
-  }
-
-  return Math.max(height(root.left), height(root.right)) + 1;
-
+// time : `O(n)`
+var isBalanced = function(root) {
+    if (!root) return true;
+    return Math.abs(getDepth(root.left) - getDepth(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
 };
