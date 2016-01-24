@@ -6,21 +6,17 @@ var largestNumber = function(nums) {
 
   var l = nums.length;
 
-  var res = '';
-
-  if (l === 0) {
-    return res;
-  }
+  if (l === 0) return '';
 
   nums = nums.sort(function (a, b) {
 
-    var d1 = a + '' + b;
-    var d2 = b + '' + a;
-  
+    var d1 = a + '' + b,
+        d2 = b + '' + a;
+
     return d2 - d1;
 
-  });
+  }).join('');
 
-  return nums.join('');
+  return nums[0] === '0' ? '0' : nums;
 
 };
