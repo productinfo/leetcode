@@ -15,19 +15,10 @@ var XYZ = function (v, min) {
  * @returns {void}
  */
 MinStack.prototype.push = function(x) {
+
+  var min = this.list.length === 0 ? x : Math.min(this.getMin(), x);
+  this.list.push(new XYZ(x, min));
   
-  var list = this.list,
-      len = list.length;
-
-  if (len === 0) {
-    // empty
-    list.push(new XYZ(x, x));
-  } else {
-
-    var m = Math.min(this.getMin(), x);
-    this.list.push(new XYZ(x, m));
-
-  }
 };
 
 /**
