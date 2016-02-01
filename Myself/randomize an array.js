@@ -8,7 +8,8 @@ var shuffle = function (arr) {
   while (len) {
 
     // get random index
-    index = Math.floor(Math.random() * len--);
+    // index = Math.floor(Math.random() * len--);
+    index = (Math.random() * len--) >> 0;
 
     // swap with front element
     tmp = arr[len];
