@@ -10,7 +10,7 @@ var triangle = function (arr) {
     return a - b;
   });
 
-  for (; i < len ; i ++) {
+  for (; i < len - 2 ; i ++) {
 
     for (j = i + 1 ; j < len - 1 ; j++) {
 
@@ -20,7 +20,7 @@ var triangle = function (arr) {
 
         c++;
         k++;
-        
+
       }
 
     }
