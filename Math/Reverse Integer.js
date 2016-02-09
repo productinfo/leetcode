@@ -4,24 +4,20 @@
  */
 var reverse = function(x) {
 
-  var n = Math.abs(x);
+  if (x < 0) return -reverse(-x);
 
-  var a = 0;
+  if (x < 10) return x;
 
-  while (n !== 0) {
+  var t = 0, d;
 
-    var d = n % 10;
+  while (x > 0) {
 
-    a = a * 10 + d;
-
-    n = (n / 10) >> 0;
+    d = x % 10;
+    t = t * 10 + d;
+    x = (x / 10) >> 0;
 
   }
 
-  if (x < 0) {
-    return -a;
-  } else {
-    return a;
-  }
+  return t > Math.pow(2, 31) - 1 ? 0 : t;
 
 };
