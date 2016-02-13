@@ -24,14 +24,13 @@ var isHappy = function(n) {
 
 var getSum = function (num) {
 
-  var str = num + '';
-  var l = str.length;
-  var i = 0;
   var total = 0;
 
-  for (; i < l ; i++) {
+  while (num > 0) {
 
-    total += Math.pow(parseInt(str[i], 10), 2);
+    total += Math.pow((num % 10), 2);
+
+    num = (num / 10) >> 0;
 
   }
 
