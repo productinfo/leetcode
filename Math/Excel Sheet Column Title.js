@@ -1,8 +1,3 @@
-/**
- * @param {number} n
- * @return {string}
- */
-
 var map = {
   1: 'A',
   2: 'B',
@@ -34,23 +29,8 @@ var map = {
 };
 
 var convertToTitle = function(n) {
-
-  var res = '';
-
-  if (n < 0) {
-    return res;
-  }
-
-  while (n) {
-
-    var r = n % 26;
-    n = (n / 26) >> 0;
-    if (r === 0) {
-      n--;
-    }
-    res = map[r] + res;
-
-  }
-
-  return res;
+  if (n < 0) return null;
+  if (n < 27) return map[n];
+  if (n % 26 === 0) return map[(n / 26) - 1] + 'Z';
+  return convertToTitle((n / 26) >> 0) + convertToTitle(n % 26);
 };
