@@ -12,7 +12,7 @@ var isEqual = function (obj1, obj2) {
 		if (typeof obj1[k1] !== typeof obj2[k1]) return false;
 
 		if (typeof obj1[k1] === 'object') {
-			if (!compare(obj1[k1], obj2[k1])) return false;
+			if (!isEqual(obj1[k1], obj2[k1])) return false;
 		} else {
 			if (obj1[k1] !== obj2[k1]) return false;
 		}
