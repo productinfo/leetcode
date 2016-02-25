@@ -4,15 +4,14 @@
  */
 var solve = function(board) {
 
+  if (!board) return;
+
   var yl = board.length;
 
-  if (!board || yl <= 0) {
-    return;
-  }
+  if (yl === 0) return;
 
-  var xl = board[0].length;
-
-  var q = [];
+  var xl = board[0].length,
+      q = [];
 
   var fill = function (x, y) {
 
@@ -26,7 +25,10 @@ var solve = function(board) {
       return;
     }
 
-    q.push([x, y]);
+    q.push({
+      x: x,
+      y: y
+    });
     board[y][x] = '?'
   };
 
@@ -34,19 +36,12 @@ var solve = function(board) {
 
     fill(x, y);
 
-    // if (board[y][x] === 'O') {
-    //   q.push([x, y]);
-      
-    // }
-
     while (q.length > 0) {
       var curr = q.shift();
-      var currX = curr[0];
-      var currY = curr[1];
-      fill(currX + 1, currY);
-      fill(currX - 1, currY);
-      fill(currX, currY + 1);
-      fill(currX, currY - 1);
+      fill(curr.x + 1, curr.y);
+      fill(curr.x - 1, curr.y);
+      fill(curr.x, curr.y + 1);
+      fill(curr.x, curr.y - 1);
     }
 
   };
