@@ -14,16 +14,10 @@ var exist = function(board, word) {
 
   var visited = [];
 
-  var i, j;
+  var i, j, tmp;
 
   for (i = 0 ; i < yl ; i++) {
-
     visited.push([]);
-
-    for (j = 0 ; j < xl ; j++) {
-      visited[i].push(false);
-    }
-
   }
 
   var go = function (y, x, index) {
