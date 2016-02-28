@@ -9,11 +9,11 @@ var numIslands = function(grid) {
   }
 
   var yl = grid.length;
-  
+
   if (yl === 0) {
       return 0;
   }
-  
+
   var xl = grid[0].length;
 
   var y, x;
@@ -21,17 +21,7 @@ var numIslands = function(grid) {
   var visited = [];
 
   for (y = 0 ; y < yl ; y++) {
-
-    var tmp = [];
-
-    for (x = 0 ; x < xl ; x++) {
-
-      tmp.push(false);
-
-    }
-
-    visited.push(tmp);
-
+    visited.push([]);
   }
 
   var count = 0;
