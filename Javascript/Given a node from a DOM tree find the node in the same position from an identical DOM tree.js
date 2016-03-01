@@ -4,16 +4,25 @@ var answer1 = (function () {
 
   return function foo (node, target) {
 
+    var tmp;
+
     if (node.nodeType === 1) {
-      // console.log(node === target);
-      if (node === target) result = node;
+
+      if (node === target) {
+        return node;
+      }
 
       node = node.firstChild;
 
       while (node) {
 
-        foo(node, target);
-        node = node.nextSibling;
+        tmp = foo(node, target);
+
+        if (tmp) {
+          return tmp;
+        } else {
+          node = node.nextSibling;
+        }
 
       }
 
@@ -34,24 +43,31 @@ var answer2 = function (node, target) {
 
   var dom = function (n, t) {
 
+    var tmp;
+
     if (n.nodeType === 1) {
 
-      if (n === t) result = n;
+      if (n === t) {
+        return n;
+      }
 
       n = n.firstChild;
 
       while (n) {
-        dom(n, t);
-        n = n .nextSibling;
+        tmp = dom(n, t);
+        if (tmp) {
+          return tmp;
+        } else {
+          n = n .nextSibling;
+        }
+
       }
 
     }
 
   };
 
-  dom(node, target);
-
-  return result;
+  return dom(node, target);
 
 };
 
