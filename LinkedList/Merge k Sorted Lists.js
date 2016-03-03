@@ -14,6 +14,58 @@
  */
 var mergeKLists = function(lists) {
 
+  var len = lists.length;
+
+  if (len === 0) {
+    return null;
+  } else if (len === 1) {
+    return lists[0];
+  } else {
+    return mergesort(mergeKLists(lists.slice(0, len >> 1)), mergeKLists(lists.slice(len >> 1)));
+  }
+
+};
+
+var mergesort = function (l1, l2) {
+
+  var head = new ListNode(-1),
+      p = head;
+
+  while (l1 && l2) {
+
+    if (l1.val < l2.val) {
+      p.next = l1;
+      l1 = l1.next;
+    } else {
+      p.next = l2;
+      l2 = l2.next;
+    }
+
+    p = p.next;
+  }
+
+  if (l1) {
+    p.next = l1;
+  }
+
+  if (l2) {
+    p.next = l2;
+  }
+
+  return head.next;
+};
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+
+/**
+ * @param {ListNode[]} lists
+ * @returns {ListNode}
+ */
+var mergeKLists = function(lists) {
+
   var i = 1, len = lists.length, tmp;
 
   if (len === 0) {
