@@ -4,59 +4,68 @@
  *     this.val = val;
  *     this.next = null;
  * }
+
+ Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+ Output: 7 -> 0 -> 8
+
  */
 
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var addTwoNumbers = function(l1, l2){
+ /**
+  * Definition for singly-linked list.
+  * function ListNode(val) {
+  *     this.val = val;
+  *     this.next = null;
+  * }
 
-  if (!l1 || !l2) {
+  Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+  Output: 7 -> 0 -> 8
 
-    return null;
+  */
 
-  }
+// 2/16/2016
+var addTwoNumbers = function(l1, l2) {
 
-  var dummy = new ListNode(-1);
+ if (!l1 && !l2) {
+   return null;
+ }
 
-  var cursor = dummy;
+ var carry = 0, l3 = new ListNode(-1),
+     c3 = l3,
+     sum;
 
-  var adv = 0
+ while (l1 && l2) {
 
-  while (l1 && l2) {
+   sum = l1.val + l2.val + carry;
+   c3.next = new ListNode(sum % 10);
+   carry = (sum / 10) >> 0;
 
-    var sum = l1.val + l2.val + adv;
+   c3 = c3.next;
+   l1 = l1.next;
+   l2 = l2.next;
 
-    adv = (sum / 10) >> 0;
+ }
 
-    cursor.next = new ListNode(sum % 10);
+ while (l1) {
+   sum = l1.val + carry;
+   c3.next = new ListNode(sum % 10);
+   carry = (sum / 10) >> 0;
+   c3 = c3.next;
+   l1 = l1.next;
+ }
 
-    cursor = cursor.next;
+ while (l2) {
+   sum = l2.val + carry;
+   c3.next = new ListNode(sum % 10);
+   carry = (sum / 10) >> 0;
+   c3 = c3.next;
+   l2 = l2.next;
+ }
 
-    l1 = l1.next;
+ if (carry) {
+   c3.next = new ListNode(carry);
+ }
 
-    l2 = l2.next;
+ return l3.next;
 
-  }
-
-  if (l1) {
-    if (adv !== 0) {
-      cursor.next = addTwoNumbers(l1, new ListNode(adv));
-    } else {
-      cursor.next = l1;
-    }
-  } else if (l2) {
-    if (adv !== 0) {
-      cursor.next = addTwoNumbers(l2, new ListNode(adv));
-    } else {
-      cursor.next = l2;
-    }
-  } else if (adv !== 0) {
-    cursor.next = new ListNode(adv);
-  }
-
-  return dummy.next;
 
 };
