@@ -33,7 +33,7 @@ var getIntersectionNode = function(headA, headB) {
 
   var step = Math.abs(l1 - l2);
   var go;
-  
+
   if (l1 > l2) {
 
     // a is longer than b
@@ -46,19 +46,19 @@ var getIntersectionNode = function(headA, headB) {
     c = headA;
   }
 
-  while (step > 0 && go) {
+  while (step-- && go) {
     go = go.next;
-    step--;
   }
 
   // now move two list together
   while (c && go) {
+
     if (c.val === go.val) {
       return c;
-    } else {
-      c = c.next;
-      go = go.next;
     }
+
+    c = c.next;
+    go = go.next;
   }
 
   return null;
