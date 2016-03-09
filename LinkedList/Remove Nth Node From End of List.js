@@ -12,17 +12,14 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-  
+
   var root = new ListNode(0),
       p2 = root,
-      p1 = root,
-      i = 0;
+      p1 = root;
 
   root.next = head;
 
-  for (; i < n ; i++) {
-    p2 = p2.next;
-  }
+  while(n--) p2 = p2.next;
 
   while (p2.next) {
     p2 = p2.next;
