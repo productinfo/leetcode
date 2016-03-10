@@ -76,3 +76,24 @@ var isPalindrome = function(x) {
   return true;
 
 };
+
+/**
+ * 2/23/2016...
+ */
+var isPalindrome = function(x) {
+    var r = 0, d = x;
+    var MAX = Math.pow(2, 31) - 1;
+    var MIN = -Math.pow(2, 31);
+
+    if (x > MAX || x < MIN || x < 0) {
+        return false;
+    }
+
+	while (d) {
+
+		r = (r * 10) + (d % 10);
+		d = (d / 10) >> 0;
+	}
+
+	return x === r;
+};
