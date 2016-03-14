@@ -29,7 +29,7 @@ var letterCombinations = function(digits) {
     }
 
     // digits[start] -> 2, 3
-    
+
     var x = map[digits[start]],
         xl = x.length;
 
@@ -47,4 +47,34 @@ var letterCombinations = function(digits) {
 
   return res;
 
+};
+
+// 3/1/2016
+var letterCombinations = function(digits) {
+	var r = [];
+	if (!digits) return r;
+	var len = digits.length;
+	if (len === 0) return r;
+	var sub = '';
+	var dfs = function (index) {
+	  if (index === len) {
+			// return
+			r.push(sub);
+			return;
+		}
+
+		var t = map[digits[index]],
+				i = 0,
+				l = t.length;
+
+    for(; i < l ; i++) {
+			sub += t[i];
+			dfs(index + 1);
+			sub = sub.slice(0, -1);
+		}
+
+	};
+
+	dfs(0);
+	return r;
 };
