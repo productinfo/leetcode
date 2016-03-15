@@ -26,3 +26,26 @@ var longestCommonPrefix = function(strs) {
 
 	return first;
 };
+
+/**
+ * 2/25/2016
+ */
+var longestCommonPrefix = function(strs) {
+  if (strs.length === 0) {
+    return '';
+  }
+
+  let r = '';
+  const f = strs[0];
+  const len = f.length;
+
+  for (let i = 0; i < len; i++) {
+    if (strs.every((item) => item[i] === f[i])) {
+      r += f[i];
+    } else {
+      break;
+    }
+  }
+
+  return r;
+};
