@@ -3,7 +3,7 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-  
+
   var len = s.length;
 
   if (len === 0) {
@@ -22,4 +22,19 @@ var lengthOfLongestSubstring = function(s) {
   }
 
   return ans;
+};
+
+//////////////////////////////////////////////
+
+var lengthOfLongestSubstring = function(s) {
+  var map = {};
+  var left = 0;
+  var max = 0;
+
+  for (var i = 0; i < s.length; i++) {
+    left = (map[s[i]] + 1) ? Math.max(left, map[s[i]] + 1) : left;
+    map[s[i]] = i;
+    max = Math.max(max, i - left + 1);
+  }
+  return max;
 };
