@@ -1,60 +1,47 @@
 /**
- * @param {number[]} num
- * @returns {number[][]} an array of number arrays with length = 3
+ * 2/25/2016
  */
-var threeSum = function (num) {
+var threeSum = function(nums) {
 
-  var len = num.length;
+  const len = nums.length;
+  let result = [];
 
-  if (len < 3) {
-    return [[]];
+  if (len === 0 || len < 3) {
+    return result;
   }
 
-  // sort array
-  num.sort(function (a, b) {
-    return a - b;
-  });
+  nums.sort((a, b) => a - b);
 
-  var i = 0, result = [];
+  let j, k, offset;
 
-  for (; i < i < len - 2 ; i++) {
+  for (let i = 0; i < len - 2; i++) {
 
-    if (i === 0 || num[i] > num[i - 1]) {
-
-      var neg = -num[i];
-
-      var start = i + 1, end = len - 1;
-
-      while (start < end) {
-
-        if (num[start] + num[end] === neg) {
-
-          // var tmp = ;
-          result.push([num[i], num[start], num[end]]);
-
-          start++;
-          end--;
-
-          while (start < end && num[start] === num[start - 1]) {
-            start++;
-          }
-
-          while (start < end && num[end] === num[end + 1]) {
-            end--;
-          }
-
-        } else if (num[start] + num[end] === neg) {
-          start++;
-        } else {
-          end--;
-        }
-
-      }
-
+    if (i > 0 && nums[i - 1] === nums[i]) {
+      continue;
     }
 
+    j = i + 1;
+    k = len - 1;
+    offset = -nums[i];
+
+    while (j < k) {
+      if (nums[j] + nums[k] === offset) {
+        result.push([nums[i], nums[j], nums[k]]);
+        while (j < k && nums[j] === nums[j + 1]) {
+          j++;
+        }
+        while (j < k && nums[k] === nums[k - 1]) {
+          k--;
+        }
+        j++;
+        k--;
+      } else if (nums[j] + nums[k] < offset) {
+        j++;
+      } else {
+        k--;
+      }
+    }
   }
 
   return result;
-
 };
