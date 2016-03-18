@@ -1,25 +1,20 @@
+// 2/17/2016
+
 /**
- * @param {number[]} numbers
+ * @param {number[]} nums
  * @param {number} target
- * @return {number[]} two integers in an array, ie: [index1, index2]
+ * @return {number[]}
  */
-var twoSum = function(numbers, target) {
-  
-  var map = {};
+var twoSum = function(nums, target) {
 
-  for (var i = 0 ; i < numbers.length ; i++) {
+  var map = {}, result = [], i = 0, len = nums.length;
 
-    if (map.hasOwnProperty(numbers[i])) {
-      
-      return [map[numbers[i]] + 1, i + 1];
-
-    } else if (!map.hasOwnProperty(target - numbers[i])) {
-
-      map[target - numbers[i]] = i;
-
+  for (; i < len ; i++) {
+    if (map.hasOwnProperty(nums[i])) {
+      return [map[nums[i]], i];
+    } else {
+      map[target - nums[i]] = i
     }
-
-
   }
 
   return [-1, -1];
