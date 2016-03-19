@@ -4,7 +4,7 @@
  * @returns {number[][]}
  */
 var fourSum = function(num, target) {
-  
+
   var len = num.length;
 
   if (len < 4) {
@@ -59,4 +59,58 @@ var fourSum = function(num, target) {
 
   return result;
 
+};
+
+// 3/18/2017
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
+var fourSum = function(nums, target) {
+  var r = [];
+  var len = nums.length;
+
+  if (len < 4) {
+    return r;
+  }
+
+  nums = nums.sort(function (a, b) {
+    return a - b;
+  });
+
+  var a, b, c, d, sum;
+
+  for (a = 0; a < len - 3; a++) {
+    if (a > 0 && nums[a] === nums[a - 1]) continue;
+
+    for (b = a + 1; b < len - 2; b++) {
+      if (b > a + 1 && nums[b] === nums[b - 1]) continue;
+
+      c = b + 1;
+      d = len - 1;
+
+      while (c < d) {
+        sum = nums[a] + nums[b] + nums[c] + nums[d];
+        if (sum === target) {
+          r.push([nums[a], nums[b], nums[c], nums[d]]);
+          while (c < d && nums[c] === nums[c + 1]) {
+            c++;
+          }
+          while(c < d && nums[d] === nums[d - 1]) {
+            d--;
+          }
+          c++;
+          d--;
+        } else if (sum < target) {
+          c++;
+        } else {
+          d--;
+        }
+      }
+    }
+
+  }
+
+  return r;
 };
