@@ -6,6 +6,8 @@
  * }
  */
 
+// time: O(n)
+
 /**
  * @param {ListNode} head
  * @returns {ListNode}
@@ -27,4 +29,21 @@ var swapPairs = function(head) {
     return temp;
   }
 
+};
+
+// iterate
+var swapPairs = function(head) {
+
+  var dm = new ListNode(-1);
+  var k;
+  dm.next = head;
+  var t = dm.next;
+  while (t && t.next) {
+    k = t.val;
+    t.val = t.next.val;
+    t.next.val = k;
+    t = t.next.next;
+  }
+
+  return dm.next;
 };
