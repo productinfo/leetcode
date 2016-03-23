@@ -38,3 +38,34 @@ var generateParenthesis = function(n) {
   return Object.keys(map);
 
 };
+
+// DFS:
+// 1. if there is left, go left
+// 2. if right is larger than left, go right
+
+
+function foo(n) {
+
+	var r = [];
+
+	var dfs = function (left, right, tmp) {
+		if (left === 0 && right === 0) {
+			r.push(tmp);
+			return;
+		}
+
+		if(left > 0) {
+			dfs(left - 1, right, tmp + '(');
+		}
+
+		if (left < right) {
+			dfs(left, right - 1, tmp + ')');
+		}
+	};
+
+	dfs(n, n, '')
+	return r;
+
+}
+
+console.log(foo(3));
