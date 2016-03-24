@@ -40,3 +40,37 @@ var strStr = function(haystack, needle) {
 
   return -1;
 };
+
+// O(m + n)
+
+/**
+  3/21/2017
+ */
+var strStr = function(s1, s2) {
+
+  var l1 = s1.length, l2 = s2.length;
+
+  if (l2 > l1) {
+    return -1;
+  }
+
+  if (l2 === l1) {
+    return s1 === s2 ? 0 : -1;
+  }
+
+  var i = 0, j;
+
+  for (; i < l1 - l2 + 1; i++) {
+
+    j = 0;
+    while (j < l2 && s1[i + j] === s2[j]) {
+      j++;
+    }
+
+    if (j === l2) {
+      return i;
+    }
+  }
+
+  return -1;
+};
