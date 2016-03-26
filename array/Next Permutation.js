@@ -3,7 +3,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var nextPermutation = function(num) {
-    
+
   var l = num.length;
 
   if (l === 0) {
@@ -55,4 +55,51 @@ var rev = function (n, s, e) {
   for (var i = s ; i <= mid ; i++) {
     swap(n, i, s + e - i);
   }
+};
+
+// 3/21/2017
+var rev = function (arr, i, j) {
+	var t;
+	console.log(i, j);
+	while(i < j) {
+		t = arr[i];
+		arr[i] = arr[j];
+		arr[j] = t;
+		i++;
+		j--;
+	}
+};
+
+var swap = function(arr, i, j) {
+	var t = arr[i];
+	arr[i] = arr[j];
+	arr[j] = t;
+};
+
+var nextPermutation = function(nums) {
+
+  var k = -1, i, len = nums.length, p = 0;
+
+  for (i = 0; i < len - 1; i++) {
+    if (nums[i] < nums[i + 1]) {
+      k = Math.max(k, i);
+    }
+  }
+
+	if (k === -1) {
+		rev(nums, 0, len - 1);
+	} else {
+		for (i = k; i < len; i++) {
+			if (nums[k] < nums[i]) {
+				p = Math.max(p, i);
+			}
+		}
+
+		// swap
+		swap(nums, k, p);
+
+		// reverse
+		rev(nums, k + 1, len - 1);
+	}
+
 };
