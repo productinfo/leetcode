@@ -46,3 +46,42 @@ var titleToNumber = function(s) {
 	return total;
 
 };
+
+var titleToNumber = function(s) {
+
+	var len = s.length;
+
+	if (len === 0) {
+		return 0;
+	}
+
+	var index = 0;
+	var total = 0;
+
+  while(len--) {
+		total += Math.pow(26, index++) * map[s[len]];
+	}
+
+	return total;
+
+};
+
+var titleToNumber = function(s) {
+
+	var len = s.length;
+
+	if (len === 0) {
+		return 0;
+	}
+
+	var index = 1;
+	var total = 0;
+
+  while(len--) {
+    total += map[s[len]] * index;
+		index *= 26;
+	}
+
+	return total;
+
+};
