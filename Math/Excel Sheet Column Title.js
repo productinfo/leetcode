@@ -32,5 +32,5 @@ var convertToTitle = function(n) {
   if (n < 0) return null;
   if (n < 27) return map[n];
   if (n % 26 === 0) return map[(n / 26) - 1] + 'Z';
-  return convertToTitle((n / 26) >> 0) + convertToTitle(n % 26);
+  return convertToTitle((n / 26) >> 0) + map[n % 26];
 };
