@@ -30,5 +30,28 @@ var canJump = function (nums) {
   }
 
   return true;
-  
+
+};
+
+// 3/29/2016
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+
+  var len = nums.length, i = 0, max = 0;
+
+  if (len === 0 || len === 1) {
+    return true;
+  }
+
+  for (; i < len; i++) {
+    if (max < i) {
+      return false
+    }
+    max = Math.max(max, nums[i] + i);
+  }
+
+  return true;
 };
