@@ -3,7 +3,7 @@
  * @return {number[]}
  */
 var plusOne = function(digits) {
-  
+
   var len = digits.length;
 
   if (len === 0) {
@@ -30,4 +30,20 @@ var plusOne = function(digits) {
 
   return digits;
 
+};
+
+// 3/31/2016
+const plusOne = (d) => {
+  let len = d.length;
+  let carry = 1;
+  while (len--) {
+    const sum = d[len] + carry;
+    d[len] = sum % 10;
+    carry = (sum / 10) >> 0;
+    if (!carry) return d;
+  }
+
+  if (carry) d.unshift(carry);
+
+  return d;
 };
