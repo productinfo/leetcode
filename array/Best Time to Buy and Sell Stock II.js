@@ -29,3 +29,25 @@ var maxProfit = function(prices) {
   return total;
 
 };
+
+// 4/4/2016
+const maxProfit = (n) => {
+
+  const len = n.length;
+  if (!len) return 0;
+
+  let max = 0, min = n[0];
+
+  for (let i = 1; i < len; i++) {
+
+    if (n[i] < min) {
+      min = n[i];
+    }
+
+    max = Math.max(max, n[i] - min);
+
+  }
+
+  return max;
+
+};
