@@ -1,3 +1,31 @@
+// 4/6/2016
+const majorityElement = (arr) => {
+
+	let len = arr.length;
+
+	if (!len) return -1;
+
+	let c = 1, index = 0;
+
+	while (len--) {
+		if (arr[index] === arr[len]) {
+			c++;
+		} else {
+			c--;
+		}
+
+		if (c === 0) {
+			c++;
+			index = len;
+		}
+	}
+
+	return arr[index];
+
+};
+
+
+
 /**
  * @param {number[]} nums
  * @return {number}
