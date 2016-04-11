@@ -76,3 +76,29 @@ var summaryRanges = function(nums) {
   return res;
 
 };
+
+// 4/7/2016
+const print = (m, n) => {
+	return m === n ? `${m}` : `${m}->${n}`;
+};
+
+const z = (n) => {
+
+	const len = n.length, r = [];
+	let s = 0, i = 0;
+	for (; i < len - 1; i++) {
+
+		while (n[i] + 1 === n[i + 1] && i < len) {
+			i++
+		}
+
+		r.push(print(n[s], n[i]));
+		s = i + 1;
+	}
+
+  if (s < len) {
+		r.push(print(n[s], n[i]));
+	}
+
+	return r;
+};
