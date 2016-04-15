@@ -29,3 +29,23 @@ var findMin = function(nums) {
   return binary(0, nums.length - 1);
 
 };
+
+// 4/6/2016
+const findPeakElement = (n) => {
+
+  let low = 0, high = n.length - 1;
+
+  while (low < high) {
+
+    const m = (low + high) >> 1;
+
+    if (n[m] > n[m + 1]) {
+      high = m;
+    } else if (n[m] < n[m + 1]) {
+      low = m + 1;
+    }
+  }
+
+  return low;
+
+};
