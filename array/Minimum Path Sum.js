@@ -29,3 +29,22 @@ var minPathSum = function(grid) {
   return dp[xl - 1];
 
 };
+
+// 3/30/2016
+const minPathSum = (g) => {
+
+  const yl = g.length, xl = g[0].length, dp = [0];
+
+  for (let x = 1; x < xl; x++) {
+    dp.push(Number.MAX_VALUE);
+  }
+
+  for (let y = 0; y < yl; y++) {
+    dp[0] = dp[0] + g[y][0];
+    for (let x = 1; x < xl; x++) {
+      dp[x] = Math.min(dp[x], dp[x - 1]) + g[y][x];
+    }
+  }
+
+  return dp[xl - 1];
+};
