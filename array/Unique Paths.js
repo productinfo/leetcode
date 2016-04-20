@@ -33,3 +33,54 @@ var uniquePaths = function(m, n) {
 
   return res[n - 1][m - 1];
 };
+
+// 3/30/2016
+const x = (m, n) => {
+
+  const g = [];
+
+  for (let y = 0; y < n; y++) {
+    g.push([]);
+  }
+
+  for (let y = 0; y < n; y++) {
+    g[y][0] = 1;
+  }
+
+  for (let x = 0; x < m; x++) {
+    g[0][x] = 1;
+  }
+
+  for (let y = 1; y < n; y++) {
+    for (let x = 1; x < m; x++) {
+      g[y][x] = g[y - 1][x] + g[y][x - 1];
+    }
+  }
+
+  return g[n - 1][m - 1];
+};
+
+// 4/19/2016
+var uniquePaths = function(x, y) {
+
+  const dp = [];
+
+  for (let i = 0; i < x; i++) {
+    dp.push(1);
+  }
+
+  for (let j = 1; j < y; j++) {
+
+    for (let i = 1; i < x; i++) {
+
+      dp[i] += dp[i - 1];
+
+    }
+
+  }
+
+  console.log(dp);
+
+  return dp[x - 1];
+
+};
