@@ -39,3 +39,40 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
 
   return obstacleGrid[yl - 1][xl - 1];
 };
+
+// 3/30/2016
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles = function(g) {
+
+  var yl = g.length,
+      xl = g[0].length,
+      block = false,
+      x, y;
+
+	if (g[0][0]) return 0;
+
+	for (x = 1; x < xl; x++) {
+		if (g[0][x]) block = true;
+		g[0][x] = +!block;
+	}
+
+	block = false
+
+	for (y = 1; y < yl; y++) {
+		if (g[y][0]) block = true;
+		g[y][0] = +!block;
+	}
+
+  g[0][0] = 1;
+
+	for (y = 1; y < yl; y++) {
+		for (x = 1; x < xl; x++) {
+			g[y][x] = g[y][x] ? 0 : g[y - 1][x] + g[y][x - 1];
+		}
+	}
+
+	return g[yl - 1][xl - 1];
+};
