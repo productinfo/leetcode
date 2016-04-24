@@ -35,3 +35,17 @@ var getRow = function(rowIndex) {
   return next;
 
 };
+
+// 4/19/2016
+var getRow = function getRow(n) {
+  if (n < 0) return [];
+  if (n === 0) return [1];
+
+  var pv = getRow(n - 1);
+  var cur = [1];
+  for (var i = 1; i < pv.length; i++) {
+    cur.push(pv[i] + pv[i - 1]);
+  }
+  cur.push(1);
+  return cur;
+};
