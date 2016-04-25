@@ -51,3 +51,17 @@ const maxProfit = (n) => {
   return max;
 
 };
+
+// 4/17/2016
+var maxProfit = function(prices) {
+
+  let d, t = 0;
+  const len = prices.length;
+  if (len < 2) return 0;
+  for (let i = 1; i < len; i++) {
+    d = prices[i] - prices[i - 1];
+    if (d > 0) t += d;
+  }
+
+  return t;
+};
