@@ -91,3 +91,82 @@ LRUCache.prototype.get = function(key) {
    }
 
  };
+
+// 4/25/2016
+class Node {
+  constructor(key, val) {
+    this.key = key;
+    this.val = val;
+    this.prev = null;
+    this.next = null;
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.size = 0;
+    this.map = {};
+    this.first = new Node(-1, -1);
+    this.last = new Node(-1, -1);
+    this.first.next = this.last;
+    this.last.prev = this.first;
+  }
+
+  get(key) {
+    if (this.map.hasOwnProperty(key)) {
+      const val = this.map[key].val;
+      this.set(key, val);
+      return val;
+    }
+    return -1;
+  }
+
+  set(key, val) {
+
+    if (this.size === 0) {
+      // not existed
+      // add to the front
+      const node = new Node(key, val);
+      this.first.next = node;
+      node.next = this.last;
+      this.last.prev = node;
+      node.prev = this.first;
+      this.size++;
+      this.map[key] = node;
+    } else if (this.map.hasOwnProperty(key)) {
+
+      const node = this.map[key];
+      // remove node
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+      this.size--;
+      delete this.map[key];
+      this.set(key, val);
+
+    } else if (this.size >= this.capacity) {
+
+      // remove the first one
+      const node = this.first.next;
+      this.first.next = node.next;
+      node.next.prev = this.first;
+      node.next = null;
+      node.prev = null;
+      this.size--;
+      delete this.map[node.key];
+      this.set(key, val);
+
+    } else {
+      // add to the tail
+      const node = new Node(key, val);
+      this.last.prev.next = node;
+      node.prev = this.last.prev;
+      node.next = this.last;
+      this.last.prev = node;
+      this.size++;
+      this.map[key] = node;
+
+    }
+
+  }
+}
