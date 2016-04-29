@@ -132,3 +132,22 @@ var merge = function(intervals) {
   return intervals.slice(0, index + 1);
 
 };
+
+// 4/28/2016
+const merge = function(intervals) {
+  const len = intervals.length;
+  if (len === 0) return [];
+  intervals = intervals.sort((a, b) => a.start - b.start);
+  let p1 = 0;
+  for (let p2 = 1; p2 < len; p2++) {
+    if (intervals[p1].end >= intervals[p2].start) {
+      // need to merge
+      intervals[p1].end = Math.max(intervals[p1].end, intervals[p2].end);
+    } else {
+      p1++;
+      intervals[p1].start = intervals[p2].start;
+      intervals[p1].end = intervals[p2].end;
+    }
+  }
+  return intervals.slice(0, p1 + 1);
+};
