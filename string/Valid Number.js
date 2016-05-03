@@ -106,3 +106,71 @@ var check = function (str) {
 
 
 };
+
+// 3/31/2016
+const check = (str) => {
+  const ch = '0123456789.';
+  let dot = 0, len = str.length;
+
+  if (!len) return false;
+
+  if (str[0] === '+' || str[0] === '-') {
+    str = str.substring(1);
+  }
+
+  len = str.length;
+
+  if (!len || str === '.') return false;
+
+  while (len--) {
+    if (ch.indexOf(str[len]) === -1) {
+      return false;
+    }
+
+    if (str[len] === '.') {
+      dot++;
+    }
+  }
+
+  return !(dot > 1);
+};
+
+const isNumber = (str) => {
+
+  if (!str) return false;
+
+  str = str.trim().toLowerCase();
+
+  const len = str.length;
+
+  if (!len) return false;
+
+  const chs = '0123456789+-.e'.split('');
+
+  let i = len, e = 0;
+
+  while(i--) {
+    if (chs.indexOf(str[i]) === -1) {
+      return false;
+    }
+    if (str[i] === 'e') {
+      e++;
+    }
+  }
+
+  if (e > 1) return false;
+
+  if (e) {
+    // e is 1
+    const eg = str.split('e');
+    for (let i = 0; i < eg[1].length; i++) {
+      if (eg[1][i] === '.') {
+        return false;
+      }
+    }
+    return check(eg[0]) && check(eg[1]);
+  } else {
+    // e is 0
+    return check(str);
+  }
+};
