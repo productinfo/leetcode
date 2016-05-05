@@ -78,3 +78,32 @@ var letterCombinations = function(digits) {
 	dfs(0);
 	return r;
 };
+
+// 4/24/2016
+var letterCombinations = function(digits) {
+
+  const r = [], sub = [];
+  const l = digits.length;
+
+  const dfs = (index) => {
+
+    if (index === l) {
+      r.push(sub.join(''));
+      return;
+    }
+
+    const char = map[digits[index]];
+
+    for (let i = 0; i < char.length; i++) {
+      sub.push(char[i]);
+      dfs(index + 1);
+      sub.pop();
+    }
+
+  };
+
+  dfs(0);
+
+  return r;
+
+};
