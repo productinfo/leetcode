@@ -44,7 +44,7 @@ var strStr = function(haystack, needle) {
 // O(m + n)
 
 /**
-  3/21/2017
+  3/21/2016
  */
 var strStr = function(s1, s2) {
 
@@ -72,5 +72,17 @@ var strStr = function(s1, s2) {
     }
   }
 
+  return -1;
+};
+
+// 4/24/2016
+var strStr = function(s1, s2) {
+  let sl1 = s1.length, sl2 = s2.length;
+  if (sl2 > sl1) return -1;
+  if (sl1 === sl2) return s1 === s2 ? 0 : -1;
+  for (let i = 0; i <= sl1 - sl2; i++) {
+    const sub = s1.substring(i, i + sl2);
+    if (sub === s2) return i;
+  }
   return -1;
 };
