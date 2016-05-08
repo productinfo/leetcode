@@ -31,3 +31,28 @@ var groupAnagrams = function(strs) {
   return res;
 
 };
+
+// 3/28/2016
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+  var r = [];
+  var len = strs.length;
+  var map = {};
+  var word;
+  var key;
+
+  while (len--) {
+    word = strs[len];
+    key = word.split('').sort().join('');
+    map.hasOwnProperty(key) ? map[key].push(word) : map[key] = [word];
+  }
+
+  Object.keys(map).forEach(function (item) {
+    r.push(map[item].sort());
+  });
+
+  return r;
+};
