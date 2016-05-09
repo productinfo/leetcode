@@ -22,3 +22,24 @@ var compareVersion = function(version1, version2) {
   return 0;
 
 };
+
+// 4/24/2016
+const compareVersion = function(v1, v2) {
+
+  const g1 = v1.split('.');
+  const g2 = v2.split('.');
+  let index = 0;
+
+  while (g1[index] || g2[index]) {
+    const d1 = +(g1[index]) || 0;
+    const d2 = +(g2[index]) || 0;
+    index++;
+    if (d1 > d2) {
+      return 1;
+    } else if (d1 < d2) {
+      return -1
+    }
+  }
+
+  return 0;
+};
