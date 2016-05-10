@@ -4,7 +4,7 @@
  * @return {string}
  */
 var addBinary = function(a, b) {
-  
+
   var adv = 0,
       i = a.length - 1,
       j = b.length - 1,
@@ -42,5 +42,40 @@ var addBinary = function(a, b) {
   }
 
   return r;
+
+};
+
+// 3/30/2016
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+
+  var adv = 0,
+      i = a.length - 1,
+      j = b.length - 1,
+      d, r = '';
+
+  while (i >= 0 && j >= 0) {
+    d = +a[i--] + +b[j--] + adv;
+    r = (d % 2) + r;
+    adv = d >> 1;
+  }
+
+  while (i >= 0) {
+    d = +a[i--] + adv;
+    r = (d % 2) + r;
+    adv = d >> 1;
+  }
+
+  while (j >= 0) {
+    d = +b[j--] + adv;
+    r = (d % 2) + r;
+    adv = d >> 1;
+  }
+
+  return adv ? adv + r : r;
 
 };
