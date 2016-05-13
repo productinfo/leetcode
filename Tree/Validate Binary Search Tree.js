@@ -64,3 +64,15 @@ var valid = function (r, min, max) {
   }
 
 };
+
+// 4/2/2016
+const isValidBST = (root) => {
+  return go(root, null, null);
+};
+
+const go = (r, min, max) => {
+  if (!r) return true;
+  if (min !== null && r.val <= min) return false;
+  if (max !== null && r.val >= max) return false;
+  return go(r.left, min, r.val) && go(r.right, r.val, max);
+};
