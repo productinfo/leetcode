@@ -55,3 +55,31 @@ BSTIterator.prototype.next = function() {
  * var i = new BSTIterator(root), a = [];
  * while (i.hasNext()) a.push(i.next());
 */
+
+// 4/25/2016
+class BSTIterator {
+
+  constructor(root) {
+    this.s = [];
+    while (root) {
+      this.s.push(root);
+      root = root.left;
+    }
+  }
+
+  hasNext() {
+    return this.s.length > 0;
+  }
+
+  next() {
+    let node = this.s.pop();
+    const val = node.val;
+    node = node.right
+    while (n) {
+      this.s.push(n);
+      n = n.left;
+    }
+    return val;
+  }
+
+}
