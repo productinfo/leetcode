@@ -8,7 +8,7 @@
 var get = function (str) {
 
   var len = str.length;
-  
+
   if (len === 0) {
     return 0;
   }
@@ -68,3 +68,18 @@ var LCP = function (s1, s2) {
 console.log(get('BANANA'));
 console.log(get('aaaa'));
 console.log(get('abcd'));
+
+// 4/16/2016
+const foo = (s) => {
+
+  const len = s.length;
+  const map = {};
+  let c = 0;
+  for (let i = 0; i < len; i++) {
+    if (map[s[i]]) continue;
+    map[s[i]] = true;
+    c += s.substring(i).length;
+  }
+
+  return c;
+};
