@@ -37,3 +37,59 @@ var getSum = function (num) {
   return total;
 
 };
+
+// 4/7/2016
+// space O(n)
+const get = (n) => {
+
+  let total = 0;
+
+  while (n > 0) {
+    const d = n % 10;
+    total += d * d;
+    n = (n / 10) >> 0;
+  }
+
+  return total;
+
+};
+
+const isHappy = (n) => {
+
+  const map = {};
+
+  while (!map[n]) {
+    map[n] = true;
+    n = get(n);
+    if (n === 1) return true;
+  }
+
+  return false;
+};
+
+// space O(1)
+const get = (n) => {
+
+  let total = 0;
+
+  while (n > 0) {
+    const d = n % 10;
+    total += d * d;
+    n = (n / 10) >> 0;
+  }
+
+  return total;
+
+};
+
+const isHappy = (n) => {
+
+  let d1 = n, d2 = get(n);
+
+  while (d1 !== d2) {
+    d1 = get(d1);
+    d2 = get(get(d2));
+  }
+
+  return d1 === 1;
+};
