@@ -37,3 +37,25 @@ var countPrimes = function(n) {
   return c;
 
 };
+
+// 4/7/2016
+const countPrimes = (n) => {
+
+  let c = 0, tmp = [];
+
+  for (let i = 2; i < Math.sqrt(n); i++) {
+
+    if (!tmp[i]) {
+      for (let j = i + i; j <= n; j += i) {
+        if (!tmp[j]) tmp[j] = true;
+      }
+    }
+
+  }
+  
+  for (let i = 2; i < n; i++) {
+    if (!tmp[i]) c++;
+  }
+
+  return c;
+};
