@@ -38,3 +38,31 @@ var removeElements = function(head, val) {
   return dm.next;
 
 };
+
+// 4/28/2016
+var removeElements = function(head, val) {
+
+  if (!head) return null;
+
+  var dm = new ListNode(-1);
+
+  dm.next = head;
+
+  var p = dm;
+
+  while (p.next) {
+
+    if (p.next.val === val) {
+      // remove
+      // var t = p.next;
+      p.next = p.next.next;
+    } else {
+      // move on
+      p = p.next;
+    }
+
+  }
+
+  return dm.next;
+
+};
