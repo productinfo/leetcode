@@ -60,9 +60,9 @@ var partition = function(head, x) {
 //   while (pointer) {
 
 //     tmp = pointer;
-    
+
 //     pointer = pointer.next;
-    
+
 //     tmp.next = null;
 
 //     if (tmp.val < x) {
@@ -87,3 +87,37 @@ var partition = function(head, x) {
 //   return dm1.next;
 
 // };
+
+var partition = function(head, x) {
+
+  var dm1 = new ListNode(-1),
+      dm2 = new ListNode(-1),
+      c1 = dm1,
+      c2 = dm2
+
+  while (head) {
+
+    if (head.val < x) {
+
+      // append to c1
+
+      c1.next = new ListNode(head.val);
+      c1 = c1.next;
+
+    } else {
+
+      // append to c2
+      c2.next = new ListNode(head.val);
+      c2 = c2.next;
+
+    }
+
+    head = head.next;
+
+  }
+
+  c1.next = dm2.next;
+
+  return dm1.next;
+
+};
