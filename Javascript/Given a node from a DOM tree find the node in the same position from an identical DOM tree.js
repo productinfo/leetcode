@@ -47,7 +47,7 @@ var answer2 = function (node, target) {
 
     if (n.nodeType === 1) {
 
-      if (n === t) {
+      if (n.isEqualNode(t)) {
         return n;
       }
 
@@ -68,6 +68,25 @@ var answer2 = function (node, target) {
   };
 
   return dom(node, target);
+
+};
+
+var answer3 = function (node, target) {
+
+  var r;
+  var dom = function (n, t) {
+    if (n.isEqualNode(t)) {
+      r = n;
+      return;
+    }
+    n = n.firstChild;
+    while (n) {
+      dom(n, t);
+      n = n.nextSibling;
+    }
+  };
+  dom(node, target);
+  return r;
 
 };
 
