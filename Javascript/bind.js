@@ -7,3 +7,18 @@ Function.prototype.bind = Function.prototype.bind || function (context) {
   };
 
 };
+
+function bind(fn, thisArg) {
+  return function() {
+    fn.apply(thisArg, arguments);
+  }
+}
+
+// es6
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (context, ...args) {
+    return () => {
+      this.apply(context, args);
+    };
+  };
+}
