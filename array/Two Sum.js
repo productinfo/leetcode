@@ -1,5 +1,5 @@
 // 2/17/2016
-
+// 8/3/2016
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -7,9 +7,10 @@
  */
 var twoSum = function(nums, target) {
 
-  var map = {}, result = [], i = 0, len = nums.length;
+  const map = {};
+  const len = nums.length;
 
-  for (; i < len ; i++) {
+  for (let i = 0; i < len ; i++) {
     if (map.hasOwnProperty(nums[i])) {
       return [map[nums[i]], i];
     } else {
