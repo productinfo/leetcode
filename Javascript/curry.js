@@ -23,3 +23,22 @@ curriedFoo(1,2,3);   // 6
 curriedFoo(1)(2,3);  // 6
 curriedFoo(1)(2)(3); // 6
 curriedFoo(1,2)(3);  // 6
+
+// 8/10/2016
+const curry = (fn) => {
+	const curried = (...args) => (
+		args.length < fn.length
+			? (...rest) => curried.call(this, ...args, ...rest)
+			: fn.apply(this, args)
+	);
+	return curried;
+};
+
+const foo = (a, b, c) => a - b + c;
+const curriedFoo = curry(foo);
+
+const a = curriedFoo(1,2,3);   // 6
+const b = curriedFoo(1)(2,3);  // 6
+const c = curriedFoo(1)(2)(3); // 6
+const d = curriedFoo(1,2)(3);  // 6
+console.log(a, b, c, d);
