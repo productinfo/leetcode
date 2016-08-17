@@ -88,3 +88,23 @@ const events = {
 // events.emit('leo', 1);
 // events.off('leo', f);
 // events.emit('leo', 1);
+
+// 8/11/2016
+const events = {
+	ev: {},
+	on(name, callback) {
+		this.ev[name] = this.ev[name] || [];
+		this.ev[name].push(callback);
+	},
+	off(name, callback) {
+		if (this.ev[name]) {
+			const index = this.ev[name].indexOf(callback);
+			index !== - 1 && this.ev[name].splice(index, 1);
+		}
+	},
+	emit(name, data) {
+		if (this.ev[name]) {
+			this.ev[name].forEach(cb => cb(data));
+		}
+	}
+};
