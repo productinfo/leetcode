@@ -52,3 +52,40 @@ var permute = function(num) {
   return res;
 
 };
+
+// 8/20/2016
+/**
+[1, 2, 3]
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+const swap = (arr, i, j) => {
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+
+const permute = function(nums) {
+  const result = [];
+  const dfs = (l, r) => {
+    if (l === r) {
+      result.push(nums.slice());
+      return;
+    }
+    for (let i = l; i <= r; i++) {
+      swap(nums, l, i);
+      dfs(l + 1, r);
+      swap(nums, l, i);
+    }
+  };
+  dfs(0, nums.length - 1);
+  return result;
+};
