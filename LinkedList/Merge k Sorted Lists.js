@@ -12,13 +12,14 @@
  * @param {ListNode[]} lists
  * @returns {ListNode}
  */
-var mergeKLists = function(lists) {
+const mergeKLists = function(lists) {
 
-  var len = lists.length;
-
-  if (len === 0) {
+  const len = lists.length;
+  if (!len) {
     return null;
-  } else if (len === 1) {
+  }
+
+  if (len === 1) {
     return lists[0];
   } else {
     return mergesort(mergeKLists(lists.slice(0, len >> 1)), mergeKLists(lists.slice(len >> 1)));
@@ -26,10 +27,10 @@ var mergeKLists = function(lists) {
 
 };
 
-var mergesort = function (l1, l2) {
+const mergesort = function (l1, l2) {
 
-  var head = new ListNode(-1),
-      p = head;
+  const head = new ListNode(-1);
+  let p = head;
 
   while (l1 && l2) {
 
