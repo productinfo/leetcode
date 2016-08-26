@@ -57,7 +57,7 @@ var rev = function (n, s, e) {
   }
 };
 
-// 3/21/2017
+// 3/21/2016
 var rev = function (arr, i, j) {
 	var t;
 	console.log(i, j);
