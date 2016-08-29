@@ -2,17 +2,17 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
-  
-  var len = s.length;
+const longestPalindrome = (s) => {
+
+  const len = s.length;
 
   if (len === 0) {
     return 0;
   }
 
-  var partial, longest = s[0];
+  let partial, longest = s[0];
 
-  for (var i = 0 ; i < len ; i++) {
+  for (let i = 0 ; i < len ; i++) {
 
     partial = expand(s, i, i);
     if (partial.length > longest.length) {
@@ -33,8 +33,8 @@ var longestPalindrome = function(s) {
 /**
  * expand from center
  */
-function expand (str, l, r) {
-  
+const expand = (str, l, r) => {
+
   while (l >= 0 && r < str.length && str[l] === str[r]) {
     l--;
     r++;
