@@ -53,3 +53,25 @@ var closestValue = function (root, target) {
 
   return null;
 };
+
+// 8/31/2016
+const foo = (root, target) => {
+	let result;
+	let min = Number.MAX_VALUE;
+	const rec = (r, t) => {
+		if (!r) return;
+
+		const diff = Math.abs(r.val - target);
+		if (diff < min) {
+			min = diff;
+			result = root.val;
+		}
+		if (target < r.val) {
+			rec(r.left, target);
+		} else {
+			rec(r.right, target);
+		}
+	};
+	rec(root, target);
+	return result;
+};
