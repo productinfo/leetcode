@@ -36,3 +36,23 @@ var combine = function(n, k) {
   return res;
 
 };
+
+// 9/7/2016
+var combine = function(n, k) {
+
+  const res = [];
+  const sub = [];
+  const dfs = start => {
+    if (sub.length === n) {
+      res.push(sub.slice());
+      return;
+    }
+    for (let i = start; i <= k; i++) {
+      sub.push(i);
+      dfs(i + 1);
+      sub.pop();
+    }
+  };
+  dfs(1);
+  return res;
+};
