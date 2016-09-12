@@ -43,30 +43,8 @@ var maxPathSum = function(root) {
 };
 
 // 8/29/2016
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
-const getLargest = (...arg) => arg.reduce((prev, next) => {
-  if (prev > next) {
-    return prev;
-  }
-  return next;
-});
-
 const maxPathSum = function(root) {
-
-  if (!root) {
-    return 0;
-  }
-
+  if (!root) return 0;
   let max = Number.NEGATIVE_INFINITY;
   const go = rt => {
     if (!rt) {
@@ -76,9 +54,9 @@ const maxPathSum = function(root) {
     const l = go(rt.left);
     const r = go(rt.right);
     const v = rt.val;
-    const mx1 = getLargest(l + v, r + v, v);
-    const mx2 = getLargest(l + r + v, mx1, v);
-    max = getLargest(max, mx2);
+    const mx1 = Math.max(l + v, r + v, v);
+    const mx2 = Math.max(l + r + v, mx1, v);
+    max = Math.max(max, mx2);
     return mx1;
   };
   go(root);
