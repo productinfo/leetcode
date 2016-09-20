@@ -31,8 +31,10 @@ var deleteDuplicates = function(head) {
     }
 
     if (prev.next === cur) {
+      // move p
       prev = prev.next;
     } else {
+      // connect p to next node
       prev.next =cur.next;
     }
 
