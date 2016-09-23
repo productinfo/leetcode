@@ -39,3 +39,33 @@ var diffWaysToCompute = function(input) {
   return res;
 
 };
+
+// 9/18/2016
+var diffWaysToCompute = function(input) {
+
+  const res = [];
+  if (!input || !input.length) return res;
+  for (let i = 0; i < input.length; i++) {
+    if (!Number.isInteger(+input[i])) {
+      const left = diffWaysToCompute(input.substring(0, i));
+      const right = diffWaysToCompute(input.substring(i + 1));
+      for (let m = 0; m < left.length; m++) {
+        for (let n = 0; n < right.length; n++) {
+          res.push(fb(input[i], left[m], right[n]));
+        }
+      }
+    }
+  }
+  return res.length ? res : [+input];
+
+};
+
+const fb = (op, a, b) => {
+  if (op === '+') {
+    return a + b;
+  } else if (op === '-') {
+    return a - b;
+  } else {
+    return a * b;
+  }
+}
