@@ -61,3 +61,31 @@ var rec = function (head) {
   console.log(head);
 
 };
+
+// 9/4/2016
+// time: O(n)
+var reverseList = function(head) {
+  if (!head || !head.next) return head;
+  let pv = null;
+  let cur = head;
+  while (cur) {
+    const tmp = cur.next;
+    cur.next = pv;
+    pv = cur;
+    cur = tmp;
+  }
+  return pv;
+};
+
+// recursive
+var reverseList = function(head) {
+  if (!head || !head.next) return head;
+  return go(head);
+};
+
+const go = (node, prev) => {
+  if (!node) return prev;
+  const n = node.next;
+  node.next = prev;
+  return go(n, node);
+}
