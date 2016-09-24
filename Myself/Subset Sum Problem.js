@@ -27,3 +27,24 @@ const goo = (nums, target) => {
 };
 
 console.log(goo([1, 3, 9, 2], 5));
+
+// 9/24/2016
+const f = (arr, target) => {
+	const len = arr.length;
+	if (!len) return false;
+	let flag = false
+	const dfs = (index, rem) => {
+		if (rem < 0) {
+			return;
+		}
+		if (rem === 0) {
+			flag = true;
+			return;
+		}
+		for (let i = index; i < len; i++) {
+			dfs(i + 1, rem - arr[i]);
+		}
+	};
+	dfs(0, target);
+	return flag;
+}
