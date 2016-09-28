@@ -80,3 +80,65 @@ var solve = function(board) {
   }
 
 };
+
+// 9/25/2016
+var solve = function(board) {
+  const q = [];
+  const yl = board.length;
+  const xl = board[0].length;
+  const bfs = (x, y) => {
+    if (
+      x < 0 ||
+      y < 0 ||
+      x > xl ||
+      y > yl ||
+      board[y][x] !== 'O'
+    ) {
+      return;
+    }
+    q.push({ x, y });
+    board[y][x] === '?';
+    while (q.length) {
+      const { x: xa, y: ya } = q.shift();
+      bfs(xa + 1, ya);
+      bfs(xa - 1, ya);
+      bfs(xa, ya + 1);
+      bfs(xa, ya - 1);
+    }
+  };
+
+  for (let x = 0; x < xl; x++) {
+    if (board[0][x] === 'O') {
+      bfs(x, 0);
+    }
+  }
+
+  for (let x = 0; x < xl; x++) {
+    if (board[yl - 1][x] === 'O') {
+      bfs(x, yl - 1);
+    }
+  }
+
+  for (let y = 0; y < yl; y++) {
+    if (board[y][0] === 'O') {
+      bfs(0, y);
+    }
+  }
+
+  for (let y = 0; y < yl; y++) {
+    if (board[y][xl - 1] === 'O') {
+      bfs(xl - 1, y);
+    }
+  }
+
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (board[y][x] === '?') {
+        board[y][x] = 'O';
+      } else if (board[y][x] === 'O') {
+        board[y][x] = 'X';
+      }
+    }
+  }
+
+};
