@@ -61,3 +61,41 @@ var numIslands = function(grid) {
   return count;
 
 };
+
+// 9/25/2016
+var numIslands = function(grid) {
+  if (!grid) return 0;
+  const yl = grid.length;
+  if (!yl) return 0;
+  const xl = grid[0].length;
+  const visited = [];
+  let counter = 0;
+  for (let y = 0; y < yl; y++) {
+    visited.push([]);
+  }
+  const go = (x, y) => {
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= xl ||
+      y >= yl ||
+      visited[y][x] ||
+      grid[y][x] !== '1'
+    ) {
+      return false;
+    }
+
+    visited[y][x] = true;
+    go(x + 1, y);
+    go(x - 1, y);
+    go(x, y + 1);
+    go(x, y - 1);
+    return true;
+  };
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (go(x, y)) counter++;
+    }
+  }
+  return counter;
+};
