@@ -42,3 +42,16 @@ const minimumTotal = (t) => {
 
   return dp[0];
 };
+
+// 9/25/2016
+var minimumTotal = function(triangle) {
+  const yl = triangle.length;
+  const xl = triangle[0].length;
+  const res = [];
+  for (let y = yl - 2; y >= 0; y--) {
+    for (let x = y; x >= 0; x--) {
+      triangle[y][x] = triangle[y][x] + Math.min(triangle[y + 1][x], triangle[y + 1][x + 1]);
+    }
+  }
+  return triangle[0][0];
+};
