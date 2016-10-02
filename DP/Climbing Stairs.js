@@ -55,3 +55,18 @@ const climbStairs = (x) => {
   }
   return r;
 };
+
+// 9/25/2016
+var climbStairs = function(n) {
+  let d1 = 1;
+  let d2 = 1;
+  let d3 = 1;
+  let i = 2;
+  while (i <= n) {
+    d3 = d1 + d2;
+    d1 = d2;
+    d2 = d3;
+    i++;
+  }
+  return d3;
+};
