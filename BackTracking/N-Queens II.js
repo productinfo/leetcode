@@ -51,3 +51,40 @@ var check = function (row, rec) {
   return true;
 
 };
+
+// 9/25/2016
+var totalNQueens = function(n) {
+  const res = [];
+  let counter = 0;
+  const record = [];
+
+  const valid = (y) => {
+    for (let x = 0; x < y; x++) {
+      if (
+        record[y] === record[x] // only check vertical
+        ||
+        Math.abs(record[y] - record[x]) === y - x
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const recur = (y) => {
+    if (y === n) {
+      // stop recursion
+      counter++;
+      return;
+    }
+    for (let x = 0; x < n; x++) {
+      record[y] = x;
+      if (valid(y)) {
+        recur(y + 1);
+      }
+    }
+  };
+
+  recur(0);
+  return counter;
+};
