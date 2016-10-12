@@ -22,3 +22,5 @@ if (!Function.prototype.bind) {
     };
   };
 }
+
+const bind = (fn, context, ...args) => _ => fn.apply(context, args);
