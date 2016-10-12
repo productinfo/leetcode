@@ -108,3 +108,23 @@ const events = {
 		}
 	}
 };
+
+// 10/2/2016
+const ets = {
+  events: {},
+  on(name, cb) {
+    this.events[name] = this.events[name] || [];
+    this.events[name].push(cb);
+  },
+  off(name, cb) {
+    if (name in this.events) {
+      const index = this.events[name].indexOf(cb);
+      index > 0 && this.events[name].splice(index, 1);
+    }
+  },
+  emit(name, value) {
+    if (name in this.events) {
+      this.events[name].forEach(cb => cb(value));
+    }
+  }
+};
