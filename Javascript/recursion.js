@@ -38,3 +38,10 @@ let fn = (data, parent) => {
 };
 
 console.log(JSON.stringify(fn(data, null), null, 2));
+// 10/3/2016
+const f = (data, parent) =>
+	data.filter(d => d.parent === parent)
+  		.reduce((acc, item) => {
+				acc[item.id] = f(data, item.id);
+        return acc;
+      }, {});
