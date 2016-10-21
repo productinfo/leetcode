@@ -172,3 +172,62 @@ class Trie {
  * trie.insert("somestring");
  * trie.search("key");
  */
+
+ // 9/24/2016
+ const TrieNode = () => ({
+   end: false,
+   children: {}
+ });
+
+ class Trie {
+   constructor() {
+     this.root = TrieNode();
+   }
+
+   // return TrieNode or NULL
+   _find(node, word) {
+     let cur = node;
+     const len = word.length;
+     for (let i = 0; i < len; i++) {
+       const children = cur.children[word[i]];
+       if (children) {
+         cur = children
+       } else {
+         return;
+       }
+     }
+     return cur;
+   }
+
+   insert(word) {
+     const len = word.length;
+     let cur = this.root;
+     let i = 0;
+     while (i < len) {
+       const children = cur.children[word[i]];
+       if (children) {
+         cur = children;
+         i++;
+       } else {
+         break;
+       }
+     }
+
+     while (i < len) {
+       const n = TrieNode();
+       cur.children[word[i++]] = n;
+       cur = n;
+     }
+
+     cur.end = true;
+   }
+
+   search(word) {
+     const p = this._find(this.root, word);
+     return p && p.end;
+   }
+
+   startsWith(prefix) {
+     return !!this._find(this.root, prefix);
+   }
+ }
