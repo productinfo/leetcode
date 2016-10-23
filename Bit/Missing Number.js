@@ -17,3 +17,13 @@ var missingNumber = function(nums) {
   return r ^ len;
 
 };
+
+// 10/22/2016
+const missingNumber = nums => {
+  const len = nums.length;
+  let sum = ((len + 1) * len) >> 1;
+  for (let i = 0; i < len; i++) {
+    sum -= nums[i];
+  }
+  return sum;
+};
