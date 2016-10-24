@@ -48,3 +48,16 @@ var hasCycle = function(head) {
   return false;
 
 };
+
+// 10/23/2016
+const hasCycle = head => {
+  if (!head || !head.next) return false;
+  let s = head;
+  let f = head;
+  while (f.next && f.next.next) {
+    s = s.next;
+    f = f.next.next;
+    if (s === f) return true;
+  }
+  return false;
+};
