@@ -52,3 +52,32 @@ var isPa = function (str) {
   return true;
 
 };
+
+// 9/23/2016
+var partition = function(s) {
+  const len = s.length;
+  if (!len) return [[]];
+  const res = [];
+  for (let i = 1; i <= len; i++) {
+    const str = s.substring(0, i);
+    if (isPartition(str)) {
+      const rest = partition(s.substring(i));
+      rest.forEach(arr => {
+        arr.unshift(str);
+        res.push(arr);
+      });
+    }
+  }
+  return res;
+};
+
+const isPartition = s => {
+  let i = 0;
+  let j = s.length - 1;
+  while (i < j) {
+    if (s[i] !== s[j]) return false;
+    i++;
+    j--;
+  }
+  return true;
+};
