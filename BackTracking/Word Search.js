@@ -65,3 +65,52 @@ var exist = function(board, word) {
   return false;
 
 };
+
+// 9/23/2016
+var exist = function(board, word) {
+  const yl = board.length;
+  const xl = board[0].length;
+  const len = word.length;
+
+  const visited = [];
+  for (let y = 0; y < yl; y++) {
+    visited.push([]);
+  }
+
+  const go = (x, y, index) => {
+
+    if (index === len) return true;
+
+    if (
+      x >= xl || y >= yl ||
+      x < 0 || y < 0 ||
+      visited[y][x] ||
+      word[index] !== board[y][x]
+    ) {
+      return false;
+    }
+
+    visited[y][x] = true;
+
+    if (
+      go(x + 1, y, index + 1) ||
+      go(x - 1, y, index + 1) ||
+      go(x, y + 1, index + 1) ||
+      go(x, y - 1, index + 1)
+    ) {
+      return true;
+    }
+
+    visited[y][x] = false;
+
+    return false;
+  };
+
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (go(x, y, 0)) return true;
+    }
+  }
+
+  return false;
+};
