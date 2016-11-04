@@ -59,3 +59,30 @@ var permuteUnique = function(num) {
   return res;
 
 };
+
+// 10/24/2016
+const permuteUnique = arr => {
+  const res = [];
+  const len = arr.length;
+  if (!len) return res;
+  const sub = [];
+  const used = [];
+  arr = arr.sort((a, b) => a - b);
+  const dfs = () => {
+    if (sub.length === len) {
+      res.push(sub.slice());
+      return;
+    }
+    for (let i = 0; i < len; i++) {
+      if (used[i]) continue;
+      if (i > 0 && arr[i] === arr[i - 1] && used[i - 1]) continue;
+      used[i] = true;
+      sub.push(arr[i]);
+      dfs();
+      used[i] = false;
+      sub.pop();
+    }
+  };
+  dfs();
+  return res;
+};
