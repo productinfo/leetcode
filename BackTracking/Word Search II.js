@@ -150,3 +150,44 @@ var findWords = function(board, words) {
   return res;
 
 };
+
+// 9/24/2016
+var findWords = function(board, words) {
+  const yl = board.length;
+  const xl = board[0].length;
+  const res = [];
+  const go = (x, y, str) => {
+    if (
+      x < 0 ||
+      y < 0 ||
+      x > xl ||
+      y > yl
+    ) {
+      return;
+    }
+
+    const hasMatched = words.every(word => word.indexOf(str) > 0);
+
+    if (!hasMatched) return;
+
+    const matched = words.every(word => word === str);
+
+    if (matched) {
+      res.push(matched);
+      return;
+    }
+
+    go(x + 1, y, str + board[y][x]);
+    go(x - 1, y, str + board[y][x]);
+    go(x, y + 1, str + board[y][x]);
+    go(x, y - 1, str + board[y][x]);
+  };
+
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      go(x, y, '');
+    }
+  }
+
+  return res;
+};
