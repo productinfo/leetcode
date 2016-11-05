@@ -114,3 +114,36 @@ var mergesort = function (l1, l2) {
 
   return head.next;
 };
+
+// 11/4/2016
+const mergeKLists = lists => {
+  const len = lists.length;
+  if (len === 0) {
+    return [];
+  } else if (len === 1) {
+    return lists[0];
+  } else {
+    return merge(mergeKLists(lists.slice(0, len >> 1)), mergeKLists(lists.slice(len >> 1)));
+  }
+};
+
+const merge = (l1, l2) => {
+  const l3 = new ListNode(-1);
+  let cur = l3;
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      cur.next = new ListNode(l1.val);
+      l1 = l1.next;
+    } else {
+      cur.next = new ListNode(l2.val);
+      l2 = l2.next;
+    }
+    cur = cur.next;
+  }
+  if (l1) {
+    cur.next = l1;
+  } else if (l2) {
+    cur.next = l2;
+  }
+  return l3.next;
+};
