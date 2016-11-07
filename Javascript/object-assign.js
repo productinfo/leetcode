@@ -31,3 +31,17 @@ var Object.assign = Object.assign || function (target) {
   return to;
 
 };
+
+// 11/4/2016
+const oa = (target, ...args) => {
+  if (target === null) {
+    throw new Error('...');
+  }
+  const result = Object(target);
+  args.forEach(
+    arg => Object.keys(arg).forEach(
+    	key => result[key] = arg[key]
+    )
+  );
+  return result;
+};
