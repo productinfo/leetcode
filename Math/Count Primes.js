@@ -52,10 +52,26 @@ const countPrimes = (n) => {
     }
 
   }
-  
+
   for (let i = 2; i < n; i++) {
     if (!tmp[i]) c++;
   }
 
+  return c;
+};
+
+// 9/21/2016
+var countPrimes = function(n) {
+  const tmp = [];
+  for (let i = 2; i * i < n; i++ ) {
+    for (let j = i + i; j < n; j += i) {
+      tmp[j] = true;
+    }
+  }
+
+  let c = 0;
+  for (let i = 2; i < n; i++) {
+    !tmp[i] && c++;
+  }
   return c;
 };
