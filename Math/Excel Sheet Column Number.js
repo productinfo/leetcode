@@ -85,3 +85,15 @@ var titleToNumber = function(s) {
 	return total;
 
 };
+
+// 9/21/2016
+var titleToNumber = function(s) {
+  let len = s.length;
+  if (!len) return -1;
+  let t = 0;
+  let b = 0;
+  while (len--) {
+    t += (Math.pow(26, b++) * map[s[len]]);
+  }
+  return t;
+};
