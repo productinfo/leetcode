@@ -27,3 +27,13 @@ const missingNumber = nums => {
   }
   return sum;
 };
+
+// 11/13/2016
+const missingNumber = arr => {
+  const len = arr.length;
+  let sum = Math.floor(len * (len + 1) / 2);
+  for (let i = 0; i < len; i++) {
+    sum -= arr[i];
+  }
+  return sum;
+};
