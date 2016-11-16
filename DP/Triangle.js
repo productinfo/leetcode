@@ -55,3 +55,15 @@ var minimumTotal = function(triangle) {
   }
   return triangle[0][0];
 };
+
+// 11/13/2016
+const minimumTotal = triangle => {
+  const yl = triangle.length;
+  const dp = triangle[yl - 1].slice();
+  for (let y = yl - 2; y >= 0; y--) {
+    for (let x = 0, l = triangle[y].length; x < l; x++) {
+      dp[x] = triangle[y][x] + Math.min(dp[x], dp[x + 1]);
+    }
+  }
+  return dp[0];
+};
