@@ -100,3 +100,35 @@ const getIntersectionNode = (h1, h2) => {
   }
   return null;
 };
+
+// 11/15/2016
+const getIntersectionNode = (h1, h2) => {
+  let l1 = 0;
+  let l2 = 0;
+  let p1 = h1;
+  let p2 = h2;
+  while (p1) {
+    p1 = p1.next;
+    l1++;
+  }
+  while (p2) {
+    p2 = p2.next;
+    l2++;
+  }
+  
+  if (l1 > l2) {
+    p1 = h1;
+    p2 = h2;  
+  } else {
+    p1 = h2;
+    p2 = h1;
+  }
+  let step = Math.abs(l1 - l2);
+  while (step--) p1 = p1.next;
+  while (p1 && p2) {
+    if (p1 === p2) return p1;
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+  return null;
+};
