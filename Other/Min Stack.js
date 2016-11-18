@@ -55,3 +55,32 @@ MinStack.prototype.getMin = function() {
   return this.list[len - 1].min;
 
 };
+
+// 11/16/2016
+class Node {
+  constructor(val, min) {
+    this.val = val;
+    this.min = min;
+  }
+}
+
+class MinStack {
+  constructor() {
+    this.s = [];
+  }
+  push(x) {
+    const min = this.s.length
+      ? Math.min(this.s[this.s.length - 1].min, x)
+      : x;
+    this.s.push(new Node(x, min));
+  }
+  pop() {
+    this.s.length && this.s.pop();
+  }
+  top() {
+    return this.s.length && this.s[this.s.length - 1].val;
+  }
+  getMin() {
+    return this.s.length && this.s[this.s.length - 1].min;
+  }
+}
