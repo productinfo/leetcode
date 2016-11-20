@@ -66,3 +66,19 @@ var removeElements = function(head, val) {
   return dm.next;
 
 };
+
+// 11/19/2016
+const removeElements = (head, val) => {
+  if (!head) return head;
+  const node = new ListNode(-1);
+  node.next = head;
+  let cur = node;
+  while (cur) {
+    if (cur.next && cur.next.val === val) {
+      cur.next = cur.next.next;
+    } else {
+      cur = cur.next;
+    }
+  }
+  return node.next;
+};
