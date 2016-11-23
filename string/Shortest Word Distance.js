@@ -35,3 +35,15 @@ var shortestDistance = function (words, word1, word2) {
   return max === Number.MAX_VALUE ? -1 : max;
 
 };
+
+const fb = (words, w1, w2) => {
+  const len = words.length;
+	let min = Number.MAX_VALUE;
+  let i1, i2;
+  for (let i = 0; i < len; i++) {
+    if (words[i] === w1) i1 = i;
+    if (words[i] === w2) i2 = i;
+    if (i1 !== undefined && i2 !== undefined) min = Math.min(min, Math.abs(i1 - i2));
+  }
+  return min;
+};
