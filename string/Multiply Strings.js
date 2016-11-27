@@ -96,3 +96,28 @@ var multiply = function(num1, num2) {
   return carry ? carry + res : res;
 
 };
+
+// 9/16/2016
+var multiply = function(num1, num2) {
+
+  if (num1 === '0' || num2 === '0') return '0';
+
+  const l1 = num1.length;
+  const l2 = num2.length;
+
+  const t = Array.from({ length: l1 + l2 - 1 }, v => 0);
+  for (let i = 0; i < l1; i++) {
+    for (let j = 0; j < l2; j++) {
+      t[i + j] += (+num1[i] * +num2[j]);
+    }
+  }
+  let res = '';
+  let carry = 0;
+  let len = t.length;
+  while (len--) {
+    const sum = t[len] + carry;
+    res = (sum % 10) + res;
+    carry = (sum / 10) >> 0;
+  }
+  return carry ? carry + res : res;
+};
