@@ -38,3 +38,17 @@ var lengthOfLongestSubstring = function(s) {
   }
   return max;
 };
+
+// 9/16/2016
+var lengthOfLongestSubstring = function(s) {
+  const len = s.length;
+  const map = {};
+  let left = 0;
+  let max = 0;
+  for (let i = 0; i < len; i++) {
+    left = (s[i] in map) ? Math.max(left, map[s[i]] + 1) : left;
+    map[s[i]] = i;
+    max = Math.max(max, i - left + 1);
+  }
+  return max;
+};
