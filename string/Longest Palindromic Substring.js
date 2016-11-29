@@ -42,3 +42,31 @@ const expand = (str, l, r) => {
 
   return str.substring(l + 1, r);
 }
+
+// 9/16/2016
+var longestPalindrome = function(s) {
+
+  const len = s.length;
+  if (!len) return '';
+  let longest = s[0];
+  let part;
+  for (let i = 0; i < len; i++) {
+    part = go(s, i, i);
+    if (part.length > longest.length) {
+      longest = part;
+    }
+    part = go(s, i, i + 1);
+    if (part.length > longest.length) {
+      longest = part;
+    }
+  }
+  return longest;
+};
+
+const go = (s, m, n) => {
+  while (s[m] === s[n] && m >= 0 && n < s.length) {
+    m--;
+    n++:
+  }
+  return s.substring(m + 1, n);
+}
