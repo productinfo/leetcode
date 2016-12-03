@@ -41,3 +41,15 @@ var lengthOfLastWord = function(s) {
 
   return end - index;
 };
+
+// 9/16/2016
+var lengthOfLastWord = function(s) {
+  s = s.trim();
+  const len = s.length;
+  if (!len) return 0;
+  let i = len - 1;
+  while (s[i] !== ' ' && i >= 0) {
+    i--;
+  }
+  return len - 1 - i;
+};
