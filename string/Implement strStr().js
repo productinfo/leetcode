@@ -86,3 +86,19 @@ var strStr = function(s1, s2) {
   }
   return -1;
 };
+
+// 9/17/2016
+var strStr = function(haystack, needle) {
+  const l1 = haystack.length;
+  const l2 = needle.length;
+  if (l2 > l1) return -1;
+  if (haystack === needle) return 0;
+
+  for (let i = 0; i <= l1 - l2; i++) {
+    if (haystack.substring(i, i + l2) === needle) {
+      return i;
+    }
+  }
+
+  return -1;
+};
