@@ -69,3 +69,23 @@ function foo(n) {
 }
 
 console.log(foo(3));
+
+// 9/15/2016
+var generateParenthesis = function(n) {
+  const res = [];
+  const dfs = (l, r, tmp) => {
+    if (l === 0 && r === 0) {
+      res.push(tmp);
+      return;
+    }
+    if (l > 0) {
+      dfs(l - 1, r, tmp + '(');
+    }
+
+    if (r > l) {
+      dfs(l, r - 1, tmp + ')');
+    }
+  }
+  dfs(n, n, '');
+  return res;
+};
