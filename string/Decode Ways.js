@@ -39,3 +39,22 @@ var numDecodings = function(s) {
   return dp[l];
 
 };
+
+// 9/15/2016
+var numDecodings = function(s) {
+  const len = s.length;
+  if (!len) return 0;
+  const dp = Array.from({ length: len }, _ => 0);
+  dp[0] = 1;
+  dp[1] = s[0] === '0' ? 0 : 1;
+  for (let i = 2; i <= len; i++) {
+    if (s[i - 1] !== '0') {
+      dp[i] += dp[i - 1];
+    }
+    const sum = +s[i - 2] * 10 + +s[i - 1];
+    if (sum >= 10 && sum <= 26) {
+      dp[i] += dp[i - 2];
+    }
+  }
+  return dp[len];
+};
