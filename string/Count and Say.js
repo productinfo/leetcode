@@ -42,3 +42,27 @@ var countAndSay = function(n) {
   return r;
 
 };
+
+// 9/15/2016
+var countAndSay = function(n) {
+  let r = '1';
+  if (n < 2) {
+    return r;
+  }
+
+  for (let i = 2; i <= n; i++) {
+    let t = '';
+    const size = r.length;
+    for (let j = 0; j < size; j++) {
+      let c = 1;
+      const char = r[j];
+      while (j + 1 < size && char === r[j + 1]) {
+        j++;
+        c++;
+      }
+      t += (c + char);
+    }
+    r = t;
+  }
+  return r;
+};
