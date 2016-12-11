@@ -84,3 +84,14 @@ var uniquePaths = function(x, y) {
   return dp[x - 1];
 
 };
+
+// 9/25/2016
+var uniquePaths = function(x, y) {
+  const dp = Array.from({ length: x }, v => 1);
+  for (let j = 1; j < y; j++) {
+    for (let i = 1; i < x; i++) {
+      dp[i] += dp[i - 1];
+    }
+  }
+  return dp[x - 1];
+};
