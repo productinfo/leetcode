@@ -34,3 +34,24 @@ class TwoSum {
   }
 
 }
+
+/**
+ * find is O(1)
+ * add is O(n)
+ */
+class X {
+  constructor() {
+    this.map = {};
+    this.total = {};
+  }
+  add(val) {
+    Object.keys(this.map).forEach(key => {
+      key = +key;
+      this.total[val + key] = true;
+    });
+    this.map[val] = true;
+  }
+  find(val) {
+    return val in this.total;
+  }
+}
