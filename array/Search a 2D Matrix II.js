@@ -25,3 +25,25 @@ var searchMatrix = function(matrix, target) {
   return search(0, xl - 1, 0, yl - 1);
 
 };
+
+// 9/12/2016
+/**
+ O(m + n)
+ */
+var searchMatrix = function(matrix, target) {
+
+  let y = 0;
+  let x = matrix[0].length - 1;
+  const yl = matrix.length;
+  while (y < yl && x >= 0) {
+    if (matrix[y][x] === target) {
+      return true;
+    }
+    if (matrix[y][x] < target) {
+      y++;
+    } else {
+      x--;
+    }
+  }
+  return false;
+};
