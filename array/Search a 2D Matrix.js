@@ -32,3 +32,21 @@ var searchMatrix = function(matrix, target) {
   return false;
 
 };
+
+// 11/8/2016
+const searchMatrix = (matrix, target) => {
+  const yl = matrix.length;
+  const xl = matrix[0].length;
+  let x = xl - 1;
+  let y = 0;
+  while (y < yl && x >= 0) {
+    if (matrix[y][x] === target) {
+      return true;
+    } else if (matrix[y][x] < target) {
+      y++;
+    } else {
+      x--;
+    }
+  }
+  return false;
+};
