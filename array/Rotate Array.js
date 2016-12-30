@@ -34,3 +34,22 @@ var rev = function (n, start, end) {
   }
 
 };
+
+// 10/24/2016
+const rev = (arr, i, j) => {
+  while (i < j) {
+    const t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+    i++;
+    j--;
+  }
+};
+
+const rotate = (arr, k) => {
+  const len = arr.length;
+  k %= len;
+  arr = arr.reverse();
+  rev(arr, 0, k - 1);
+  rev(arr, k, arr.length - 1);
+};
