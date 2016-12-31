@@ -47,3 +47,29 @@ const plusOne = (d) => {
 
   return d;
 };
+
+// 9/11/2016
+var plusOne = function(digits) {
+
+  let carry = 1;
+  let len = digits.length;
+  while (len--) {
+    const sum = digits[len] + carry;
+    digits[len] = (sum % 10);
+    carry = (sum / 10) >> 0;
+  }
+  return carry ? [carry].concat(digits) : digits;
+};
+
+// 10/21/2016
+const plusOne = digits => {
+  let carry = 1;
+  let len = digits.length;
+  while (len--) {
+    const sum = digits[len] + carry;
+    digits[len] = sum % 10;
+    carry = (sum / 10) >> 0;
+    if (carry === 0) return digits;
+  }
+  return carry ? [carry, ...digits] : digits;
+};
