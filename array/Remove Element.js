@@ -22,3 +22,15 @@ var removeElement = function(A, elem) {
   return c;
 
 };
+
+// 10/20/2016
+const removeElement = (arr, val) => {
+  const len = arr.length;
+  let index = 0;
+  for (let i = 0; i < len; i++) {
+    if (arr[i] !== val) {
+      arr[index++] = arr[i];
+    }
+  }
+  return index;
+};
