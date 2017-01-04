@@ -60,3 +60,21 @@ var generate = function(n) {
 
   return r;
 };
+
+// 11/28/2016
+const generate = n => {
+  const res = [];
+  if (n < 1) return res;
+  res.push([1]);
+  if (n < 2) return res;
+  for (let i = 1; i < n; i++) {
+    const pv = res[i - 1];
+    const cur = [1];
+    for (let l = pv.length, j = 0; j < l - 1; j++) {
+      cur.push(pv[j] + pv[j + 1]);
+    }
+    cur.push(1);
+    res.push(cur);
+  }
+  return res;
+};
