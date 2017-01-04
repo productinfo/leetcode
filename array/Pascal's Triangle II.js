@@ -49,3 +49,31 @@ var getRow = function getRow(n) {
   cur.push(1);
   return cur;
 };
+
+// 9/10/2016
+var goo = function(rowIndex) {
+  const res = [];
+  if (rowIndex < 0) return res;
+  for (let i = 0; i < rowIndex + 1; i++) {
+    res.unshift(1);
+		for (let j = 1; j < res.length - 1; j++) {
+			res[j] = res[j] + res[j + 1];
+		}
+  }
+  return res;
+};
+
+// 11/28/2016
+const getRow = n => {
+  let p = [1];
+  if (n === 0) return p;
+  for (let i = 1; i <= n; i++) {
+    const cur = [1];
+    for (let l = p.length, j = 0; j < l - 1; j++) {
+      cur.push(p[j] + p[j + 1]);
+    }
+    cur.push(1);
+    p = cur;
+  }
+  return p;
+};
