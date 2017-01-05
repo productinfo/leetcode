@@ -81,3 +81,45 @@ const z = (n, s, e) => {
 };
 
 console.log(z([0, 1, 3, 50, 75], 0, 99));
+
+// 9/13/2016
+const fb = (nums, start, end) => {
+  const res = [];
+  const len = nums.length;
+  if (!len) return res;
+  for (let i = 0; i < len; i++) {
+    if (nums[i + 1] && nums[i] + 1 === nums[i + 1]) {
+      continue;
+    }
+    a = nums[i] + 1 || start;
+    b = i === len - 1 ? end : nums[i + 1] - 1;
+    res.push(print(a, b));
+  }
+	return res;
+};
+
+const print = (start, end) => start === end
+  ? `${start}`
+  : `${start}->${end}`;
+
+
+// 10/22/2016
+const print = (a, b) => a === b ? `${a}` : `${a}->${b}`;
+const f = (arr, s, e) => {
+  const res = [];
+  let len = arr.length;
+  let next = s;
+  for (let i = 0; i < len; i++) {
+    // not within the range yet
+    if (arr[i] < next) continue;
+    // continue to find the next one
+    if (arr[i] === next) {
+      next++;
+      continue;
+    }
+    res.push(print(next, arr[i] - 1));
+    next = arr[i] + 1;
+  }
+  if (next <= e) res.push(print(next, e));
+  return res;
+};
