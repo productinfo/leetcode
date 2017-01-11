@@ -1,3 +1,21 @@
+// 9/10/2016
+var majorityElement = function(nums) {
+  const len = nums.length;
+  let mj = nums[0];
+  let c = 1;
+  for (let i = 1; i < len; i++) {
+    if (c === 0) {
+      mj = nums[i];
+      c++;
+    } else if (nums[i] === mj) {
+      c++;
+    } else {
+      c--;
+    }
+  }
+  return mj;
+};
+
 // 4/6/2016
 const majorityElement = (arr) => {
 
@@ -133,3 +151,20 @@ var majorityElement = function(nums) {
 //   return max > l / 2 ? max : 0;
 
 // };
+
+// 11/16/2016
+const majorityElement = arr => {
+  let c = 0;
+  let n = 0;
+  for (let l = arr.length, i = 0; i < l; i++) {
+    if (c === 0) {
+      n = arr[i];
+      c++;
+    } else if (arr[i] === n) {
+      c++;
+    } else {
+      c--;
+    }
+  }
+  return n;
+};
