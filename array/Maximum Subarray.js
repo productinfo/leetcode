@@ -55,3 +55,32 @@ var maxSubArray = function(nums) {
   }
   return max;
 };
+
+// 10/5/2016
+var maxSubArray = function(nums) {
+  const len = nums.length;
+  let max = Number.NEGATIVE_INFINITY;
+  let t = 0;
+  for (let i = 0; i < len; i++) {
+    t += nums[i];
+    if (t < nums[i]) t = nums[i];
+    max = Math.max(max, t);
+  }
+  return max;
+};
+
+// 11/27/2016
+const maxSubArray = arr => {
+  const len = arr.length;
+  if (!len) return 0;
+  let max = -Infinity;
+  let total = 0;
+  for (let i = 0; i < len; i++) {
+    total += arr[i];
+    if (total < arr[i]) {
+      total = arr[i];
+    }
+    max = Math.max(max, total);
+  }
+  return max;
+};
