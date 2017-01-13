@@ -52,3 +52,25 @@ var longestConsecutive = function(nums) {
   return max;
 
 };
+
+// 11/29/2016
+const longestConsecutive = arr => {
+  const map = {};
+  arr.forEach(v => map[v] = true);
+  const go = (val, inc) => {
+    let c = 0;
+    while (map[val]) {
+      c++;
+      delete map[val];
+      if (inc) {
+        val++;
+      } else {
+        val--;
+      }
+    }
+    return c;
+  };
+  let max = 0;
+  arr.forEach(v => max = Math.max(max, go(v, false) + go(v + 1, true)));
+  return max;
+};
