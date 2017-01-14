@@ -179,3 +179,112 @@ var findKthLargest = function(nums, k) {
     return res;
 
 };
+
+// 9/10/2016
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var findKthLargest = function(nums, k) {
+  return findKthSmallest(nums, 0, nums.length - 1, nums.length - k);
+};
+
+const swap = (n, i, j) => {
+  const t = n[i];
+  n[i] = n[j];
+  n[j] = t;
+}
+
+const findKthSmallest = (nums, s, e, k) => {
+  if (s > e) return Number.MAX_VALUE;
+
+  // pick last one as pivot
+  let pivot = nums[e];
+  let left = s;
+  for (let i = s; i < e; i++) {
+    if (nums[i] <= pivot) {
+      // Put numbers < pivot to pivot's left
+      swap(nums, left++, i);
+    }
+  }
+  // Finally, swap A[end] with A[left]
+  swap(nums, left, end);
+  if (left === k) {
+    return nums[left];
+  } else if (left < k) {
+    return findKthSmallest(nums, left + 1, e, k);
+  } else {
+    return findKthSmallest(nums, s, left - 1, k);
+  }
+}
+
+// 10/24/2016
+const swap = (n, i, j) => {
+  const t = n[i];
+  n[i] = n[j];
+  n[j] = t;
+};
+// find kth larget === find (len - k) smallest
+const findKthLargest = (nums, k) => {
+  const len = nums.length;
+  if (!len || !k) return 0;
+  const x = len - k;
+  // find pivot as lastest element and move all value smaller than it to its right
+  const go = (s, e) => {
+    if (s > e) return Number.MAX_VALUE;
+    const pivot = nums[e];
+    let index = s;
+    for (let i = s; i < e; i++) {
+      if (nums[i] <= pivot) {
+        swap(nums, i, index++);
+      }
+    }
+    swap(nums, index, e);
+    if (x === index) {
+      return nums[index];
+    } else if (index < x) {
+      return go(index + 1, e);
+    } else {
+      return go(s, index - 1);
+    }
+  }
+  return go(0, len - 1); 
+};
+
+/*
+2, 3, 1, 6, 4, 5
+2, 3, 1, 4, 6, 5
+2, 3, 1, 4, 5, 6
+index = 4
+*/
+
+// 11/20/2016
+const swap = (arr, i, j) => {
+  const t = arr[i];
+  arr[i] = arr[j];
+  arr[j] = t;
+};
+
+const findKthLargest = (arr, k) => {
+  const l = arr.length;
+  const x = l - k;
+  const go = (s, e) => {
+    let left = s;
+    const pivot = arr[e];
+    for (let i = s; i < e; i++) {
+      if (arr[i] < pivot) {
+        swap(arr, i, left++);
+      }
+    }
+    swap(arr, e, left);
+    if (left === x) {
+      return arr[x];
+    } else if (left < x) {
+      return go(left + 1, e);
+    } else {
+      return go(s, left - 1);
+    }
+  };
+  return go(0, l - 1);
+};
