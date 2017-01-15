@@ -67,3 +67,19 @@ var insert = function(intervals, newInterval) {
 
   return intervals;
 };
+
+// 11/6/2016
+const insert = (ins, iv) => {
+  let i = 0 ;
+  // sort
+  while (i < ins.length && ins[i].end < iv.start) {
+    i++;
+  }
+  while (i < ins.length && iv.end >= ins[i].start) {
+    iv.start = Math.min(iv.start, ins[i].start);
+    iv.end = Math.max(iv.end, ins[i].end);
+    ins.splice(i, 1);
+  }
+  ins.splice(i, 0, iv);
+  return ins;
+};
