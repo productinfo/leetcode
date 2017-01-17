@@ -37,3 +37,18 @@ var jump = function(nums) {
   return step;
 
 };
+
+// 11/5/2016
+const jump = arr => {
+  let currentJumpMax = 0;
+  let stepCount = 0;
+  let lastJumpMax = 0;
+  for (let l = arr.length, i = 0; i < l - 1; i++) {
+    currentJumpMax = Math.max(currentJumpMax, arr[i] + i);
+    if (i === lastJumpMax) {
+    	stepCount++;
+			lastJumpMax = currentJumpMax;
+		}
+  }
+	return stepCount;
+};
