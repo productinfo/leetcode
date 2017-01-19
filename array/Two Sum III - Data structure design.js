@@ -55,3 +55,21 @@ class X {
     return val in this.total;
   }
 }
+
+/**
+ * find is O(1)
+ * add is O(n)
+ */
+class X {
+  constructor() {
+    this.map = {};
+    this.total = {};
+  }
+  add(val) {
+    Object.keys(this.map).forEach(key => this.total[+key + val] = true);
+    this.map[val] = true;
+  }
+  find(val) {
+    return val in this.total;
+  }
+}
