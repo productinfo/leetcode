@@ -30,22 +30,35 @@ var findMin = function(nums) {
 
 };
 
-// 4/6/2016
-const findPeakElement = (n) => {
-
-  let low = 0, high = n.length - 1;
-
+var findMin = function(nums) {
+  let low = 0;
+  let high = nums.length - 1;
   while (low < high) {
-
-    const m = (low + high) >> 1;
-
-    if (n[m] > n[m + 1]) {
-      high = m;
-    } else if (n[m] < n[m + 1]) {
-      low = m + 1;
+    if (nums[low] < nums[high]) {
+      return nums[low];
+    }
+    let m = (low + high) >> 1;
+    if (nums[low] <= nums[m]) {
+      low = mid + 1;
+    } else {
+      high = mid;
     }
   }
+  return nums[low];
+};
 
-  return low;
-
+// 10/23/2016
+const findMin = arr => {
+  let l = 0;
+  let h = arr.length - 1;
+  while (l < h) {
+    if (arr[l] < arr[h]) return arr[l];
+    let m = (l + h) >> 1;
+    if (arr[h] < arr[m]) {
+      l = m + 1;
+    } else {
+      h = m;
+    }
+  }
+  return arr[l];
 };
