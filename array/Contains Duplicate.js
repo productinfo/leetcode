@@ -46,3 +46,36 @@ const containsDuplicate = (n) => {
 
   return false;
 };
+
+// 11/20/2016
+const containsDuplicate = arr => {
+  // sort
+  // O(nlog)
+  // no extra space
+  arr = arr.sort((a, b) => a - b);
+  for (let l = arr.length, i = 1; i < l; i++) {
+    if (arr[i] === arr[i - 1]) return true;
+  }
+  return false;
+};
+
+const containsDuplicate = arr => {
+  // use map extra space
+  // O(n)
+  const map = {};
+  for (let l = arr.length, i = 0; i < l; i++) {
+    if (arr[i] in map) return true;
+    map[arr[i]] = i;
+  }
+  return false;
+};
+
+// 11/30/2016
+const containsDuplicate = arr => {
+  const l = arr.length;
+  arr = arr.sort((a, b) => a - b);
+  for (let i = 0; i < l; i++) {
+    if (i > 0 && arr[i] === arr[i - 1]) return true;
+  }
+  return false;
+};
