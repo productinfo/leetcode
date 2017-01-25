@@ -30,3 +30,26 @@ var containsNearbyDuplicate = function(nums, k) {
   return false;
 
 };
+
+// 9/7/2016
+var containsNearbyDuplicate = function(nums, k) {
+  const len = nums.length;
+  if (!len) return false;
+  const map = {};
+  for (let i = 0; i < len; i++) {
+    if (map.hasOwnProperty(nums[i]) && Math.abs(map[nums[i]] - i) <= k) return true;
+    map[nums[i]] = i;
+  }
+  return false;
+};
+
+// 10/5/2016
+var containsNearbyDuplicate = function(nums, k) {
+  const len = nums.length;
+  const map = {};
+  for (let i = 0; i < len; i++) {
+    if (nums[i] in map && i - map[nums[i]] <= k) return true;
+    map[nums[i]] = i;
+  }
+  return false;
+};
