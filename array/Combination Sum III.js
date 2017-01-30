@@ -38,3 +38,29 @@ var combinationSum3 = function(k, n) {
 
 	return res;
 };
+
+// 9/7/2016
+const sum = arr => arr.reduce((prev, next) => prev + next, 0);
+
+const combinationSum3 = function(k, n) {
+
+  const res = [];
+  const sub = [];
+
+  const dfs = start => {
+    if (sub.length === k && sum(sub) === n) {
+      res.push(sub.slice());
+      return;
+    }
+    for (let i = start; i < 10; i++) {
+      sub.push(i);
+      dfs(i + 1);
+      sub.pop();
+    }
+  };
+
+  dfs(1);
+
+  return res;
+
+};
