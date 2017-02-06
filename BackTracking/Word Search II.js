@@ -166,11 +166,13 @@ var findWords = function(board, words) {
       return;
     }
 
-    const hasMatched = words.every(word => word.indexOf(str) > 0);
+    str = str + board[y][x];
+
+    const hasMatched = words.some(word => word.startsWith(str));
 
     if (!hasMatched) return;
 
-    const matched = words.every(word => word === str);
+    const matched = words.some(word => word === str);
 
     if (matched) {
       res.push(matched);
@@ -185,7 +187,7 @@ var findWords = function(board, words) {
 
   for (let y = 0; y < yl; y++) {
     for (let x = 0; x < xl; x++) {
-      go(x, y, '');
+      go(x, y, board[y][x]);
     }
   }
 
