@@ -99,3 +99,32 @@ var numIslands = function(grid) {
   }
   return counter;
 };
+
+// 11/30/2016
+const numIslands = grid => {
+  const yl = grid.length;
+  if (!yl) return 0;
+  const xl = grid[0].length;
+  let c = 0;
+  const dfs = (x, y) => {
+    if (
+      x < 0 || y < 0 ||
+      x >= xl || y >= yl ||
+      grid[y][x] === '0'
+    ) {
+      return false;
+    }
+    grid[y][x] = '0'
+    dfs(x + 1, y);
+    dfs(x - 1, y);
+    dfs(x, y + 1);
+    dfs(x, y - 1);
+    return true;
+  };
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (dfs(x, y)) c++;
+    }
+  }
+  return c;
+};
