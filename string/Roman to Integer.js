@@ -50,7 +50,7 @@ var romanToInt = function(s) {
   const res = 0;
   for (let i = 0; i < len; i++) {
     res += map[s[i]];
-    if (i > 0 && map[s[i - 1]] > map[s[i]]) res -= 2 * map[s[i - 1]];
+    if (i > 0 && map[s[i - 1]]< map[s[i]]) res -= 2 * map[s[i - 1]];
   }
   return res;
 };
