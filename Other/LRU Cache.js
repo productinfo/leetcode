@@ -140,6 +140,8 @@ class LRUCache {
       // remove node
       node.prev.next = node.next;
       node.next.prev = node.prev;
+      node.next = null;
+      node.prev = null;
       this.size--;
       delete this.map[key];
       this.set(key, val);
