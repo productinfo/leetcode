@@ -41,3 +41,31 @@ var evalRPN = function(tokens) {
   return s.pop();
 
 };
+
+// 11/29/2016
+const evalRPN = tokens => {
+  const stack = [];
+  let d1, d2;
+  for (let l = tokens.length, i = 0; i < l; i++) {
+    if (tokens[i] === '+') {
+      d1 = stack.pop();
+      d2 = stack.pop();
+      stack.push(d1 + d2);
+    } else if (tokens[i] === '-') {
+      d1 = stack.pop();
+      d2 = stack.pop();
+      stack.push(d2 - d1);
+    } else if (tokens[i] === '*') {
+      d1 = stack.pop();
+      d2 = stack.pop();
+      stack.push(d1 * d2);
+    } else if (tokens[i] === '/') {
+      d1 = stack.pop();
+      d2 = stack.pop();
+      stack.push((d2 / d1) >> 0);
+    } else {
+      stack.push(+tokens[i]);
+    }
+  }
+  return stack.pop();
+};
