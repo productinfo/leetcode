@@ -45,3 +45,29 @@ Queue.prototype.peek = function() {
 Queue.prototype.empty = function() {
   return this.s.length === 0;
 };
+
+// 11/30/2016
+class Queue {
+  constructor() {
+    this.s = [];
+  }
+  push(x) {
+    const tmp = [];
+    while (this.s.length) {
+      tmp.push(this.s.pop());
+    }
+    tmp.push(x);
+    while (tmp.length) {
+      this.s.push(tmp.pop());
+    }
+  }
+  pop() {
+    return this.s.pop();
+  }
+  peek() {
+    return this.s[this.s.length - 1];
+  }
+  empty() {
+    return this.s.length === 0;
+  }
+}
