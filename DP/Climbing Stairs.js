@@ -70,3 +70,17 @@ var climbStairs = function(n) {
   }
   return d3;
 };
+
+// 11/27/2016
+const climbStairs = n => {
+  if (n < 2) return 1;
+  let d1 = 1;
+  let d2 = 1;
+  let d3;
+  while (n > 1) {
+    d3 = d1 + d2;
+    d1 = d2;
+    d2 = d3;
+  }
+  return d3;
+}
