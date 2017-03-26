@@ -67,3 +67,15 @@ const minimumTotal = triangle => {
   }
   return dp[0];
 };
+
+// 11/28/2016
+const minimumTotal = triangle => {
+  const yl = triangle.length;
+  for (let i = yl - 2; i >= 0; i--) {
+    const pv = triangle[i + 1];
+    for (let l = triangle[i].length, j = 0; j < l; j++) {
+      triangle[i][j] += Math.min(pv[j], pv[j + 1]);
+    }
+  }
+  return triangle[0][0];
+};
