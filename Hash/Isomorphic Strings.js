@@ -55,3 +55,14 @@ const valid = (s1, s2) => {
   }
   return true;
 }
+
+// 11/30/2016
+const valid = (s1, s2) => {
+  const map = {};
+  for (let l = s1.length, i = 0; i < l; i++) {
+    if (map[s1[i]] && map[s1[i]] !== s2[i]) return false; 
+    map[s1[i]] = s2[i];
+  }
+  return true;
+};
+const isIsomorphic = (s, t) => s.length === t.length && valid(s, t) && valid(t, s)
