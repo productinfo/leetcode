@@ -31,3 +31,20 @@ var removeNthFromEnd = function(head, n) {
   return root.next;
 
 };
+
+// 11/25/2016
+const removeNthFromEnd = (head, n) => {
+  const node = new ListNode(-1);
+  node.next = head;
+  let cur = node;
+  while (n--) {
+    cur = cur.next;
+  }
+  let x = node;
+  while (cur.next) {
+    cur = cur.next;
+    x = x.next;
+  }
+  x.next = x.next.next;
+  return node.next;
+};
