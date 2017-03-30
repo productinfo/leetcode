@@ -37,3 +37,11 @@ const missingNumber = arr => {
   }
   return sum;
 };
+
+// 3/27/2017
+const missingNumber = arr => {
+  const len = arr.length;
+  const total = ((0 + len) * (len + 1)) >> 1;
+  const sum = arr.reduce((t, a) => t + a, 0);
+  return total - sum;
+};
