@@ -50,3 +50,74 @@ t.add(t6);
 t.add(t7);
 t.add(t8);
 t.concur();
+
+// 11/30/2016
+class Task {
+  constructor(max) {
+    this.max = max;
+    this.curr = 0;
+    this.list = [];
+  }
+  add(t) {
+    this.list.push(t);
+  }
+  _callback() {
+    this.curr--;
+    if (this.curr < this.max) {
+      this._go();
+    }
+  }
+  _go() {
+    if (!this.list.length) return;
+    const t = this.list.shift();
+    this.curr++;
+    t(this._callback.bind(this));
+  }
+  run() {
+    for (let i = 0; i < this.max; i++) {
+      this._go();  
+    }
+  }
+}
+
+// Composition version
+const addTask = state => ({
+  add: task => state.q.push(task)
+});
+
+const execution = state => ({
+  cb() {
+    state.curr--;
+    if (state.curr < state.max) {
+      this.run();
+    }
+  },
+  run() {
+    const t = state.q.shift();
+    if (!t) return;
+    state.curr++;
+    t(this.cb.bind(this));
+  },
+  exec() {
+    for (let i = 0; i < state.max; i++) {
+      this.run();
+    }
+  }
+});
+
+const Task = state => Object.assign(
+  {},
+  addTask(state),
+  execution(state)
+);
+
+const leo = Task({
+  max: 3,
+  q: [],
+  curr: 0
+});
+
+leo.add(t1);
+leo.add(t2);
+leo.add(t3);
+leo.exec();
