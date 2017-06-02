@@ -39,3 +39,39 @@ const validTree = (n, edges) => {
 
   return true;
 };
+
+// 5/30/2017
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {boolean}
+ */
+var validTree = function(n, edges) {
+  const graph = [];
+  const visited = Array(n).fill(false);
+  for (let i = 0; i < n; i++) {
+    graph.push([]);
+  }
+  for (let j = 0; j < edges.length; j++) {
+    const u = edges[j][0];
+    const v = edges[j][1];
+    graph[u].push(v);
+    graph[v].push(u);
+  }
+  const hasCycle = (u, parent) => {
+    visited[u] = true;
+    for (let j = 0; j < graph[u].length; j++) {
+      const v = graph[u][j];
+      if (
+        (visited[v] && v !== parent) || (!visited[v] && hasCycle(v, u))
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+  
+  if (hasCycle(0, -1)) return false;
+
+  return visited.every(v => !!v);
+};

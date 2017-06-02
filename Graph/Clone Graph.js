@@ -54,3 +54,45 @@ var cloneGraph = function(graph) {
   return dm;
 
 };
+
+// 3/30/2017
+// BFS
+const cloneGraph = graph => {
+  if (!graph) return null;
+  const q = [graph];
+  const map = {
+    [graph.label]: new UndirectedGraphNode(graph.label)
+  };
+  while (q.length) {
+    const node = q.shift();
+    for (const neb of node.neighbors) {
+      if (!(neb.label in map)) {
+        map[neb.label] = new UndirectedGraphNode(neb.label);
+        q.push(neb);
+      }
+      map[node.label].neighbors.push(map[neb.label]);
+    }
+  }
+  return map[graph.label];
+};
+
+// Time O(n)
+// Space O(n)
+
+// DFS
+const cloneGraph = graph => {
+  const map = {};
+  const clone = node => {
+    if (!node) return null;
+    if (node.label in map) {
+      return map[node.label];
+    }
+    const copy = new UndirectedGraphNode(node.label);
+    map[copy.label] = copy;
+    for (const n of node.neighbors) {
+      copy.neighbors.push(clone(n));
+    }
+    return copy;
+  };
+  return clone(graph);
+};

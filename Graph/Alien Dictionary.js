@@ -58,3 +58,48 @@ const alienOrder = words => {
   
   return res.length !== Object.keys(degree).length ? '' : res;
 };
+
+// 5/30/2017
+/**
+ * @param {string[]} words
+ * @return {string}
+ */
+var alienOrder = function(words) {
+  const graph = [];
+  const map = {};
+  for (const w of words) {
+    for (const c of w) map[c] = 0;
+  }
+  for (let i = 0; i < words.length - 1; i++) {
+    const w1 = words[i];
+    const w2 = words[i + 1];
+    const len = Math.min(w1.length, w2.length);
+    for (let j = 0; j < len; j++) {
+      const c1 = w1[j];
+      const c2 = w2[j];
+      if (c1 !== c2) {
+        const set = graph[c1] || [];
+        if (!set.includes(c2)) {
+          set.push(c2);
+          map[c2]++;
+          graph[c1] = set;
+        }
+        break;
+      }
+    }
+  }
+  const q = [];
+  Object.keys(map).forEach(k => map[k] === 0 && q.push(k));
+  let res = '';
+  while (q.length) {
+    const k = q.shift();
+    res += k;
+    if (graph[k]) {
+      for (const c of graph[k]) {
+        map[c]--;
+        if (map[c] === 0) q.push(c);
+      }
+    }
+  }
+  return res.length === Object.keys(map).length ? res : '';
+};
