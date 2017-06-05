@@ -187,3 +187,48 @@ solve([
   ['X', 'X', 'O', 'X'],
   ['X', 'O', 'X', 'X']
 ]);
+
+
+// 5/31/2017
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solve = function(board) {
+  const yl = board.length;
+  if (!yl) return;
+  const xl = board[0].length;
+  const bfs = (x, y) => {
+    if (
+      x < 0 || y < 0 ||
+      x >= xl || y >= yl ||
+      board[y][x] !== 'O'
+    ) {
+      return;
+    }
+    board[y] = `${board[y].substring(0, x)}?${board[y].substring(x + 1)}`;
+    bfs(x + 1, y);
+    bfs(x - 1, y);
+    bfs(x, y + 1);
+    bfs(x, y - 1);
+  };
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (y === 0) bfs(x, y)
+      if (y === yl - 1) bfs(x, y)
+      if (x === 0) bfs(x, y)
+      if (x === xl - 1) bfs(x, y)
+    }
+  }
+  // console.log(board);
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (board[y][x] === '?') {
+        board[y] = `${board[y].substring(0, x)}O${board[y].substring(x + 1)}`;
+      } else if (board[y][x] === 'O') {
+        board[y] = `${board[y].substring(0, x)}X${board[y].substring(x + 1)}`;
+      }
+    }
+  }
+  // console.log(board);
+};
