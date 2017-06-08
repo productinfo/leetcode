@@ -95,3 +95,52 @@ var fullJustify = function(words, maxWidth) {
   return res;
 
 };
+
+// 4/14/2017
+// O(n ^ 2)
+const fullJustify = (words, maxWidth) => {
+  const res = [];
+  let i = 0;
+  while (i < words.length) {
+    let j = i;
+    let len = 0;
+    while (j < words.length && len + words[j].length + j - i <= maxWidth) {
+      len += words[j++].length;
+    }
+    let out = '';
+    // how many empty space left;
+    let space = maxWidth - len;
+    for (let k = i; k < j; k++) {
+      out += words[k];
+      if (space > 0) {
+        let t; // total of space needs to add
+        // if it is the end of the line
+        if (j === words.length) {
+          // no gap
+          if (j - k === 1) t = space;
+          // this is gap between words
+          else t = 1;
+        } else {
+          // j - k - 1 represent how many gap between words in this line
+          if (j - k - 1 > 0) {
+            if (space % (j - k - 1) === 0) {
+              // if space we needs can be divide with number of gaps
+              t = (space / (j - k - 1)) >> 0;
+            } else {
+              t = ((space / (j - k - 1)) >> 0) + 1;
+            }
+          } else {
+            t = space;
+          }
+        }
+        for (let z = 0; z < t; z++) {
+          out += ' ';
+        }
+        space -= t;
+      }
+    }
+    res.push(out);
+    i = j;
+  }
+  return res;
+};
