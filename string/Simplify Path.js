@@ -41,3 +41,21 @@ var simplifyPath = function(path) {
 
   return stack.length === 0 ? '/' : '/' + stack.join('/');
 };
+
+// 3/28/2017
+const simplifyPath = path => {
+  let res = '';
+  path = path.trim();
+  const stack = [];
+	const gs = path.split('/');
+  for (let i = 0; i < gs.length; i++) {
+    if (gs[i] === '.' || gs[i] === '') {
+      // no-op
+    } else if (gs[i] === '..') {
+      stack.pop();
+    } else {
+      stack.push(gs[i]);
+    }
+  }
+  return stack.length ? `/${stack.join('/')}` : '/';
+};
