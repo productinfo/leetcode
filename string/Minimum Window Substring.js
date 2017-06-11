@@ -84,3 +84,44 @@ var minWindow = function(s, t) {
   return s.substring(start, end + 1);
 
 };
+
+// O(n)
+/**
+ * 
+ 1. Use two pointers: start and end to represent a window.
+ 2. Move end to find a valid window.
+ 3. When a valid window is found, move start to find a smaller window.
+ */
+const minWindow = (s, t) => {
+  const map = {};
+  for (const c of s) {
+    map[c] = 0;
+  }
+  for (const c of t) {
+    if (c in map) map[c] += 1;
+  }
+  let start = 0;
+  let end = 0;
+  let counter = t.length;
+  let minStart = 0;
+  let minLen = Infinity;
+  let size = s.length;
+  while (end < size) {
+    const c1 = s[end];
+    if (map[c1] > 0) counter -= 1;
+    map[c1] -= 1;
+    end += 1;
+    while (counter === 0) {
+      if (end - start < minLen) {
+        minStart = start;
+        minLen = end - start;
+      }
+      const c2 = s[start];
+      map[c2] += 1;
+      if (map[c2] > 0) counter += 1;
+      start += 1;
+    }
+  }
+
+  return minLen === Infinity ? '' : s.substring(minStart, minStart + minLen);
+};
