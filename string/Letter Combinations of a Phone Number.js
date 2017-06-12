@@ -129,3 +129,51 @@ var letterCombinations = function(digits) {
   dfs(0);
   return res;
 };
+
+// 3/28/2017
+// O(n ^ m)
+// n is how many characters for each digits
+// m is how many input digits
+
+const letterCombinations = arr => {
+  const res = [];
+  const len = arr.length;
+  if (!len) return res;
+  const sub = [];
+  const dfs = start => {
+    if (sub.length === len) {
+      res.push(sub.join(''));
+      return;
+    }
+    const chars = map[arr[start]];
+    for (let i = 0; i < chars.length; i++) {
+      sub.push(chars[i]);
+      dfs(start + 1);
+      sub.pop();
+    }
+  };
+  dfs(0);
+  return res;
+};
+
+// 4/12/2017
+const letterCombinations = digits => {
+  const res = [];
+  const len = digits.length;
+  if (!len) return res;
+  const sub = [];
+  const dfs = index => {
+    if (index === len) {
+      res.push(sub.join(''));
+      return;
+    }
+    const char = map[digits[index]];
+    for (const c of char) {
+      sub.push(c);
+      dfs(index + 1);
+      sub.pop();
+    }
+  };
+  dfs(0);
+  return res;
+};
