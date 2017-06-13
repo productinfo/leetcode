@@ -102,3 +102,18 @@ var strStr = function(haystack, needle) {
 
   return -1;
 };
+
+// 3/28/2017
+const strStr = (s1, s2) => {
+  const l1 = s1.length;
+  const l2 = s2.length;
+  if (l2 > l1) return -1;
+  if (s1 === s2) return 0;
+  for (let i = 0; i < l1 - l2 + 1; i++) {
+    const subs = s1.substring(i, i + l2);
+    if (subs === s2) {
+      return i;
+    }
+  }
+  return -1;
+};
