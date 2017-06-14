@@ -89,3 +89,20 @@ const groupAnagrams = strs => {
   }
   return Object.keys(map).reduce((result, key) => (result.push(map[key]), result),[])
 };
+
+// 4/9/2016
+const groupAnagrams = strs => {
+  const map = {};
+  for (str of strs) {
+    const key = str.split('').sort().join('')
+    if (key in map) {
+      map[key].push(str);
+    } else {
+      map[key] = [str];
+    }
+  }
+  return Object.keys(map).reduce((res, key) => {
+    res.push(map[key])
+    return res;
+  }, []);
+};
