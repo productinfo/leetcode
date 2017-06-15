@@ -44,3 +44,26 @@ const solution = read4 => {
     return total;
   };
 };
+
+// 6/8/2017
+const solution = read4 => {
+  let index = 0;
+  const tmp = [];
+  let count = 0;
+  return (buf, n) => {
+    let eof = false;
+    let total = 0;
+    while (!eof && total < n) {
+      if (count === 0) {
+        count = read4(tmp);
+        eof = count < 4;
+      }
+      while (count > 0 && total < n) {
+        buf[total++] = tmp[index++];
+        count--;
+      }
+      if (index === 4) index = 0;
+    }
+    return total;
+  };
+};
