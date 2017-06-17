@@ -70,6 +70,7 @@ function foo(n) {
 
 console.log(foo(3));
 
+// O(2 ^ n)
 // 9/15/2016
 var generateParenthesis = function(n) {
   const res = [];
