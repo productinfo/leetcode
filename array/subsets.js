@@ -36,6 +36,9 @@ var subsets = function(S) {
   return result;
 };
 
+// original it is O(2 ^ n) problem
+// now it is O(n ^ 2)
+
 // 9/12/2016
 var subsets = function(nums) {
   const res = [[]];
@@ -48,6 +51,20 @@ var subsets = function(nums) {
       const cur = res[j].slice();
       cur.push(nums[i]);
       res.push(cur);
+    }
+  }
+  return res;
+};
+
+// 3/26/2017
+const subsets = (arr) => {
+  const res = [[]];
+  const len = arr.length;
+  for (let i = 0; i < len; i++) {
+    for (let j = 0, size = res.length; j < size; j++) {
+      const tmp = res[j].slice();
+      tmp.push(arr[i]);
+      res.push(tmp);
     }
   }
   return res;
