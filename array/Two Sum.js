@@ -63,3 +63,14 @@ const twoSum = (arr, target) => {
   }
   return [-1, -1];
 };
+
+// 3/24/2017
+const twoSum = (arr, target) => {
+  const map = {};
+  for (let i = 0, l = arr.length; i < l; i++) {
+    if (arr[i] in map) return [map[arr[i]], i];
+    map[target - arr[i]] = i;
+  }
+  A
+  return [-1, -1];
+};
