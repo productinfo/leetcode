@@ -47,3 +47,17 @@ var removeDuplicates = function(nums) {
   }
   return a + 1;
 };
+
+// 3/25/2017
+const removeDuplicates = (arr) => {
+  let a = 0, b = 1;
+  const l = arr.length;
+  while (a < l && b < l) {
+    if (arr[a] === arr[b]) {
+      b++;
+    } else {
+      arr[++a] = arr[b++];
+    }
+  }
+  return a + 1;
+};
