@@ -28,3 +28,25 @@ var canAttendMeetings = function (intervals) {
   return true;
 
 };
+
+// 4/4/2017
+const canAttendMeetings = intervals => {
+  const len = intervals.length;
+  if (!len) return true;
+  intervals = intervals.sort((a, b) => a.start - b.start);
+  for (let i = 1; i < len; i++) {
+    const cur = intervals[i];
+    const pv = intervals[i - 1];
+    if (cur.start < pv.end) return false;
+  }
+  return true;
+};
+
+const canAttendMeetings = intervals => {
+  if (intervals.length < 2) return true;
+  intervals = intervals.sort((a, b) => a.start - b.start);
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i].start < intervals[i - 1].end) return false;
+  }
+  return true;
+};
