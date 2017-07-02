@@ -195,3 +195,57 @@ class RandomizedCollection {
     return this.arr[(Math.random() * this.arr.length) >> 0];
   }
 }
+
+// 5/25/2017
+class RandomizedCollection {
+  constructor() {
+    this.arr = [];
+    this.map = {};
+  }
+  insert(val) {
+    let notContain = true;
+    if (val in this.map) {
+      notContain = false;
+    }
+    this.map[val] = this.map[val] || [];
+    this.map[val].push(this.arr.length);
+    this.arr.push(val);
+    return notContain;
+  }
+  swap(x, y) {
+    const tmp = this.arr[x];
+    this.arr[x] = this.arr[y];
+    this.arr[y] = tmp;
+  }
+  getMax(arr) {
+    return Math.max(...arr);
+  }
+  updateMap(key, val) {
+    if (this.map[key].length === 1) {
+      delete this.map[key];
+    } else {
+      const index = this.map[key].indexOf(val);
+      this.map[key].splice(index, 1);
+    }
+  }
+  remove(val) {
+    if (val in this.map) {
+      const last = this.arr.length - 1; // 5
+      const lastVal = this.arr[last]; // 30
+      const indexVal = this.getMax(this.map[val]); // 1(0)
+			if (indexVal !== last) {
+				this.swap(indexVal, last);
+				this.map[lastVal].push(indexVal);
+				this.updateMap(lastVal, last);
+			}
+      this.updateMap(val, indexVal);
+      this.arr.pop();
+      return true;
+    } else {
+      return false;
+    }
+  }
+  getRandom() {
+    return this.arr[(Math.random() * this.arr.length) >> 0];
+  }
+}
