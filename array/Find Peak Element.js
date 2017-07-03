@@ -48,3 +48,37 @@ const findPeakElement = (n) => {
   return low;
 
 };
+
+// 5/10
+const go = (arr, l, h) => {
+  if (l === h) return l;
+  if (l + 1 === h) return arr[l] < arr[h] ? h : l;
+  const m = (l + h) >> 1;
+  if (arr[m - 1] < arr[m] && arr[m + 1] < arr[m]) return m;
+  else if (arr[m - 1] > arr[m] && arr[m] > arr[m + 1]) return go(arr, l, m - 1);
+  else return go(arr, m + 1, h); 
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findPeakElement = function(nums) {
+  const len = nums.length;
+  if (!len) return 0;
+  return go(nums, 0, len - 1);
+};
+
+// 5/30/2017
+const findPeakElement = arr => {
+  let l = 0;
+  let h = arr.length - 1;
+  while (l < h) {
+    let m = (l + h) >> 1;
+    let next = m + 1;
+    if (arr[m] < arr[next]) l = next;
+    else h = m;
+
+  }
+  return l;
+};
