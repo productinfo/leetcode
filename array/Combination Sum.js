@@ -42,6 +42,8 @@ var combinationSum = function(candidates, target) {
 };
 
 // 9/7/2016
+// O(k * 2^n') time
+// k is average length of each solution, and we need O(k) time to copy new linkedlist when we get one combination.
 var combinationSum = function(candidates, target) {
   const res = [];
   const sub = [];
@@ -61,4 +63,32 @@ var combinationSum = function(candidates, target) {
   };
   dfs(0, target);
   return res;
+};
+
+// 6/3/2017
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function(candidates, target) {
+    const len = candidates.length;
+    const res = [];
+    if (!len) return res;
+    const sub = [];
+    candidates = candidates.sort((a, b) => a - b);
+    const dfs = (pos, rem) => {
+        if (rem === 0) {
+            res.push(sub.slice());
+            return;
+        }
+        for (let j = pos; j < len; j++) {
+            if (rem < candidates[j]) return;
+            sub.push(candidates[j]);
+            dfs(j, rem - candidates[j]);
+            sub.pop();
+        }
+    };
+    dfs(0, target);
+    return res;
 };
