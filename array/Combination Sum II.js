@@ -81,6 +81,7 @@ var combinationSum2 = function(candidates, target) {
 console.log(fb([10, 1, 2, 7, 6, 1, 5], 8));
 
 // 11/5/2016
+// O(k * 2^n') time
 const combinationSum2 = (arr, target) => {
   const res = [];
   const len = arr.length;
@@ -102,4 +103,33 @@ const combinationSum2 = (arr, target) => {
   };
   dfs(0, target);
   return res;
+};
+
+// 6/3/2017
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+    const len = candidates.length;
+    const res = [];
+    if (!len) return res;
+    const sub = [];
+    candidates = candidates.sort((a, b) => a - b);
+    const dfs = (pos, rem) => {
+        if (rem === 0) {
+            res.push(sub.slice());
+            return;
+        }
+        for (let j = pos; j < len; j++) {
+            if (j > pos && candidates[j] === candidates[j - 1]) continue;
+            if (rem < candidates[j]) return;
+            sub.push(candidates[j]);
+            dfs(j + 1, rem - candidates[j]);
+            sub.pop();
+        }
+    };
+    dfs(0, target);
+    return res;
 };
