@@ -53,3 +53,14 @@ var maxProfit = function(prices) {
   return max;
 
 };
+
+// 4/5/2017
+const maxProfit = prices => {
+  let min = Infinity;
+  let max = 0;
+  for (const p of prices) {
+    if (p < min) min = p;
+    max = Math.max(max, p - min);
+  }
+  return max;
+};
