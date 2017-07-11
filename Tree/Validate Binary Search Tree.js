@@ -76,3 +76,22 @@ const go = (r, min, max) => {
   if (max !== null && r.val >= max) return false;
   return go(r.left, min, r.val) && go(r.right, r.val, max);
 };
+
+// 10/25/2016
+const go = (r, min, max) => {
+  if (!r) return true;
+  if (min !== undefined && min >= r.val) return false;
+  if (max !== undefined && max <= r.val) return false;
+  return go(r.left, min, r.val) && go(r.right, r.val, max);
+};
+const isValidBST = root => root ? go(root) : true;
+
+// 3/29/2017
+const valid = (r, min = -Infinity, max = Infinity) => {
+  if (!r) return true;
+  if (min >= r.val) return false;
+  if (max <= r.val) return false;
+  return valid(r.left, min, r.val) && valid(r.right, r.val, max);
+};
+
+const isValidBST = root => root ? valid(root) : true;
