@@ -58,3 +58,35 @@ var generateTrees = function(n) {
   // return res;
 
 };
+
+// 11/11/2016
+const generateTrees = n => {
+  if (n === 0) return [];
+  const go = (start, end) => {
+  	const res = [];	
+  	if (start > end) {
+    	res.push(null);
+      return res;
+    }
+    if (start === end) {
+    	res.push(new TreeNode(start));
+      return res;
+    }
+    for (let i = start; i <= end; i++) {
+			// debugger;
+			const l = go(start, i - 1);
+      const r = go(i + 1, end);
+			for (let ll = l.length, m = 0; m < ll; m++) {
+      	for (let rr = r.length, n = 0; n < rr; n++) {
+        	const rt = new TreeNode(i);
+          rt.left = l[m];
+          rt.right = r[n];
+          res.push(rt);
+        }
+      }
+    }
+    return res;
+  };
+  return go(1, n);
+};
+// console.log(f(2));
