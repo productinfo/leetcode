@@ -26,3 +26,11 @@ var same = function (t1, t2) {
   return t1.val === t2.val && same(t1.left, t2.right) && same(t1.right, t2.left);
 
 };
+
+// 11/27/2016
+const isSymmetric = root => root ? go(r.left, r.right) : false;
+const go = (l, r) => {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  return l.val === r.val && go(l.left, r.right) && go(l.right, r.left);
+};
