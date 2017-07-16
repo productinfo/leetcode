@@ -95,3 +95,13 @@ var dfs = function (r, total) {
 //   return sum;
 
 // };
+
+
+// 3/30/2017
+const go = (r, s) => {
+  if (!r) return 0;
+  const ans = s * 10 + r.val;
+  if (!r.left && !r.right) return ans;
+  return go(r.left, ans) + go(r.right, ans);
+}
+const sumNumbers = root => root ? go(root, 0) : 0;
