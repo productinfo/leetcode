@@ -21,3 +21,10 @@ var isSameTree = function(p, q) {
   return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 
 };
+
+// 3/29/2017
+const isSameTree = (p, q) => {
+  if (!p && !q) return true;
+  else if (!p || !q) return false;
+  else return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+};
