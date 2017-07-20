@@ -26,3 +26,10 @@ var hasPathSum = function(root, sum) {
   return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
 
 };
+
+// 10/23/2016
+const hasPathSum = (root, sum) => {
+  if (!root) return false;
+  if (!root.left && !root.right) return root.val === sum;
+  return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+};
