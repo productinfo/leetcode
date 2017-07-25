@@ -25,3 +25,13 @@ var lowestCommonAncestor = function(root, p, q) {
   return l ? l : r;
 
 };
+
+// 10/23/2016
+const lowestCommonAncestor = (root, p, q) => {
+  if (!root) return null;
+  if (root === p || root === q) return root;
+  const l = lowestCommonAncestor(root.left, p, q);
+  const r = lowestCommonAncestor(root.right, p, q);
+  if (l && r) return root;
+  return l ? l : r;
+};
