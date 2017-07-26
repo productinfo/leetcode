@@ -119,3 +119,67 @@ var kthSmallest = function(root, k) {
   return v;
 
 };
+
+// 9/29/2016
+const inorder = root => {
+  const res = [];
+  if (!root) return res;
+  const stack = [];
+  while (stack.length > 0 || root) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      let node = stack.pop();
+      res.push(node.val);
+      root = node.right;
+    }
+  }
+  return res;
+};
+
+var kthSmallest = function(root, k) {
+  // O(n)
+  const arr = inorder(root);
+  // O(1)
+  return arr[k - 1];
+};
+
+// 10/23/2016
+const get = r => r ? get(r.left) + get(r.right) + 1 : 0;
+
+const kthSmallest = (root, k) => {
+  if (!root) return 0;
+  let cur = root;
+  while (cur) {
+    const lc = get(cur.left);
+    if (lc + 1 === k) {
+      return cur.val;
+    } else if (k > lc) {
+      k -= (lc + 1);
+      cur = cur.right;
+    } else {
+      cur = cur.left;
+    }
+  }
+  return -1;
+};
+
+// 10/25/2016
+const get = r => r ? (get(r.left) + get(r.right) + 1) : 0; 
+
+const kthSmallest = (root, k) => {
+  if (!root) return null;
+  while (root) {
+    const lc = get(root.left);
+    if (lc + 1 === k) {
+      return root.val;
+    } else if (k > lc) {
+      k = k - lc - 1;
+      root = root.right;
+    } else {
+      root = root.left;
+    }
+  }
+  return -1;
+};
