@@ -25,3 +25,14 @@ var invertTree = function(root) {
   return root;
 
 };
+
+// 10/23/2016
+const invertTree = root => {
+  if (!root) return null;
+  const t = root.left;
+  root.left = root.right;
+  root.right = t;
+  invertTree(root.left);
+  invertTree(root.right);
+  return root;
+};
