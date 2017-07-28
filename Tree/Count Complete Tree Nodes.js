@@ -33,3 +33,21 @@ var countNodes = function(root) {
   return hl === hr ? (1 << hl) - 1 : 1 + countNodes(root.left) + countNodes(root.right);
 
 };
+
+// 10/23/2016
+const countNodes = root => {
+  if (!root) return 0;
+  let hl = 0;
+  let hr = 0;
+  let c = root;
+  while (c) {
+    c = c.left;
+    hl++;
+  }
+  c = root
+  while (c) {
+    c = c.right;
+    hr++;
+  }
+  return hl === hr ? Math.pow(2, hl) - 1 : 1 + countNodes(root.left) + countNodes(root.right);
+};
