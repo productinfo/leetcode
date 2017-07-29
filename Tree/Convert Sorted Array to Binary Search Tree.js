@@ -25,3 +25,14 @@ var sortedArrayToBST = function(nums) {
 
   return root;
 };
+
+// 10/23/2016
+const sortedArrayToBST = arr => {
+  const len = arr.length;
+  if (!len) return null;
+  const m = len >> 1;
+  const root = new TreeNode(arr[m]);
+  root.left = sortedArrayToBST(arr.slice(0, m));
+  root.right = sortedArrayToBST(arr.slice(m + 1));
+  return root;
+};
