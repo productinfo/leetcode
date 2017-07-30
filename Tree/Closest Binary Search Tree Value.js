@@ -58,7 +58,7 @@ var closestValue = function (root, target) {
 const foo = (root, target) => {
 	let result;
 	let min = Number.MAX_VALUE;
-	const rec = (r, t) => {
+	const rec = r => {
 		if (!r) return;
 
 		const diff = Math.abs(r.val - target);
@@ -67,11 +67,32 @@ const foo = (root, target) => {
 			result = root.val;
 		}
 		if (target < r.val) {
-			rec(r.left, target);
+			rec(r.left);
 		} else {
-			rec(r.right, target);
+			rec(r.right);
 		}
 	};
-	rec(root, target);
+	rec(root);
 	return result;
+};
+
+// 9/24/2016
+const f = (root, target) => {
+  let res;
+  let min = Number.MAX_VALUE;
+  const go = r => {
+    if (!r) return;
+    let diff = Math.abs(r.val - target);
+    if (diff < min) {
+      min = diff;
+      res = r.val;
+    }
+    if (r.val < target) {
+      go(r.left);
+    } else {
+      go(r.right);
+    }
+  };
+  go(root);
+  return res;
 };
