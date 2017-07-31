@@ -92,3 +92,20 @@ var rightSideView = function rightSideView(root) {
 
 	return r;
 };
+
+// 10/23/2016
+const rightSideView = root => {
+  const res = [];
+  if (!root) return res;
+  const q = [root];
+  while (q.length) {
+    const size = q.length;
+    for (let j = 0; j < size; j++) {
+      const node = q.shift();
+      j === 0 && res.push(node.val);
+      node.right && q.push(node.right);
+      node.left && q.push(node.left); 
+    }
+  }
+  return res;
+};
