@@ -56,30 +56,26 @@ BSTIterator.prototype.next = function() {
  * while (i.hasNext()) a.push(i.next());
 */
 
-// 4/25/2016
+// 11/30/2016
 class BSTIterator {
-
   constructor(root) {
-    this.s = [];
+    this.stack = [];
     while (root) {
-      this.s.push(root);
+      this.stack.push(root);
       root = root.left;
     }
   }
-
-  hasNext() {
-    return this.s.length > 0;
-  }
-
   next() {
-    let node = this.s.pop();
+    let node = this.stack.pop();
     const val = node.val;
-    node = node.right
-    while (n) {
-      this.s.push(n);
-      n = n.left;
+    node = node.right;
+    while (node) {
+      this.stack.push(node);
+      node = node.left;
     }
     return val;
   }
-
+  hasNext() {
+    return !!this.stack.length;
+  }
 }
