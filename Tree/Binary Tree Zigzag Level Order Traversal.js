@@ -55,3 +55,28 @@ var zigzagLevelOrder = function(root) {
 
 
 };
+
+// 10/23/2016
+const zigzagLevelOrder = root => {
+  const res = [];
+  if (!root) return res;
+  const q = [root];
+  let direction = true;
+  while (q.length) {
+    const size = q.length;
+    const t = [];
+    for (let j = 0; j < size; j++) {
+      const node = q.shift();
+      if (direction) {
+        t.push(node.val);
+      } else {
+        t.unshift(node.val);
+      }
+      if (node.left) q.push(node.left);
+      if (node.right) q.push(node.right);
+    }
+    res.push(t);
+    direction = !direction;
+  }
+  return res;
+};
