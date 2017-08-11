@@ -172,3 +172,77 @@ class LRUCache {
 
   }
 }
+
+// 4/13/2017
+class Node {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.map = {};
+    this.size = 0;
+    this.first = new Node(-1, -1);
+    this.last = new Node(-1, -1);
+    this.first.next = this.last;
+    this.last.prev = this.first;
+  }
+
+  get(key) {
+    if (key in this.map) {
+      const node = this.map[key];
+      const v = node.value;
+      this.put(key, v);
+      return v;
+    }
+    return -1;
+  }
+
+  put(key, value) {
+    if (this.size === 0) {
+      // add to front
+      const node = new Node(key, value);
+      this.first.next = node;
+      node.next = this.last;
+      this.last.prev = node;
+      node.prev = this.first;
+      this.size += 1;
+      this.map[key] = node;
+    } else if (key in this.map) {
+      // remove node
+      const node = this.map[key];
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+      node.next = null;
+      node.prev = null;
+      this.size -= 1;
+      delete this.map[key];
+      this.put(key, value);
+    } else if (this.size >= this.capacity) {
+      // remove first one
+      const node = this.first.next;
+      this.first.next = node.next;
+      node.next.prev = this.first;
+      node.next = null;
+      node.prev = null;
+      this.size -= 1;
+      delete this.map[node.key];
+      this.put(key, value);
+    } else {
+      // add to tail
+      const node = new Node(key, value);
+      node.prev = this.last.prev;
+      this.last.prev.next = node;
+      node.next = this.last;
+      this.last.prev = node;
+      this.size += 1;
+      this.map[key] = node;
+    }
+  }
+}
