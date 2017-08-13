@@ -1,3 +1,4 @@
+// time: O(n)
 /**
  * @constructor
  * Initialize your data structure here.
@@ -231,3 +232,61 @@ class Trie {
      return !!this._find(this.root, prefix);
    }
  }
+
+// 3/30/2017
+const trieNode = _ => ({
+  end: false,
+  children: {}
+});
+
+class Trie {
+  constructor() {
+    this.root = trieNode();
+  }
+
+  insert(word) {
+    let cur = this.root;
+    let i = 0;
+    const len = word.length;
+    while (i < len) {
+      const children = cur.children[word[i]];
+      if (children) {
+        cur = children;
+        i++;
+      } else {
+        break;
+      }
+    }
+    
+    while (i < len) {
+      let n = trieNode();
+      cur.children[word[i++]] = n;
+      cur = n;
+    }
+    cur.end = true;
+  }
+
+
+  _find(r, w) {
+    let cur = r;
+    for (const c of w) {
+      const children = cur.children[c];
+      if (children) {
+        cur = children;
+      } else {
+        return null;
+      }
+    }
+    return cur;
+  }
+
+  search(word) {
+    const p = this._find(this.root, word);
+    return p ? p.end : false;
+  }
+
+  startsWith(prefix) {
+    const p = this._find(this.root, prefix);
+    return !!p;
+  }
+}
