@@ -46,3 +46,36 @@ var merge = function (a1, a2) {
 
   return a3;
 };
+
+// 11/27/2016
+const merge = (a1, a2) => {
+  let i = 0;
+  let j = 0;
+  const l1 = a1.length;
+  const l2 = a2.length;
+  let a3 = [];
+  while (i < l1 && j < l2) {
+    if (a1[i] < a2[j]) {
+      a3.push(a1[i++]);
+    } else {
+      a3.push(a2[j++]);
+    }
+  }
+  if (i < l1) {
+  	a3 = [...a3, ...a1.slice(i - 1)];
+  } else if (j < l2) {
+  	a3 = [...a3, ...a2.slice(j - 1)];
+  }
+  return a3;
+};
+
+const mk = lists => {
+  const len = lists.length;
+  if (len === 0) {
+    return [];
+  } else if (len === 1) {
+    return lists[0];
+  } else {
+    return merge(mk(lists.slice(0, len >> 1)), mk(lists.slice(len >> 1)));
+  }
+};
