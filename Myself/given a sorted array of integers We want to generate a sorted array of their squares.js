@@ -55,3 +55,42 @@ const zzz = arr => {
 
 const y = zzz([-3, -1, 0, 1, 2]);
 console.log(y);
+
+// 4/16/2017
+// We're given a sorted array of integers: [-3, -1, 0, 1, 2]. We want to generate a sorted array of their squares: [0, 1, 1, 4, 9]
+// [0, 1, 1, 4, 9]
+const z = arr => {
+  const res = [];
+  const len = arr.length;
+  if (!len) return res;
+  const neg = [];
+  const pos = [];
+  // 1. split into neg and pos
+  for (const a of arr) {
+    if (a < 0) {
+      neg.push(a * a);
+    } else {
+      pos.push(a * a);
+    }
+  }
+  // 2. square and reverse neg
+  let p = 0;
+  let n = neg.length - 1;
+  // 3. merge two sorted array
+  while (p < pos.length && n >= 0) {
+    if (pos[p] < neg[n]) {
+      res.push(pos[p++]);
+    } else {
+      res.push(neg[n--]);
+    }
+  }
+  while (p < pos.length) {
+    res.push(pos[p++]);
+  }
+  while (n >= 0) {
+    res.push(neg[n--]);
+  }
+  return res;
+};
+
+console.log(z([-3, -1, 0, 1, 2]));
