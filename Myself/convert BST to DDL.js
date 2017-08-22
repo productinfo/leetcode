@@ -45,3 +45,103 @@ const y = head => {
   r.right = y(fast);
   return r;
 };
+
+// 5/23/2017
+// preorder
+
+const NULL = 'null';
+
+class DDL {
+  constructor(val) {
+    this.prev = null;
+    this.next = null;
+    this.val = val;
+  }
+}
+
+class TreeNode {
+  constructor(val) {
+    this.left = null;
+    this.right = null;
+    this.val = val;
+  }
+}
+
+const aa = new TreeNode(1);
+const bb = new TreeNode(2);
+const cc = new TreeNode(3);
+const dd = new TreeNode(4);
+const ee = new TreeNode(5);
+const ff = new TreeNode(6);
+const gg = new TreeNode(7);
+
+aa.left = bb;
+aa.right = cc;
+
+bb.left = dd;
+bb.right = ee;
+
+cc.left = ff;
+cc.right = gg;
+
+var a = new DDL(1);
+
+var b = new DDL(2);
+
+var c = new DDL(3);
+
+var d = new DDL(4);
+
+var e = new DDL(5);
+
+var f = new DDL(6);
+
+var g = new DDL(7);
+
+a.next = b;
+b.prev = a;
+b.next = c;
+c.prev = b;
+c.next = d;
+d.prev = c;
+d.next = e;
+e.prev = d;
+e.next = f;
+f.prev = e;
+f.next = g;
+g.prev = f;
+
+const s = root => {
+  // debugger
+  const dm = new DDL(-1);
+  let cur = dm;
+  const go = r => {
+    if (r) {
+      const ddl = new DDL(r.val);
+      cur.next = ddl;
+      ddl.prev = cur;
+      cur = cur.next;
+      go(r.left);
+      go(r.right);
+    } else {
+      cur.next = new DDL(null);
+    }
+  };
+  go(root);
+  return dm.next;
+};
+
+const deserialize = head => {
+  const go = () => {
+    const { val } = head;
+    head = head.next;
+    if (val === null) return null;
+    const r = new TreeNode(val);
+    r.left = go();
+    r.right = go();
+    return r;
+  };
+  return go();
+};
+
+console.log(s(aa));
