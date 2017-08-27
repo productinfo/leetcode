@@ -1,50 +1,25 @@
-var maxCircularSum = function (nums) {
-
-  if (!nums) {
-    return 0;
+const getMax = arr => {
+  let max = -Infinity;
+  let total = 0;
+  for (const a of arr) {
+    total += a;
+    if (total < a) total = a;
+    max = Math.max(max, total);
   }
-
-  var len = nums.length;
-
-  if (len === 0) {
-    return 0;
-  }
-
-  var max = maxSubArr(nums);
-
-  
-
+  return max
 };
 
-var maxSubArr = function (nums) {
-
-  if (!nums) {
-    return 0;
+const x = arr => {
+  const m1 = getMax(arr);
+  let t = 0;
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = -arr[i];
+    t += arr[i];
   }
-
-  var len = nums.length;
-
-  if (len === 0) {
-    return 0;
-  }
-
-  var i = 0, max = Number.NEGATIVE_INFINITY,
-      sum = 0;
-
-  for (; i < len ; i++) {
-
-    sum += nums[i];
-
-    if (sum < nums[i]) {
-      sum = nums[i];
-    }
-
-    if (sum > max) {
-      max = sum;
-    }
-
-  }
-
-  return max;
-
+	const m2 = getMax(arr);
+	return Math.max(m1, (t - m2) * -1);
 };
+
+console.log(x([
+	2, 3, -6, -7, 4, 5
+]));
