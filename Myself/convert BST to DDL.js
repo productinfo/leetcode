@@ -145,3 +145,78 @@ const deserialize = head => {
 };
 
 console.log(s(aa));
+
+// 8/22/2017
+const s = root => {
+  if (!root) return null;
+  const dm = new DDL(-1);
+  let cur = dm;
+  const go = r => {
+    const h = new DDL(r ? r.val : null);
+    cur.next = h;
+    h.prev = cur;
+    cur = cur.next;
+    if (r) {
+      go(r.left);
+      go(r.right);
+    }
+  };
+  go(root);
+  return dm.next;
+};
+
+const ds = head => {
+  const go = _ => {
+    if (!head || !head.next) return head;
+    const { val } = head;
+    head = head.next;
+    if (val) {
+      const r = new TreeNode(val);
+      r.left = go();
+      r.right = go();
+      return r;
+    } else {
+      return null;
+    }
+  };
+  return go();
+};
+
+// 8/27/2017
+const serialize = root => {
+  if (!root) return null;
+  const head = new DDL(-1);
+  let cur = head;
+  const go = r => {
+    const ddl = new DDL(r ? +r.val : null);
+    ddl.prev = cur;
+    cur.next = ddl;
+    cur = cur.next;
+    if (r) {
+      go(r.left);
+      go(r.right);
+    }
+  };
+  go(root);
+  cur.next = head.next;
+  head.next.prev = cur;
+  return head.next;
+};
+
+const deserialize = head => {
+  if (!head) return null;
+  const go = _ => {
+    if (!head) return null;
+    const { val } = head;
+    head = head.next;
+    if (val === null) {
+      return null;
+    } else {
+      const r = new TreeNode(val);
+      r.left = go();
+      r.right = go();
+      return r;
+    }
+  };
+  return go();
+};
