@@ -59,3 +59,23 @@ const simplifyPath = path => {
   }
   return stack.length ? `/${stack.join('/')}` : '/';
 };
+
+// 8/17/2017
+/**
+ * @param {string} path
+ * @return {string}
+ */
+var simplifyPath = function(path) {
+  const stack = [];
+  const g = path.split('/');
+  for (const ch of g) {
+    if (ch === '.' || ch === '') {
+      // no-op
+    } else if (ch === '..') {
+      stack.pop();
+    } else {
+      stack.push(ch);
+    }
+  }
+  return stack.length ? `/${stack.join('/')}` : '/';
+};
