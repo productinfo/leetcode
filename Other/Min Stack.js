@@ -84,3 +84,33 @@ class MinStack {
     return this.s.length && this.s[this.s.length - 1].min;
   }
 }
+
+// 8/21/2017
+class MinStack {
+  constructor() {
+    this.arr = [];
+  }
+
+  push(x) {
+    const min = this.arr.length ? Math.min(
+      x,
+      this.getMin()
+    ) : x;
+    this.arr.push({
+      val: x,
+      min
+    });
+  }
+
+  pop() {
+    this.arr.pop();
+  }
+
+  top() {
+    return this.arr.length && this.arr[this.arr.length - 1].val;
+  }
+
+  getMin() {
+    return this.arr.length && this.arr[this.arr.length - 1].min;
+  }
+}
