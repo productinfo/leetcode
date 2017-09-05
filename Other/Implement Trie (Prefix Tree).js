@@ -290,3 +290,59 @@ class Trie {
     return !!p;
   }
 }
+
+// 8/17/2017
+const trieNode = _ => ({
+  end: false,
+  children: {}
+});
+
+class Trie {
+  constructor() {
+    this.root = trieNode();
+  }
+ 
+  insert(word) {
+    const len = word.length;
+    let index = 0;
+    let cur = this.root;
+    while (index < len) {
+      const next = cur.children[word[index]];
+      if (next) {
+        cur = next;
+        index++
+      } else {
+        break;
+      }
+    }
+    while (index < len) {
+      const node = trieNode();
+      cur.children[word[index++]] = node;
+      cur = node;
+    }
+    cur.end = true;
+  }
+
+  _find(w) {
+    let cur = this.root;
+    for (const ch of w) {
+      const next = cur.children[ch];
+      if (next) {
+        cur = next;
+      } else {
+        return null;
+      }
+    }
+    return cur;
+  }
+
+  search(word) {
+    const p = this._find(word);
+    return p ? p.end : false;
+  }
+
+  startsWith(prefix) {
+    const p = this._find(prefix);
+    return !!p;
+  }
+}
