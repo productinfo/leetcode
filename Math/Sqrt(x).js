@@ -29,3 +29,20 @@ var mySqrt = function(x) {
   return mid;
 
 };
+
+// 3/30/2017
+const mySqrt = x => {
+  let l = 1;
+  let h = x;
+  let res = 0;
+  while (l <= h) {
+    let m = (l + h) >> 1;
+    if (m <= (x / m)) {
+      l = m + 1;
+      res = m;
+    } else {
+      h = m - 1;
+    }
+  }
+  return res;
+};
