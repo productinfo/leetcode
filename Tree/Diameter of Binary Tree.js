@@ -11,3 +11,17 @@ const diameterOfBinaryTree = root => {
   dfs(root);
   return max;
 };
+
+// O(n)
+const diameterOfBinaryTree = root => {
+  let max = 0;
+  const go = r => {
+    if (!r) return 0;
+    const left = go(r.left);
+    const right = go(r.right);
+    max = Math.max(max, left + right);
+    return Math.max(left, right) + 1;
+  };
+  go(root);
+  return max;
+};
