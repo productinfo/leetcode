@@ -62,3 +62,20 @@ const maxPathSum = function(root) {
   go(root);
   return max;
 };
+
+// 8/31/2017
+var maxPathSum = function(root) {
+  let max = -Infinity;
+  if (!root) return max;
+  const go = node => {
+    if (!node) return 0;
+    const l = go(node.left);
+    const r = go(node.right);
+    const { val: v } = node;
+    const m1 = Math.max(v, v + l, v + r);
+    max = Math.max(max, m1, v + l + r);
+    return m1;
+  };
+  go(root);
+  return max;
+};

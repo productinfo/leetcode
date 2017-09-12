@@ -34,3 +34,26 @@ var divide = function(dividend, divisor) {
   }
 
 };
+
+// 6/6/2017
+/**
+ * @param {number} dividend
+ * @param {number} divisor
+ * @return {number}
+ */
+var divide = function(dividend, divisor) {
+  let d1 = Math.abs(dividend);
+  let d2 = Math.abs(divisor);
+  let ans = 0;
+  while (d1 >= d2) {
+    let a = d2;
+    let m = 1;
+    while (d1 > (a << 1)) {
+      a = a << 1;
+      m = m << 1;
+    }
+    ans += m;
+    d1 -= a;
+  }
+  return ans;
+};
