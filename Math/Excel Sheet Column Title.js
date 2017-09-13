@@ -24,8 +24,7 @@ var map = {
   23: 'W',
   24: 'X',
   25: 'Y',
-  26: 'Z',
-  0: 'Z'
+  26: 'Z'
 };
 
 var convertToTitle = function(n) {
@@ -33,4 +32,23 @@ var convertToTitle = function(n) {
   if (n < 27) return map[n];
   if (n % 26 === 0) return map[(n / 26) - 1] + 'Z';
   return convertToTitle((n / 26) >> 0) + map[n % 26];
+};
+
+// 3/30/2017
+const convertToTitle = n => {
+  if (n < 26) return map[n];
+  if (n % 26 === 0) {
+    return convertToTitle((n / 26) - 1) + 'Z';
+  } else {
+    return convertToTitle() + map[n % 26];
+  }
+};
+
+const convertToTitle = n => {
+  if (n <= 26) return map[n];
+  if (n % 26 === 0) {
+    return convertToTitle((n / 26) - 1) + 'Z';
+  } else {
+    return convertToTitle((n / 26) >> 0) + map[n % 26];
+  }
 };
