@@ -97,3 +97,13 @@ var titleToNumber = function(s) {
   }
   return t;
 };
+
+// 3/30/2017
+const titleToNumber = s => {
+  let t = 0;
+  let k = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    t += (map[s[i]] * Math.pow(26, k++));
+  }
+  return t;
+};
