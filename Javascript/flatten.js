@@ -106,3 +106,7 @@ const b = (arr) => {
 
 console.log(a(x));
 console.log(b(x));
+
+const f = arr => Array.isArray(arr)
+  ? [].concat(...arr.map(f))
+  : arr
