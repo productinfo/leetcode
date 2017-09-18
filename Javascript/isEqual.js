@@ -22,3 +22,24 @@ var isEqual = function (obj1, obj2) {
 	return true;
 
 };
+
+// 6/17/2017
+function isEqual(oa, ob) {
+  if (
+    !oa || !ob || typeof oa !== 'object' || typeof ob !== 'object'
+  ) return false;
+
+  const ka = Object.keys(oa);
+  const kb = Object.keys(ob);
+
+  if (ka.length !== kb.length) return false;
+
+  for (const k in oa) {
+    if (!(k in ob)) return false;
+    if (typeof oa[k] !== typeof ob[k]) return false;
+    if (typeof oa[k] === 'object') return isEqual(oa[k], ob[k]);
+    if (oa[k] !== ob[k]) return false;
+  }
+
+  return true;
+}
