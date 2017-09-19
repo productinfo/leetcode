@@ -84,3 +84,34 @@ const isValidSudoku = board => {
     }
   }
 };
+
+// 4/16/2017
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+  const yl = board.length;
+  const xl = board[0].length;
+  const u1 = [];
+  const u2 = [];
+  const u3 = [];
+  for (let y = 0; y < yl; y++) {
+    u1.push([]);
+    u2.push([]);
+    u3.push([]);
+  }
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (board[y][x] != '.') {
+        const nb = +board[y][x];
+        const k = ((y / 3) >> 0) * 3 + ((x / 3) >> 0)
+        if (u1[y][nb] || u2[x][nb] || u3[k][nb]) return false;
+        u1[y][nb] = true;
+        u2[x][nb] = true;
+        u3[k][nb] = true;
+      }
+    }
+  }
+  return true;
+};
