@@ -1,3 +1,5 @@
+// time: O(n)
+// space: O(n)
 const maxSubArrayLen = (nums, k) => {
   const l = nums.length;
   if (!l) return 0;
