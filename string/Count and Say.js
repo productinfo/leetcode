@@ -52,7 +52,7 @@ var countAndSay = function(n) {
 
   for (let i = 2; i <= n; i++) {
     let t = '';
-    const size = r.length;
+    const size = r.length; // not really necessary
     for (let j = 0; j < size; j++) {
       let c = 1;
       const char = r[j];
