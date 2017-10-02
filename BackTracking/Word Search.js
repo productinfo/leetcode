@@ -67,6 +67,8 @@ var exist = function(board, word) {
 };
 
 // 9/23/2016
+// DFS
+// O(mn*4^k)
 var exist = function(board, word) {
   const yl = board.length;
   const xl = board[0].length;

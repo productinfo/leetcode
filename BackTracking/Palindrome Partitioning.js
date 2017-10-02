@@ -81,3 +81,35 @@ const isPartition = s => {
   }
   return true;
 };
+
+// 5/31/2017
+const valid = str => {
+  let i = 0;
+  let j = str.length - 1;
+  while (i < str.length && j >= 0) {
+    if (str[i] !== str[j]) return false;
+    i++;
+    j--;
+  }
+  return true;
+};
+// aab
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+var partition = function(s) {
+  const res = [];
+  const len = s.length;
+  if (!len) return [[]];
+  for (let i = 1; i <= len; i++) {
+    const part = s.substring(0, i);
+    if (valid(part)) {
+      const rest = partition(s.substring(i));
+      for (const r of rest) {
+        res.push([part, ...r]);
+      }
+    }
+  }
+  return res;
+};
