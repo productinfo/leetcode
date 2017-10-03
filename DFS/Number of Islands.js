@@ -128,3 +128,65 @@ const numIslands = grid => {
   }
   return c;
 };
+
+// O(ROW x COL)
+// 4/17/2017
+var numIslands = function(grid) {
+  let total = 0;
+  const yl = grid.length;
+  if (!yl) return total;
+  const xl = grid[0].length;
+  const dfs = (x, y) => {
+    if (
+      x < 0 || y < 0 ||
+      x >= xl || y >= yl ||
+      grid[y][x] !== '1'
+    ) {
+      return;
+    }
+    grid[y][x] = '0';
+    dfs(x + 1, y);
+    dfs(x - 1, y);
+    dfs(x, y + 1);
+    dfs(x, y - 1);
+  };
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (grid[y][x] === '1') {
+        dfs(x, y);
+        total += 1;
+      }
+    }
+  }
+  return total;
+};
+
+// 5/10/2017
+var numIslands = function(grid) {
+  let t = 0;
+  const yl = grid.length;
+  if (!yl) return t;
+  const xl = grid[0].length;
+  const dfs = (x, y) => {
+    if (
+      x < 0 || y < 0 ||
+      x >= xl || y >= yl ||
+      grid[y][x] !== '1'
+    ) return;
+    grid[y][x] = '0';
+
+    dfs(x + 1, y);
+    dfs(x - 1, y);
+    dfs(x, y + 1);
+    dfs(x, y - 1);
+  };
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (grid[y][x] === '1') {
+        dfs(x, y);
+        t++;
+      }
+    }
+  }
+  return t;
+};
