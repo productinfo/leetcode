@@ -177,3 +177,31 @@ const letterCombinations = digits => {
   dfs(0);
   return res;
 };
+
+// 8/15/2017
+// recursive
+// O(n ^ 2L)
+const map = {
+  "2": "abc",
+  "3": "def",
+  "4": "ghi",
+  "5": "jkl",
+  "6": "mno",
+  "7": "pqrs",
+  "8": "tuv",
+  "9": "wxyz"
+};
+
+const letterCombinations = digits => {
+  const len = digits.length;
+  const res = [];
+  if (len === 0) return res;
+  if (len === 1) return map[digits].split('');
+  const partial = letterCombinations(digits.substring(1, len));
+  for (const first of map[digits[0]].split('')) {
+    for (const rest of partial) {
+      res.push(first + rest);
+    }
+  }
+  return res;
+};
