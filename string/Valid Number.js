@@ -174,3 +174,87 @@ const isNumber = (str) => {
     return check(str);
   }
 };
+
+// 9/21/2017
+const v = s => {
+  const valid = '0123456789.';
+  if (!s || !s.length) return false;
+  if (s[0] === '+' || s[0] === '-') s = s.substring(1);
+  if (!s.length || s === '.') return false;
+  let dot = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (valid.indexOf(s[i]) < 0) return false;
+    if (s[i] === '.') dot++;
+  }
+  return dot < 2;
+};
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isNumber = function(s) {
+  if (!s || !s.length) return false;
+  s = s.trim().toLowerCase();
+  const validChar = '01234567890+-.e';
+  let e = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (validChar.indexOf(s[i]) < 0) return false;
+    if (s[i] === 'e') e++;
+    if (e > 1) return false;
+  }
+  if (e !== 0) {
+    const g = s.split('e');
+    for (let i = 0; i < g[1].length; i++) {
+      if (g[1][i] === '.') return false;
+    }
+    return v(g[0]) && v(g[1]);
+  }
+  return v(s);
+};
+
+// 9/26/2017
+const v = s => {
+  if (!s || !s.length) return false;
+  if (s[0] === '+' || s[0] === '-') s = s.substring(1);
+  if (!s.length || s === '.') return false;
+  const valid = '01234567890.'.split('');
+  let dot = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (valid.indexOf(s[i]) < 0) return false;
+    if (s[i] === '.') dot++;
+    if (dot > 1) return false;
+  }
+  return true;
+};
+
+/**
+ * 1
+ * 0.1
+ * +1
+ * -2
+ * 1.23
+ * 2e3
+ * 
+ * @param {string} s
+ * @return {boolean}
+ */
+var isNumber = function(s) {
+  if (!s || !s.length) return false;
+  s = s.trim();
+  const valid = '0123456789+-.e'.split('');
+  let e = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (valid.indexOf(s[i]) < 0) return false;
+    if (s[i] === 'e') e++;
+    if (e > 1) return false;
+  }
+  if (e !== 0) {
+    const g = s.split('e');
+    for (let i = 0; i < g[1].length; i++) {
+      if (g[1][i] === '.') return false;
+    }
+    return v(g[0]) && v(g[1]);
+  }
+  return v(s);
+};
