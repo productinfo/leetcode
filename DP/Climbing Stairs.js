@@ -84,3 +84,21 @@ const climbStairs = n => {
   }
   return d3;
 }
+
+// 4/15/2017
+// f(n) = f(n - 1) + f(n - 2)
+// n = 2, 2
+// n = 3, 1 + 2 = 3
+// n = 4, 2 + 3 = 5
+const climbStairs = n => {
+  let d1 = 1;
+  if (n < 2) return d1;
+  let d2 = 1;
+  let d3 = 0;
+  while (n-- > 1) {
+    d3 = d1 + d2;
+    d1 = d2;
+    d2 = d3;
+  }
+  return d3;
+};
