@@ -67,3 +67,63 @@ var minDistance = function(word1, word2) {
   return dp[l1][l2];
 
 };
+
+// 4/15/2017
+const minDistance = (w1, w2) => {
+  const l1 = w1.length;
+  const l2 = w2.length;
+  const dp = [0];
+  for (let i = 1; i <= l1; i++) {
+    dp[i] = i;
+  }
+  for (let j = 1; j <= l2; j++) {
+    let pre = dp[0];
+    dp[0] = j;
+    for (let i = 1; i <= l1; i++) {
+      const tmp = dp[i];
+      if (w1[i - 1] === w2[j - 1]) {
+        dp[i] = pre;
+      } else {
+        dp[i] = Math.min(
+          pre + 1,
+          Math.min(
+            dp[i] + 1,
+            dp[i - 1] + 1
+          )
+        );
+      }
+      pre = tmp;
+    }
+  }
+  return dp[l1];
+};
+
+const minDistance = (w1, w2) => {
+  const l1 = w1.length;
+  const l2 = w2.length;
+  const dp = [];
+  for (let y = 0; y <= l1; y++) {
+    dp.push([]);
+  }
+  dp[0][0] = 0;
+  for (let y = 1; y <= l1; y++) {
+    dp[y][0] = y;
+  }
+  for (let x = 1; x <= l2; x++) {
+    dp[0][x] = x;
+  }
+  for (let y = 1; y <= l1; y++) {
+    for (let x = 1; x <= l2; x++) {
+      if (w1[y - 1] === w2[x - 1]) {
+        dp[y][x] = dp[y - 1][x - 1];
+      } else {
+        dp[y][x] = Math.min(
+          dp[y - 1][x - 1] + 1,
+          dp[y - 1][x] + 1,
+          dp[y][x - 1] + 1
+        );
+      }
+    }
+  }
+  return dp[l1][l2];
+};
