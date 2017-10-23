@@ -31,3 +31,23 @@ var minCostII = function(costs) {
   }
   return Math.min(...t);
 };
+
+// 6/1/2017
+/**
+ * @param {number[][]} costs
+ * @return {number}
+ */
+var minCostII = function(costs) {
+  const yl = costs.length;
+  if (!yl) return 0;
+  const xl = costs[0].length;
+  for (let y = 1; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      costs[y][x] += Math.min(
+        ...costs[y - 1].slice(0, x),
+        ...costs[y - 1].slice(x + 1)
+      );
+    }
+  }
+  return Math.min(...costs[yl - 1]);
+};
