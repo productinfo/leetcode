@@ -90,3 +90,22 @@ var generateParenthesis = function(n) {
   dfs(n, n, '');
   return res;
 };
+
+// 8/29/2017
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+  const res = [];
+  const go = (l, r, exp) => {
+    if (l === 0 && r === 0) {
+      res.push(exp);
+      return;
+    }
+    if (l > 0) go(l - 1, r, `${exp}(`);
+    if (r > l) go(l, r - 1, `${exp})`);
+  };
+  go(n, n, '');
+  return res;
+};
