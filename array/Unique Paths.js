@@ -95,3 +95,20 @@ var uniquePaths = function(x, y) {
   }
   return dp[x - 1];
 };
+
+// 8/24/2017
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(xl, yl) {
+  if (!yl) return 0;
+  const dp = Array(xl).fill(1);
+  for (let y = 1; y < yl; y++) {
+    for (let x = 1; x < xl; x++) {
+      dp[x] += dp[x - 1];
+    }
+  }
+  return dp[xl - 1];
+};
