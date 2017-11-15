@@ -48,3 +48,18 @@ const moveZeroes = nums => {
     if (nums[i]) swap(i, p++);
   }
 };
+
+// 9/1/2017
+var moveZeroes = function(nums) {
+  let p = 0;
+  if (nums.every(n => n !== 0)) return;  
+  while (p < nums.length && nums[p] !== 0) p++
+  const swap = (x, y) => {
+    const tmp = nums[x];
+    nums[x] = nums[y];
+    nums[y] = tmp;
+  };
+  for (let i = p; i < nums.length; i++) {
+    if (nums[i]) swap(i, p++);
+  }
+};
