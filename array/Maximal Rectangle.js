@@ -53,3 +53,46 @@ maximalRectangle(
 		'10010'
 	]
 );
+
+// 8/25/2017
+/**
+ * @param {character[][]} matrix
+ * @return {number}
+ */
+var maximalRectangle = function(matrix) {
+  const yl = matrix.length;
+  if (!yl) return 0;
+  const xl = matrix[0].length;
+  var largestRectangleArea = function(heights) {
+    heights.push(0);
+    const len = heights.length;
+    let area = 0;
+    const stack = [];
+    for (let i = 0; i < len; i++) {
+      while (stack.length && heights[stack[stack.length - 1]] > heights[i]) {
+        const h = heights[stack[stack.length - 1]];
+        stack.pop();
+        const l = stack.length ? stack[stack.length - 1] : -1;
+        area = Math.max(area, h * (i - l - 1));
+      }
+      stack.push(i);
+    }
+    return area;
+  };
+  const arr = matrix[0].map(c => +c);
+  let max = largestRectangleArea(arr);
+  for (let y = 1; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (+matrix[y][x]) arr[x] += (+matrix[y][x]);
+      else arr[x] = 0
+    }
+    max = Math.max(max, largestRectangleArea(arr));
+  }
+  return max;
+};
+maximalRectangle([
+  [1, 0, 1, 0, 0],
+  [1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 0, 0, 1, 0]
+])
