@@ -25,3 +25,25 @@ const largestRectangleArea = (h) => {
 
   return max;
 };
+
+// 8/25/2017
+/**
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  heights.push(0);
+  const len = heights.length;
+  let area = 0;
+  const stack = [];
+  for (let i = 0; i < len; i++) {
+    while (stack.length && heights[stack[stack.length - 1]] > heights[i]) {
+      const h = heights[stack[stack.length - 1]];
+      stack.pop();
+      const l = stack.length ? stack[stack.length - 1] : -1;
+      area = Math.max(area, h * (i - l - 1));
+    }
+    stack.push(i);
+  }
+  return area;
+};
