@@ -232,3 +232,40 @@ var solve = function(board) {
   }
   // console.log(board);
 };
+
+//DFS
+// 3/23/2018
+const solve = board => {
+  if (!board) return;
+  const yl = board.length;
+  if (!yl) return;
+  const xl = board[0].length;
+
+  const dfs = (i, j) => {
+    if (
+      i < 0 || j < 0 || i >= xl || j >= yl || board[j][i] !== 'O'
+    ) return;
+    board[j][i] = '?';
+    dfs(i + 1, j);
+    dfs(i - 1, j);
+    dfs(i, j + 1);
+    dfs(i, j - 1);
+  };
+
+  for (let y = 0; y < yl; y++) {
+    if (board[y][0] === 'O') dfs(0, y);
+    if (board[y][xl - 1] === 'O') dfs(xl - 1, y);
+  }
+
+  for (let x = 0; x < xl; x++) {
+    if (board[0][x] === 'O') dfs(x, 0);
+    if (board[yl - 1][x] === 'O') dfs(x, yl - 1);
+  }
+
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (board[y][x] === 'O') board[y][x] = 'X';
+      else if (board[y][x] === '?') board[y][x] = 'O';
+    }
+  }
+};
