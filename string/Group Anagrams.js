@@ -106,3 +106,47 @@ const groupAnagrams = strs => {
     return res;
   }, []);
 };
+
+// 2/4/2018
+const groupAnagrams = strs => {
+  if (!strs.length) return 0;
+  const map = {};
+  const BASE = 'a'.charCodeAt();
+  // n
+  for (const str of strs) {
+    // m
+    const res = Array(26).fill(0);
+    for (const c of str) {
+      res[c.charCodeAt() - BASE]++;
+    }
+    const keymap = JSON.stringify(res);
+    map[keymap] = map[keymap] || [];
+    map[keymap].push(str);
+  }
+  // n
+  return Object.keys(map).reduce((res, k) => {
+    res.push(map[k]);
+    return res;
+  }, []);
+};
+
+// 3/12/2018
+var groupAnagrams = function(strs) {
+  const map = {};
+  const BASE = 'a'.charCodeAt();
+  for (const str of strs) {
+    const tmp = [];
+    for (const ch of str) {
+      const asc = ch.charCodeAt() - BASE;
+      tmp[asc] = tmp[asc] || 0;
+      tmp[asc]++;
+    }
+    const k = tmp.join('#');
+    map[k] = map[k] || [];
+    map[k].push();
+  }
+  return Object.keys(map).reduce((acc, k) => {
+    acc.push(map[k]);
+    return acc;
+  }, []);
+};
