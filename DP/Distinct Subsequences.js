@@ -49,3 +49,22 @@ var numDistinct = function(s, t) {
 
   return dp[tl][sl];
 };
+
+
+// 3/28/2018
+var numDistinct = function(s, t) {
+  const sl = s.length;
+  const tl = t.length;
+  const dp = [Array.from({ length: tl + 1 }, _ => 0)];
+  for (let y = 1; y <= sl; y++) {
+    dp.push([1]);
+  }
+  dp[0][0] = 1;
+  for (let y = 1; y <= sl; y++) {
+    for (let x = 1; x <= tl; x++) {
+      dp[y][x] = dp[y - 1][x];
+      if (s[y - 1] === t[x - 1]) dp[y][x] += dp[y - 1][x - 1];
+    }
+  }
+  return dp[sl][tl];
+};
