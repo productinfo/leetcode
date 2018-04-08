@@ -270,3 +270,31 @@ class WordDictionary {
     return false;
   }
 }
+
+// 4/8/2018
+class WordDictionary {
+  constructor() {
+    this.map = {};
+  }
+
+  addWord(w) {
+    const l = w.length;
+    this.map[l] = this.map[l] || [];
+    this.map[l].push(w);
+  }
+
+  match(m, n) {
+    for (let j = 0; j < m.length; j++) {
+      if (m[j] !== '.' && m[j] !== n[j]) return false;
+    }
+    return true;
+  }
+
+  search(w) {
+    const l = w.length;
+    for (const i of this.map[l] || []) {
+      if (this.match(w, i)) return true;
+    }
+    return false;
+  }
+}
