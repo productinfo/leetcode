@@ -38,3 +38,27 @@ var trap = function(height) {
 
   return water;
 };
+
+/**
+ *  * @param {number[]} height
+ *   * @return {number}
+ *    */
+var trap = function(height) {
+    let left = 0;
+    let right = height.length - 1;
+    let lmax = 0;
+    let rmax = 0;
+    let res = 0;
+    while (left < right) {
+          if (height[left] < height[right]) {
+                  lmax = Math.max(lmax, height[left]);
+                  res += lmax - height[left];
+                  left++;
+                } else {
+                        rmax = Math.max(rmax, height[right]);
+                        res += rmax - height[right];
+                        right--;
+                      }
+        }
+    return res;
+};
