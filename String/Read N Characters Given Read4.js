@@ -41,3 +41,26 @@ const solution = read4 => (buf, n) => {
   }
   return total;
 };
+
+// 6/2/2018
+var solution = function(read4) {
+  /**
+   * @param {character[]} buf Destination buffer
+   * @param {number} n Maximum number of characters to read
+   * @return {number} The number of characters read
+   */
+  return function(buf, n) {
+    let total = 0;
+    const tmp = [];
+    while (total < n) {
+      let count = read4(tmp)
+      if (count === 0) break;
+      count = Math.min(count, n - total);
+      for (let i = 0; i < count; i++) {
+        buf[total++] = tmp[i];
+      }
+    }
+    return total;
+  };
+};
+
