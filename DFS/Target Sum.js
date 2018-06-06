@@ -77,3 +77,50 @@ const findTargetSumWays = (num, S) => {
 		return (sum + S) % 2 === 0 ? subsetSum(num, (sum + S) >> 1) : 0;
 	}
 };
+
+
+// 6/6/2018
+var findTargetSumWays = function(nums, S) {
+  const n = nums.length;
+  const sum = nums.reduce((t, v) => t + v, 0);
+  if (sum < S) return 0;
+  const dp = [];
+  for (let y = 0; y <= n; y++) {
+    dp.push(
+      Array((sum * 2) + 1).fill(0)
+    )
+  }
+  dp[0][sum] = 1;
+  // console.log(dp)
+  for (let y = 0; y < n; y++) {
+    // console.log('~~~~')
+    // console.log(y)
+    for (let x = nums[y]; x < 2 * sum + 1 - nums[y]; x++) {
+      if (dp[y][x]) {
+        dp[y + 1][x + nums[y]] += dp[y][x];
+        dp[y + 1][x - nums[y]] += dp[y][x];
+      }
+    }
+  }
+  return dp[n][S + sum];
+};
+
+var findTargetSumWays = function(nums, S) {
+  const n = nums.length;
+  const sum = nums.reduce((t, v) => t + v, 0);
+  if (sum < S) return 0;
+  const total = 2 * sum + 1;
+  let dp = Array(total).fill(0);
+  dp[sum] = 1;
+  for (const n of nums) {
+    const tmp = Array(total).fill(0);
+    for (let j = n; j < total - n; j++) {
+      if (dp[j]) {
+        tmp[j + n] += dp[j];
+        tmp[j - n] += dp[j];
+      }
+    }
+    dp = tmp;
+  }
+  return dp[S + sum];
+};
