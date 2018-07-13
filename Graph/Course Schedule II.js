@@ -60,3 +60,31 @@ const findOrder = (numCourses, prerequisites) => {
   }
   return res.length === numCourses ? res : [];
 };
+
+// 6/6/2018
+var findOrder = function(numCourses, prerequisites) {
+  const graph = [];
+  const ind = Array(numCourses).fill(0);
+  for (const [a, b] of prerequisites) {
+    graph[b] = graph[b] || [];
+    graph[b].push(a);
+    ind[a]++;
+  }
+  const q = [];
+  for (let i = 0; i < ind.length; i++) {
+    if (ind[i] === 0) q.push(i);
+  }
+  const res = [];
+  while (q.length) {
+    const size = q.length;
+    for (let j = 0; j < size; j++) {
+      const u = q.shift();
+      res.push(u);
+      for (const v of graph[u] || []) {
+        ind[v]--;
+        if (ind[v] === 0) q.push(v);
+      }
+    }
+  }
+  return res.length === numCourses ? res : [];
+};

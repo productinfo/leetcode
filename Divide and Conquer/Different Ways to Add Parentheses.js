@@ -69,3 +69,31 @@ const fb = (op, a, b) => {
     return a * b;
   }
 }
+
+// 5/31/2017
+const get = (v1, v2, op) => {
+  if (op === '+') return v1 + v2;
+  if (op === '-') return v1 - v2;
+  if (op === '*') return v1 * v2;
+};
+/**
+ * @param {string} input
+ * @return {number[]}
+ */
+var diffWaysToCompute = function(input) {
+  const res = [];
+  const len = input.length;
+  if (!len) return res;
+  for (let i = 0; i < len; i++) {
+    if (input[i] === '+' || input[i] === '-' || input[i] === '*') {
+      const right = diffWaysToCompute(input.substring(0, i));
+      const left = diffWaysToCompute(input.substring(i + 1));
+      for (const v1 of right) {
+        for (const v2 of left) {
+          res.push(get(v1, v2, input[i]));
+        }
+      }
+    }
+  }
+  return res.length ? res : [+input];
+};

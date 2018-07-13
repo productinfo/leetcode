@@ -82,3 +82,20 @@ const removeElements = (head, val) => {
   }
   return node.next;
 };
+
+// 3/29/2017
+const removeElements = (head, val) => {
+  const dm = new ListNode(-1);
+  dm.next = head;
+  let pv = dm;
+  let cur = head;
+  while (cur) {
+    if (cur.val === val) {
+      pv.next = cur.next;
+    } else {
+      pv = pv.next;
+    }
+    cur = cur.next;
+  }
+  return dm.next;
+};

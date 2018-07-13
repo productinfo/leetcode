@@ -96,3 +96,62 @@ const cloneGraph = graph => {
   };
   return clone(graph);
 };
+
+// 6/12/2017
+/**
+ * Definition for undirected graph.
+ * function UndirectedGraphNode(label) {
+ *     this.label = label;
+ *     this.neighbors = [];   // Array of UndirectedGraphNode
+ * }
+ */
+
+/**
+ * @param {UndirectedGraphNode} graph
+ * @return {UndirectedGraphNode}
+ */
+var cloneGraph = function(graph) {
+  if (!graph) return null;
+  const copy = new UndirectedGraphNode(graph.label);
+  const map = {
+    [graph.label]: copy
+  };
+  const q = [graph];
+  while (q.length) {
+    const size = q.length;
+    for (let j = 0; j < size; j++) {
+      const node = q.shift();
+      for (const nb of node.neighbors) {
+        if (!(nb.label in map)) {
+          map[nb.label] = new UndirectedGraphNode(nb.label);
+          q.push(nb);
+        }
+        map[node.label].neighbors.push(map[nb.label]);
+      }
+    }
+  }
+  return copy;
+};
+
+// Time: O(VE)
+// Space: O(V)
+
+
+// 8/16/2017
+const cloneGraph = graph => {
+  const map = {};
+  const dfs = node => {
+    if (!node) return null;
+    if (node.label in map) {
+      return map[node.label];
+    } else {
+      const copy = new UndirectedGraphNode(node.label);
+      map[node.label] = copy;
+      for (const n of node.neighbors) {
+        copy.neighbors.push(dfs(n));
+      }
+      return copy;
+    }
+  };
+  return dfs(graph);
+};

@@ -144,3 +144,48 @@ const fullJustify = (words, maxWidth) => {
   }
   return res;
 };
+
+
+// 5/3/2018
+const fullJustify = (words, maxWidth) => {
+  const res = [];
+  let i = 0;
+  while (i < words.length) {
+    let count = words[i].length;
+    let last = i + 1;
+    while (last < words.length) {
+      if (words[last].length + 1 + count > maxWidth) break;
+      count += 1 + words[last].length;
+      last++;
+    }
+    let str = words[i];
+    const interval = last - i - 1;
+    // no interval or it is the last word
+    if (interval === 0 || last === words.length) {
+      for (let j = i + 1; j < last; j++) {
+        str += ' ';
+        str += `${words[j]}`;
+      }
+      for (let k = str.length; k < maxWidth; k++) {
+        str += ' ';
+      }
+    } else {
+      const space = ((maxWidth - count) / interval) | 0;
+      let remain = (maxWidth - count) % interval;
+      for (let j = i + 1; j < last; j++) {
+        for (let k = space; k > 0; k--) {
+          str += ' ';
+        }
+        if (remain > 0) {
+          str += ' ';
+          remain--;
+        }
+        str += ' ';
+        str += `${words[j]}`;
+      }
+    }
+    res.push(str);
+    i = last;
+  }
+  return res;
+};

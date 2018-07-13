@@ -105,3 +105,20 @@ const go = (r, s) => {
   return go(r.left, ans) + go(r.right, ans);
 }
 const sumNumbers = root => root ? go(root, 0) : 0;
+
+// 3/28/2018
+var sumNumbers = function(root) {
+  let sum = 0;
+  if (!root) return sum;
+  const dfs = (r, cur) => {
+    if (!r) return;
+    const ans = cur * 10 + r.val;
+    if (!r.left && !r.right) {
+      sum += ans;
+    }
+    if (r.left) dfs(r.left, ans);
+    if (r.right) dfs(r.right, ans);
+  };
+  dfs(root, 0);
+  return sum;
+};

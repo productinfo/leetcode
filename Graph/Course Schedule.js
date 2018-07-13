@@ -107,3 +107,36 @@ var canFinish = function(numCourses, prerequisites) {
   }
   return indegree.every(i => !!i === false);
 };
+
+// 8/21/2017
+/**
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+var canFinish = function(numCourses, prerequisites) {
+  const graph = {};
+  const deg = Array(numCourses).fill(0);
+  for (let i = 0; i < prerequisites.length; i++) {
+    const v = prerequisites[i][1];
+    const u = prerequisites[i][0];
+    graph[u] = graph[u] || [];
+    graph[u].push(v);
+    deg[v]++;
+  }
+  const q = [];
+  for (let i = 0; i < deg.length; i++) {
+    if (deg[i] === 0) q.push(i);
+  }
+  while (q.length) {
+    const v = q.shift();
+    if (v in graph) {
+      for (const u of graph[v]) {
+        deg[u]--;
+        if (deg[u] === 0) q.push(u);
+      }
+    }
+  }
+
+  return deg.every(d => d === 0);
+};

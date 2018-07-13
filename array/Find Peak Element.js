@@ -82,3 +82,46 @@ const findPeakElement = arr => {
   }
   return l;
 };
+
+// 4/5/2018
+var findPeakElement = function(nums) {
+  let l = 0;
+  let h = nums.length - 1;
+  while (l + 1 < h) {
+    let m = (l + h) >> 1;
+    if (nums[m] > nums[m + 1]) {
+      h = m;
+    } else {
+      l = m + 1;
+    }
+  }
+  return nums[l] > nums[h] ? l : h; 
+};
+
+// 4/7/2018
+var findPeakElement = function(nums) {
+  let l = 0;
+  let h = nums.length - 1;
+  while (l < h) {
+    let m = (l + h) >> 1;
+    if (nums[m] < nums[m + 1]) {
+      l = m + 1;
+    } else {
+      h = m;  
+    }
+  }
+  return l;
+};
+
+// 5/1/2018
+const findPeakElement = arr => {
+  let l = 0;
+  let h = arr.length - 1;
+  while (l <= h) {
+    let m = (l + h) >> 1;
+    if (arr[m] > (arr[m + 1] || -Infinity) && arr[m] > (arr[m - 1] || -Infinity)) return m;
+    else if (arr[m + 1] > arr[m]) l = m + 1;
+    else h = m - 1;
+  }
+  return -1;
+};

@@ -121,3 +121,30 @@ var multiply = function(num1, num2) {
   }
   return carry ? carry + res : res;
 };
+
+// 3/10/2018
+/**
+ *  * @param {string} num1
+ *   * @param {string} num2
+ *    * @return {string}
+ *     */
+var multiply = function(num1, num2) {
+    if (num1 === '0' || num2 === '0') return '0';
+    const s1 = num1.length;
+    const s2 = num2.length;
+    const tmp = [];
+    for (let i = 0; i < s1; i++) {
+          for (let j = 0; j < s2; j++) {
+                  tmp[i + j] = tmp[i + j] || 0;
+                  tmp[i + j] += (+num1[i]) * (+num2[j]);
+                }
+        }
+    let carry = 0;
+    for (let k = tmp.length - 1; k >= 0; k--) {
+          const sum = tmp[k] + carry;
+          tmp[k] = sum % 10;
+          carry = (sum / 10) >> 0;
+        }
+    if (carry) tmp.unshift(carry);
+    return tmp.join('');
+};

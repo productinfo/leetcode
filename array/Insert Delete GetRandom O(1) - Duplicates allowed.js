@@ -249,3 +249,61 @@ class RandomizedCollection {
     return this.arr[(Math.random() * this.arr.length) >> 0];
   }
 }
+
+// 8/17/2017
+class RandomizedCollection {
+  constructor() {
+    this.arr = [];
+    this.map = {};
+  }
+
+  insert(val) {
+    const exist = val in this.map;
+    const index = this.arr.length;
+    this.map[val] = this.map[val] || [];
+    this.map[val].push(index);
+    this.arr.push(val);
+    return !exist;
+  }
+
+  swap(x, y) {
+    const tmp = this.arr[x];
+    this.arr[x] = this.arr[y];
+    this.arr[y] = tmp;
+  }
+
+  getMax(arr) {
+    return Math.max(...arr);
+  }
+
+  update(k, v) {
+    if (this.map[k].length === 1) {
+      delete this.map[k];
+    } else {
+      const i = this.map[k].indexOf(v);
+      this.map[k].splice(i, 1);
+    }
+  }
+
+  remove(val) { // 20
+    if (val in this.map) {
+      const last_index = this.arr.length - 1; // 5
+      const last_value = this.arr[last_index]; // 30
+      const index = this.getMax(this.map[val]); // 3
+      if (val !== last_value) {
+        this.swap(index, last_index);
+        this.map[last_value].push(index);
+        this.update(last_value, last_index);
+      }
+      this.update(val, index);
+      this.arr.pop();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getRandom() {
+    return this.arr[(Math.random() * this.arr.length) >> 0];
+  }
+}

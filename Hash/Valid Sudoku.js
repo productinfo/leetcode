@@ -2,7 +2,7 @@
  * @param {character[][]} board
  * @return {boolean}
  */
-var isValidSudoku = function(board) {
+var isValidSudoku = function (board) {
 
   var yl = board.length, xl = board[0].length;
 
@@ -14,15 +14,15 @@ var isValidSudoku = function(board) {
 
   var nArea;
 
-  for (x = 0 ; x < 9 ; x++) {
+  for (x = 0; x < 9; x++) {
     yChecker[x] = [];
     xChecker[x] = [];
     boxChecker[x] = [];
   }
 
-  for (y = 0 ; y < 9 ; y++) {
+  for (y = 0; y < 9; y++) {
 
-    for (x = 0 ; x < 9 ; x++) {
+    for (x = 0; x < 9; x++) {
 
       if (board[y][x] !== '.') {
 
@@ -32,7 +32,7 @@ var isValidSudoku = function(board) {
           yChecker[y].indexOf(board[y][x]) !== -1
           || xChecker[x].indexOf(board[y][x]) !== -1
           || boxChecker[nArea].indexOf(board[y][x]) !== -1
-          ) {
+        ) {
           return false;
         }
 
@@ -90,7 +90,7 @@ const isValidSudoku = board => {
  * @param {character[][]} board
  * @return {boolean}
  */
-var isValidSudoku = function(board) {
+var isValidSudoku = function (board) {
   const yl = board.length;
   const xl = board[0].length;
   const u1 = [];
@@ -111,6 +111,26 @@ var isValidSudoku = function(board) {
         u2[x][nb] = true;
         u3[k][nb] = true;
       }
+    }
+  }
+  return true;
+};
+
+
+var isValidSudoku = function (board) {
+  for (let y = 0; y < 9; y++) {
+    const rows = [];
+    const cols = [];
+    const cubes = [];
+    for (let x = 0; x < 9; x++) {
+      if (board[y][x] !== '.' && rows[+board[y][x]]) return false;
+      rows[+board[y][x]] = true;
+      if (board[x][y] !== '.' && cols[+board[x][y]]) return false;
+      cols[+board[x][y]] = true;
+      const yy = 3 * Math.floor(y / 3) + Math.floor(x / 3);
+      const xx = 3 * Math.floor(y % 3) + Math.floor(x % 3);
+      if (board[yy][xx] !== '.' && cubes[+board[yy][xx]]) return false;
+      cubes[+board[yy][xx]] = true;
     }
   }
   return true;

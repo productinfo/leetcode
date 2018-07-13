@@ -77,3 +77,31 @@ const getRow = n => {
   }
   return p;
 };
+
+// 3/28/2018
+var getRow = function(rowIndex) {
+  let pv = [1];
+  if (rowIndex === 0) return pv;
+  for (let i = 0; i < rowIndex; i++) {
+    const cur = [1];
+    for (let j = 0; j < pv.length - 1; j++) {
+      cur.push(pv[j] + pv[j + 1]);
+    }
+    cur.push(1);
+    pv = cur;
+  }
+  return pv;
+};
+
+// recursive
+const getRow = rowIndex => {
+  if (rowIndex === 0) return [1];
+  const pv = getRow(rowIndex - 1);
+  const cur = [1];
+  for (let j = 0; j < pv.length - 1; j++) {
+    cur.push(pv[j] + pv[j + 1]);
+  }
+  cur.push(1);
+  return cur;
+};
+

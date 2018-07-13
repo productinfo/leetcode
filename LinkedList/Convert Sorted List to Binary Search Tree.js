@@ -60,3 +60,38 @@ var sortedListToBST = function(head) {
 
 };
 
+// 8/31/2017
+const go = (head, tail = null) => {
+  if (head === tail) return null;
+  let slow = head;
+  let fast = head;
+  while (fast !== tail && fast.next !== tail) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  const node = new TreeNode(slow.val);
+  node.left = go(head, slow);
+  node.right = go(slow.next, tail);
+  return node;
+};
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {TreeNode}
+ */
+var sortedListToBST = function(head) {
+  return head ? go(head) : null;
+};

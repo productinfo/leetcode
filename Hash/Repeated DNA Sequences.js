@@ -95,3 +95,16 @@ var longToStr = function (n) {
     return s;
 
 };
+
+// 4/8/2018
+const findRepeatedDnaSequences = str => {
+  const map = {};
+  for (let i = 0; i < str.length - 9; i++) {
+    const subs = str.slice(i, i + 10);
+    map[subs] = map[subs] || 0;
+    map[subs]++;
+    // console.log(subs)
+  }
+  // console.log(map)
+  return Object.keys(map).filter(k => map[k] > 1);
+};

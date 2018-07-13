@@ -183,3 +183,19 @@ const kthSmallest = (root, k) => {
   }
   return -1;
 };
+
+// 4/9/2018
+var kthSmallest = function(root, k) {
+  if (!root) return 0;
+  let lc = 0;
+  const get = r => {
+    if (!r) return;
+    lc++;
+    get(r.left);
+    get(r.right);
+  };
+  get(root.left);
+  if (lc + 1 === k) return root.val
+  else if (k > lc) return kthSmallest(root.right, k - 1 - lc);
+  else return kthSmallest(root.left, k);
+};

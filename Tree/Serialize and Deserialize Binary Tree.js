@@ -121,3 +121,66 @@ var deserialize = function(data) {
   };
   return b();
 };
+
+// 5/14/2018
+const splitter = '!';
+const NULL = 'null';
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+  if (!root) return '';
+  let tmp = '';
+  // preorder
+  const preorder = r => {
+    if (r) {
+      tmp += `${r.val}${splitter}`;
+      preorder(r.left);
+      preorder(r.right);
+    } else {
+      tmp += `${NULL}${splitter}`;
+    }
+  };
+  preorder(root);
+  return tmp;
+};
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function(data) {
+  if (!data) return null;
+  const g = data.split(splitter);
+  const build = () => {
+    const node = g.shift();
+    if (node === NULL) {
+      return null;
+    } else {
+      const r = new TreeNode(+node);
+      r.left = build();
+      r.right = build();
+      return r;
+    }
+  };
+  return build();
+};
+
+/**
+ * Your functions will be called as such:
+ * deserialize(serialize(root));
+ */
+

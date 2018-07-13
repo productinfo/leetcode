@@ -69,3 +69,22 @@ const subsets = (arr) => {
   }
   return res;
 };
+
+// 5/27/2018
+// DFS
+// 2 ^ n
+var subsets = function(nums) {
+  const res = [];
+  const len = nums.length;
+  if (!len) return [[]];
+  const dfs = (i, tmp) => {
+    if (i === len) {
+      res.push(tmp);
+      return;
+    }
+    dfs(i + 1, [...tmp, nums[i]]);
+    dfs(i + 1, tmp);
+  };
+  dfs(0, []);
+  return res;
+};

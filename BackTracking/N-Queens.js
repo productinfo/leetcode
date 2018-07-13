@@ -73,3 +73,45 @@ var check = function (row, rec) {
   return true;
 
 };
+
+// 3/23/2018
+// DFS
+
+/**
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function(n) {
+  const res = [];
+  const tmp = [];
+
+  // [0, 1, 2, 3]
+  const valid = (arr, level) => {
+    for (let i = 0; i < level; i++) {
+      if (arr[i] === arr[level] || Math.abs(arr[level] - arr[i]) === level - i) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const output = arr => arr.reduce((result, pos) => {
+    const x = Array.from({ length: n }, _ => '.');
+    x[pos] = 'Q';
+    result.push(x.join(''));
+    return result;
+  }, []);
+
+  const dfs = (level) => {
+    if (level === n) {
+      res.push(output(tmp));
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      tmp[level] = i;
+      if (valid(tmp, level)) dfs(level + 1);
+    }
+  };
+  dfs(0);
+  return res;
+};

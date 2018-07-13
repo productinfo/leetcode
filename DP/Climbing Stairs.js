@@ -102,3 +102,19 @@ const climbStairs = n => {
   }
   return d3;
 };
+
+// 3/24/2018
+var climbStairs = function(n) {
+  let v1 = 1;
+  let v2 = 1;
+  if (n < 2) return v1;
+  let v3 = 0;
+  let x = 2;
+  while (x <= n) {
+    v3 = v1 + v2;
+    v1 = v2;
+    v2 = v3;
+    x++;
+  }
+  return v3;
+};

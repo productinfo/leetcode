@@ -19,3 +19,7 @@ const findMaxLength = arr => {
   }
   return max;
 };
+
+// 1. make all 0 to -1
+// 2. so if sum is 0 then we know there are even number of 0 and 1
+// 3. use map to make search faster

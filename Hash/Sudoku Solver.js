@@ -94,3 +94,31 @@ var valid = function (b, x, y, c) {
   return true;
 
 };
+
+const valid = (board, x, y, ch) => {
+  for (let k = 0; k < 9; k++) {
+    if (board[y][k] !== '.' && board[y][k] === ch) return false;
+    if (board[k][x] !== '.' && board[k][x] === ch) return false;
+    const yy = 3 * (y / 3) >> 0 + (k / 3) >> 0;
+    const xx = 3 * (x / 3) >> 0 + (k / 3) >> 0;
+    if (board[yy][xx] !== '.' && board[yy][xx] === ch) return false;
+  }
+  return true;
+};
+
+const solveSudoku = board => {
+  for (let y = 0; y < 9; y++) {
+    for (let x = 0; x < 9; x++) {
+      if (board[y][x] === '.') {
+        for (let ch = '1'; ch <= '9'; ch++) {
+          if (valid(board, x, y, ch)) {
+            board[y][x] = ch;
+            if (solveSudoku(board)) return
+            else board[y][x] = '.'; 
+          }
+        }
+        return;
+      }
+    }
+  }
+};

@@ -96,3 +96,55 @@ const f = (root, target) => {
   go(root);
   return res;
 };
+
+// 4/22/2016
+var closestValue = function(root, target) {
+  let closet = 0;
+  let diff = Infinity;
+  const dfs = node => {
+    if (!node) return;
+    const delta = Math.abs(target - node.val);
+    if (diff > delta) {
+      diff = delta;
+      closet = node.val;
+    }
+    if (node.val < target) {
+      dfs(node.right);
+    } else {
+      dfs(node.left);
+    }
+  };
+  dfs(root);
+  return closet;
+};
+
+// 6/6/2018
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} target
+ * @return {number}
+ */
+var closestValue = function(root, target) {
+  let ans = 0;
+  let min = Infinity;
+  const dfs = r => {
+    if (!r) return;
+    const diff = Math.abs(r.val - target);
+    if (diff < min) {
+      min = diff;
+      ans = r.val;
+    }
+    dfs(r.left);
+    dfs(r.right);
+  };
+  dfs(root);
+  return ans
+};
+

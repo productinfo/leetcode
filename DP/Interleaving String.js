@@ -56,3 +56,29 @@ var isInterleave = function(s1, s2, s3) {
 
   return dp[l2][l1];
 };
+
+// 3/24/2018
+var isInterleave = function(s1, s2, s3) {
+  const l1 = s1.length;
+  const l2 = s2.length;
+  if (l1 + l2 !== s3.length) return false;
+  const dp = [];
+  for (let y = 0; y <= l2; y++) {
+    dp.push([]);
+  }
+  dp[0][0] = true;
+  for (let y = 1; y <= l2; y++) {
+    if (s2[y - 1] === s3[y - 1]) dp[y][0] = true;
+    else break;
+  }
+  for (let x = 1; x <= l1; x++) {
+    if (s1[x - 1] === s3[x - 1]) dp[0][x] = true;
+    else break;
+  }
+  for (let y = 1; y <= l2; y++) {
+    for (let x = 1; x <= l1; x++) {
+      dp[y][x] = (s2[y - 1] === s3[x + y - 1] && dp[y - 1][x]) || (s1[x - 1] === s3[x + y - 1] && dp[y][x - 1]);
+    }
+  }
+  return !!dp[l2][l1];
+};

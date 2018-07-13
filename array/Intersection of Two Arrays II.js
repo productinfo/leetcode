@@ -38,3 +38,39 @@ const intersect = (n1, n2) => {
   }
   return res;
 };
+
+// 8/31/2017
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+  const map = {};
+  for (const v of nums1) {
+    map[v] = map[v] || 0;
+    map[v]++;
+  }
+  const res = [];
+  for (const v of nums2) {
+    if (v in map) {
+      if (map[v] > 0) {
+        res.push(v);
+        map[v]--;
+      }
+    }
+  }
+  return res;
+};
+
+/*
+
+Q: What if the given array is already sorted? How would you optimize your algorithm?
+A: use two pointers
+
+Q: What if nums1's size is small compared to nums2's size? Which algorithm is better?
+A: hashmap
+
+
+
+*/

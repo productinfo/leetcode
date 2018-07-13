@@ -88,3 +88,36 @@ const isMatch = (s, p) => {
   }
   return !!dp[s.length][p.length];
 }
+
+// 3/4/2018
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+var isMatch = function(s, p) {
+  const sl = s.length;
+  const pl = p.length;
+  const dp = [];
+  for (let y = 0; y <= sl; y++) {
+    dp.push([]);
+  }
+  dp[0][0] = true;
+  for (let x = 1; x <= pl; x++) {
+    if (p[x - 1] === '*') dp[0][x] = dp[0][x - 2];
+  }
+  for (let y = 1; y <= sl; y++) {
+    for (let x = 1; x <= pl; x++) {
+      if (s[y - 1] === p[x - 1] || p[x - 1] === '.') {
+        // use dignoal
+        dp[y][x] = dp[y - 1][x - 1];
+      } else if (p[x - 1] === '*') {
+        dp[y][x] = dp[y][x - 2];
+        if (p[x - 2] === '.' || p[x - 2] === s[y - 1]) {
+          dp[y][x] = dp[y][x] || dp[y - 1][x];
+        }
+      }
+    }
+  }
+  return !!dp[sl][pl];
+};

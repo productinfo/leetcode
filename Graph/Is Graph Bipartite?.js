@@ -14,3 +14,32 @@ var isBipartite = function(graph) {
   }
   return true;
 };
+
+
+// 6/11/2018
+/**
+ * @param {number[][]} graph
+ * @return {boolean}
+ * 
+ * 
+ * 
+ * [[1,3], [0,2], [1,3], [0,2]]
+ * 0       1      2      3
+ */
+var isBipartite = function(graph) {
+  const mark = [];
+  const dfs = (pos, label) => {
+    if (mark[pos] !== undefined) return mark[pos] === label;
+    mark[pos] = label;
+    for (const next of graph[pos] || []) {
+      if (!dfs(next, -label)) return false;
+    }
+    return true;
+  };
+
+  for (let i = 0; i < graph.length; i++) {
+    if (mark[i] === undefined && !dfs(i, 1)) return false;
+  }
+  return true;
+};
+

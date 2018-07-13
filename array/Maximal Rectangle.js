@@ -96,3 +96,26 @@ maximalRectangle([
   [1, 1, 1, 1, 1],
   [1, 0, 0, 1, 0]
 ])
+
+// 3/24/2018
+var maximalRectangle = function(matrix) {
+  let res = 0;
+  if (!matrix) return res;
+  const yl = matrix.length;
+  if (!yl) return res;
+  const xl = matrix[0].length;
+  const toNumber = ch => +ch;
+  const tmp = matrix[0].map(toNumber);
+  res = largestRectangleArea(tmp);
+  for (let y = 1; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (+matrix[y][x] !== 0) {
+        tmp[x] += (+matrix[y][x])
+      } else {
+        tmp[x] = 0;
+      }
+    }
+    res = Math.max(res, largestRectangleArea(tmp));
+  }
+  return res;
+};

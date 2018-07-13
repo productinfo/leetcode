@@ -99,3 +99,38 @@ const threeSumClosest = (nums, target) => {
   }
   return result;
 };
+
+// 3/6/2018
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var threeSumClosest = function(nums, target) {
+  const l = nums.length;
+  if (!l) return 0;
+  let D = Infinity;
+  let min = 0;
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < l - 2; i++) {
+    // skip
+    if (i > 0 && nums[i - 1] === nums[i]) continue;
+    let j = i + 1;
+    let k = l - 1;
+    while (j < k) {
+      const sum = nums[i] + nums[j] + nums[k];
+      const diff = Math.abs(sum - target);
+      if (diff === 0) return sum;
+      if (diff < D) {
+        D = diff;
+        min = sum;
+      }
+      if (sum < target) {
+        j++;
+      } else {
+        k--;
+      }
+    }
+  }
+  return min;
+};

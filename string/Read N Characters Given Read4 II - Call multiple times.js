@@ -67,3 +67,26 @@ const solution = read4 => {
     return total;
   };
 };
+
+
+// 6/2/2018
+const solution = read4 => {
+  const tmp = [];
+  let pointer = 0;
+  let count = 0
+  return (buf, n) => {
+    let total = 0;
+    while (total < n) {
+      if (pointer === 0) {
+        count = read4(tmp);
+      }
+      if (count === 0) break;
+      while (total < n && pointer < count) {
+        buf[total++] = tmp[pointer++];
+      }
+      if (pointer >= count) pointer = 0;
+    }
+    return total;
+  };
+};
+

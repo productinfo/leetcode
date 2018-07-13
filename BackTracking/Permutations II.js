@@ -86,3 +86,61 @@ const permuteUnique = arr => {
   dfs();
   return res;
 };
+
+// 4/18/2018
+var permuteUnique = function(nums) {
+  const res = [];
+  const map = {}
+  const p = (arr, prefix) => {
+    if (arr.length === 0) {
+      map[prefix.join('')] = prefix.slice();
+      return;
+    }
+    for (let j = 0; j < arr.length; j++) {
+      p(
+        [
+          ...arr.slice(0, j),
+          ...arr.slice(j + 1)
+        ],
+        [
+          ...prefix,
+          arr[j]
+        ]
+      );
+    }
+  };
+  p(nums, []);
+  return Object.keys(map).reduce((res, k) => {
+    res.push(map[k]);
+    return res;
+  }, []);
+};
+
+
+// 5/27/2018
+var permuteUnique = function(nums) {
+  const res = [];
+  if (!nums || !nums.length) return res;
+  nums.sort((a, b) => a - b);
+  const go = (arr, tmp) => {
+    if (arr.length === 0) {
+      res.push(tmp.slice());
+      return;
+    }
+    for (let j = 0; j < arr.length; j++) {
+      if (j > 0 && arr[j] === arr[j - 1]) continue;
+      go(
+        [
+          ...arr.slice(0, j),
+          ...arr.slice(j + 1)
+        ],
+        [
+          ...tmp,
+          arr[j]
+        ]
+      );
+    }
+  };
+  go(nums, []);
+  return res;
+};

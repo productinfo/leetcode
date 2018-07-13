@@ -47,17 +47,16 @@ var wordBreak = function(s, wordDict) {
 
 };
 
-// var wordBreak = function(s, wordDict) {
-//     var t = [];                                                                                     
-
-//     for (var i = 0; i< s.length; i++) {                                                             
-//         for (var j = 0; j <=i; j ++ ) {                                                             
-//             var word = s.slice(j, i + 1);                                                           
-//             if (wordDict.has(word) && (j == 0 || t[j-1] == true )) {                                
-//                 t[i] = true;                                                                        
-//             }                                                                                       
-//         }                                                                                           
-//     }                                                                                               
-
-//     return t[s.length - 1] || false; 
-// };
+// 4/14/2017
+const wordBreak = (s, wordDict) => {
+  const dp = [true];
+  for (let i = 1; i <= s.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (dp[j] && wordDict.includes(s.substring(j, i))) {
+        dp[i] = true;
+        break;
+      }
+    }
+  }
+  return !!dp[s.length];
+};

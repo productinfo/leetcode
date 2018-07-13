@@ -103,3 +103,43 @@ var alienOrder = function(words) {
   }
   return res.length === Object.keys(map).length ? res : '';
 };
+
+// 8/21/2017
+// never test it
+const x = words => {
+  const deg = {};
+  const graph = {};
+  for (const w of words) {
+    for (const ch of w) {
+      graph[ch] = [];
+      deg[ch] = 0;
+    }
+  }
+  for (let i = 1; i < words.length; i++) {
+    const w1 = words[i - 1];
+    const w2 = words[i];
+    for (let j = 0; j < w1.length; j++) {
+      if (w1[j] === w2[j]) continue;
+      const c1 = w1[j];
+      const c2 = w2[j];
+      graph[c1] = graph[c1] || [];
+      if (!graph[c1].includes(c2)) graph[c1].push(c2);
+      deg[c2]++;
+      break;
+    }
+  }
+  let res = '';
+  const q = [];
+  Object.keys(graph).forEach(k => graph[k] === 0 && q.push(k));
+  while (q.length) {
+    const ch = q.shift();
+    res += ch;
+    if (ch in graph) {
+      for (const char of graph[ch]) {
+        deg[char]--;
+        if (graph[char] === 0) q.push(char);
+      }
+    }
+  }
+  return res.length === Object.keys(deg).length ? res : '';
+};

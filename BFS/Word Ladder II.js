@@ -196,3 +196,60 @@ console.log(findLadders(
   'cog',
   ["hot","dot","dog","lot","log","cog"]
 ));
+
+// 4/1/2018
+var x = function(beginWord, endWord, wordList) {
+  let min = Infinity;
+  const res = [];
+  const map = {};
+  const q = [beginWord];
+  const char = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  const ladder = {};
+  for (const w of wordList) ladder[w] = Infinity;
+  ladder[beginWord] = 0;
+  while (q.length) {
+    const w = q.shift();
+    let step = ladder[w] + 1;
+    if (step > min) break;
+    for (let j = 0; j < w.length; j++) {
+      for (const ch of char) {
+        const newWord = `${w.slice(0, j)}${ch}${w.slice(j + 1)}`;
+        if (newWord in ladder) {
+          if (step > ladder[newWord]) {
+            continue;
+          } else if (step < ladder[newWord]) {
+            q.push(newWord);
+            ladder[newWord] = step;
+          } else {
+            // no op
+          }
+
+          if (newWord in map) {
+            map[newWord].push(w);
+          } else {
+            map[newWord] = [w];
+          }
+          if (newWord === endWord) min = step;
+        }
+      }
+    }
+  }
+  const tmp = [];
+  const dfs = w => {
+    if (w === beginWord) {
+      tmp.unshift(w);
+      res.push(tmp.slice());
+      tmp.shift();
+      return;
+    }
+    tmp.unshift(w);
+    if (w in map) {
+      for (const v of map[w]) {
+        dfs(v);
+      }
+    }
+    tmp.shift();
+  };
+  dfs(endWord);
+  return res;
+};

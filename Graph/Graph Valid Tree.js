@@ -104,3 +104,25 @@ var validTree = function(n, edges) {
   if (hasCycle(0, -1)) return false;
   return visited.every(v => v);
 };
+
+// 4/21/2018
+var validTree = function(n, edges) {
+  const graph = {};
+  for (const [u, v] of edges) {
+    graph[u] = graph[u] || [];
+    graph[u].push(v);
+    graph[v] = graph[v] || [];
+    graph[v].push(u);
+  }
+  const visited = Array(n).fill(false);
+  const cycle = (node, parent) => {
+    visited[node] = true;
+    for (const n of graph[node] || []) {
+      if (n === parent) continue;
+      if (visited[n] || cycle(n, node)) return true;
+    }
+    return false;
+  };
+  if (cycle(0, -1)) return false;
+  return visited.every(v => v);
+};

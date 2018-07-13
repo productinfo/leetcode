@@ -1,0 +1,25 @@
+{
+  "name": "asyncro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-async-to-generator",
+      "syntax-async-functions"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2017": "^6.24.1"
+  },
+  "dependencies": {
+    "node-fetch": "^2.1.2"
+  }
+}

@@ -156,3 +156,49 @@ const summaryRanges = arr => {
   if (next <= arr[l - 1]) res.push(pr(next, arr[l - 1]));
   return res;
 };
+
+// 4/9/2018
+var summaryRanges = function(nums) {
+  const res = [];
+  if (!nums.length) return res;
+  if (nums.length === 1) return [`${nums[0]}`];
+  let start = nums[0];
+  const p = (a, b) => a === b ? `${a}` : `${a}->${b}`;
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] + 1 === nums[i + 1]) continue;
+    res.push(p(start, nums[i]));
+    start = nums[i + 1];
+  }
+  res.push(p(start, nums[nums.length - 1]));
+  return res;
+};
+
+// 4/18/2018
+var summaryRanges = function(nums) {
+  const res = [];
+  if (!nums.length) return res;
+  let start = nums[0];
+  const print = (a, b) => a === b ? `${a}` : `${a}->${b}`;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === nums[i - 1] + 1) continue;
+    res.push(print(start, nums[i - 1]));
+    start = nums[i];
+  }
+  if (start <= nums[nums.length - 1]) res.push(print(start, nums[nums.length - 1]));
+  return res;
+};
+
+// 4/28/2018
+var summaryRanges = function(nums) {
+  const res = [];
+  if (!nums.length) return res;
+  let pv = nums[0];
+  const print = (a, b) => a === b ? `${a}` : `${a}->${b}`;
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] + 1 === nums[i + 1]) continue;
+    res.push(print(pv, nums[i]));
+    pv = nums[i + 1];
+  }
+  if (pv !== undefined) res.push(print(pv, nums[nums.length - 1]));
+  return res;
+};

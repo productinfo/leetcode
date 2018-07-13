@@ -123,3 +123,21 @@ const f = (arr, s, e) => {
   if (next <= e) res.push(print(next, e));
   return res;
 };
+
+// 4/27/2018
+var findMissingRanges = function(nums, lower, upper) {
+  const res = [];
+  let pv = lower;
+  const print = (a, b) => a === b ? `${a}` : `${a}->${b}`;
+  for (const n of nums) {
+    if (n < pv) continue;
+    if (n === pv) {
+      pv = n + 1;
+      continue;
+    }
+    res.push(print(pv, n - 1));
+    pv = n + 1;
+  }
+  if (pv <= upper) res.push(print(pv, upper));
+  return res;
+};

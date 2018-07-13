@@ -80,3 +80,31 @@ const isPalindrome = (s) => {
   return true;
 
 };
+
+// 5/17/2018
+const v = ch => {
+  if (
+    (ch >= 'a' && ch <= 'z') ||
+      (ch >= 'A' && ch <= 'Z')
+  ) return true;
+  if (ch >= '0' && ch <= '9') return true;
+  return false;
+};
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+  if (!s || !s.length) return true;
+  let i = 0;
+  let j = s.length - 1;
+  while (i < j) {
+    while (i < j && !v(s[i])) i++;
+    while (i < j && !v(s[j])) j--;
+    if (s[i].toLowerCase() !== s[j].toLowerCase()) return false;
+    i++;
+    j--;
+  }
+  return true;
+};
+

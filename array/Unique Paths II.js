@@ -76,3 +76,43 @@ var uniquePathsWithObstacles = function(g) {
 
 	return g[yl - 1][xl - 1];
 };
+
+
+// 6/6/2018
+var uniquePathsWithObstacles = function(obstacleGrid) {
+  const yl = obstacleGrid.length;
+  const xl = obstacleGrid[0].length;
+    if (obstacleGrid[0][0] === 1) return 0;
+  let block = false;
+  for (let x = 0; x < xl; x++) {
+    if (block) {
+      obstacleGrid[0][x] = 0;
+    } else if (!block && obstacleGrid[0][x] === 0) {
+      obstacleGrid[0][x] = 1;
+    } else if (!block && obstacleGrid[0][x] === 1) {
+      block = true;
+      obstacleGrid[0][x] = 0;
+    }
+  }
+  block = false;
+  for (let y = 1; y < yl; y++) {
+    if (block) {
+      obstacleGrid[y][0] = 0;
+    } else if (!block && obstacleGrid[y][0] === 0) {
+      obstacleGrid[y][0] = 1;
+    } else if (!block && obstacleGrid[y][0] === 1) {
+      block = true;
+      obstacleGrid[y][0] = 0;
+    }
+  }
+  for (let y = 1; y < yl; y++) {
+    for (let x = 1; x < xl; x++) {
+      if (obstacleGrid[y][x] === 1) {
+        obstacleGrid[y][x] = 0;
+      } else {
+        obstacleGrid[y][x] = obstacleGrid[y][x - 1] + obstacleGrid[y - 1][x];
+      }
+    }
+  }
+  return obstacleGrid[yl - 1][xl - 1];
+};

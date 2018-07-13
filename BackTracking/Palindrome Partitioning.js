@@ -113,3 +113,40 @@ var partition = function(s) {
   }
   return res;
 };
+
+//3/18/2018
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+
+const valid = s => {
+  let i = 0;
+  let j = s.length - 1;
+  while (i < j) {
+    if (s[i++] !== s[j--]) return false;
+  }
+  return true;
+};
+const partition = s => {
+  const res = [];
+  const l = s.length;
+  if (!l) return res;
+  const tmp = [];
+  const dfs = str => {
+    if (!str.length) {
+      res.push(tmp.slice());
+      return;
+    }
+    for (let i = 1; i <= str.length; i++) {
+      const prefix = str.slice(0, i);
+      if (valid(prefix)) {
+        tmp.push(prefix);
+        dfs(str.slice(i));
+        tmp.pop();
+      }
+    }
+  };
+  dfs(s);
+  return res;
+};

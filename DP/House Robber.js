@@ -37,3 +37,18 @@ var rob = function(nums) {
   }
   return dp[len - 1];
 };
+
+// 4/8/2018
+var rob = function(nums) {
+  if (!nums.length) return 0;
+    let v1 = nums[0];
+    if (nums.length === 1) return v1;
+    let v2 = Math.max(nums[0], nums[1]);
+    let v3 = v2;
+    for (let i = 2; i < nums.length; i++) {
+        v3 = Math.max(v2, v1 + nums[i]);
+        v1 = v2;
+        v2 = v3;
+    }
+    return v3;
+};

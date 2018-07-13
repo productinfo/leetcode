@@ -116,3 +116,28 @@ const permute = arr => {
   dfs();
   return res;
 };
+
+// 4/14/2018
+var permute = function(nums) {
+  const res = [];
+  const p = (arr, prefix) => {
+    if (arr.length === 0) {
+      res.push(prefix.slice());
+      return;
+    }
+    for (let j = 0; j < arr.length; j++) {
+      p(
+        [
+          ...arr.slice(0, j),
+          ...arr.slice(j + 1)
+        ],
+        [
+          ...prefix,
+          arr[j]
+        ]
+      );
+    }
+  };
+  p(nums, []);
+  return res;
+};

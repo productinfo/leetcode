@@ -78,3 +78,17 @@ but if you need to print all paths then it is O(N*logN).
 Suppose that u have a complete binary tree then the total paths will be N/2
 and each path will have logN nodes so total of O(N*logN) in worst case.
 */
+
+
+// 5/17/2018
+var binaryTreePaths = function(root) {
+  const res = [];
+  if (!root) return res;
+  const go = (r, path) => {
+    if (!r.left && !r.right) res.push(`${path}${r.val}`);
+    if (r.left) go(r.left, `${path}${r.val}->`);
+    if (r.right) go(r.right, `${path}${r.val}->`);
+  };
+  go(root, '');
+  return res;
+};

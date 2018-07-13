@@ -90,3 +90,26 @@ const generateTrees = n => {
   return go(1, n);
 };
 // console.log(f(2));
+
+// 3/25/2018
+var generateTrees = function(n) {
+  if (n === 0) return [];
+  const x = (s, e) => {
+    const res = [];
+    if (s > e) return [null];
+    for (let i = s; i <= e; i++) {
+      const left = x(s, i - 1);
+      const right = x(i + 1, e);
+      for (const l of left) {
+        for (const r of right) {
+          const root = new TreeNode(i);
+          root.left = l;
+          root.right = r;
+          res.push(root);
+        }
+      }
+    }
+    return res;
+  };
+  return x(1, n);
+};

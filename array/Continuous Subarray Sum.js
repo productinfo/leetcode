@@ -17,3 +17,26 @@ const checkSubarraySum = (arr, k) => {
   }
   return false;
 };
+
+// 8/24/2017
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var checkSubarraySum = function(nums, k) {
+  const map = {
+    0: -1
+  };
+  let total = 0;
+  for (let i = 0; i < nums.length; i++) {
+    total += nums[i];
+    if (k !== 0) total %= k;
+    if (total in map) {
+      if (i - map[total] > 1) return true;
+    } else {
+      map[total] = i;
+    }
+  }
+  return false;
+};

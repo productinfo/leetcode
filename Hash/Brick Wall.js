@@ -17,3 +17,24 @@ const leastBricks = wall => {
   }
   return yl - count;
 };
+
+// 5/31/2017
+/**
+ * @param {number[][]} wall
+ * @return {number}
+ */
+var leastBricks = function(wall) {
+  const map = {};
+  const total = wall.length;
+  let max = 0;
+  for (const list of wall) {
+    let cur = 0;
+    for (let j = 0; j < list.length - 1; j++) {
+      cur += list[j];
+      map[cur] = map[cur] || 0;
+      map[cur]++;
+      max = Math.max(max, map[cur]);
+    }
+  }
+  return total - max;
+};

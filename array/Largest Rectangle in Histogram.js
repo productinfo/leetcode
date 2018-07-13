@@ -47,3 +47,23 @@ var largestRectangleArea = function(heights) {
   }
   return area;
 };
+
+// 3/24/2018
+// if increasing, push index to stack
+// else if decreasing, calculate area
+
+var largestRectangleArea = function(heights) {
+  let res = 0;
+  if (!heights || !heights.length) return res;
+  const stack = [];
+  heights.push(0);
+  for (let i = 0; i < heights.length; i++) {
+    while (stack.length && heights[i] < heights[stack[stack.length - 1]]) {
+      const ht = heights[stack.pop()];
+      const start = stack.length ? stack[stack.length - 1] : -1;
+      res = Math.max(res, ht * (i - start - 1));
+    }
+    stack.push(i);
+  }
+  return res;
+};

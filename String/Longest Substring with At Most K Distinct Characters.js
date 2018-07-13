@@ -37,3 +37,22 @@ var lengthOfLongestSubstringKDistinct = function(s, k) {
   }
   return max;
 };
+
+// 4/26/2018
+var lengthOfLongestSubstringKDistinct = function(s, k) {
+  if (!s || !s.length) return 0;
+  let res = 0;
+  const map = {};
+  let p1 = 0;
+  for (let p2 = 0; p2 < s.length; p2++) {
+    map[s[p2]] = map[s[p2]] || 0
+    map[s[p2]]++;
+    while (Object.keys(map).length > k) {
+      map[s[p1]]--;
+      if (map[s[p1]] === 0) delete map[s[p1]];
+      p1++;
+    }
+    res = Math.max(res, p2 - p1 + 1);
+  }
+  return res;
+};

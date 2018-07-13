@@ -125,3 +125,30 @@ const minWindow = (s, t) => {
 
   return minLen === Infinity ? '' : s.substring(minStart, minStart + minLen);
 };
+
+// 4/12/2018
+var minWindow = function(s, t) {
+  const map = {};
+  for (const ch of s) map[ch] = 0;
+  for (const ch of t) map[ch]++;
+  let p1 = 0;
+  let p2 = 0;
+  let count = t.length;
+  let max = Infinity;
+  let res = s;
+  while (p2 < s.length) {
+    if (map[s[p2]] > 0) count--;
+    map[s[p2]]--;
+    p2++;
+    while (count === 0) {
+      if (p2 - p1 < max) {
+        max = p2 - p1;
+        res = s.slice(p1, p2);
+      }
+      map[s[p1]]++;
+      if (map[s[p1]] > 0) count++;
+      p1++;
+    }
+  }
+  return max === Infinity ? "" : res;
+};

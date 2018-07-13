@@ -190,3 +190,42 @@ var numIslands = function(grid) {
   }
   return t;
 };
+
+// 4/28/2018
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+  let total = 0;
+  if (!grid) return total;
+  const yl = grid.length;
+  if (!yl) return total;
+  const xl = grid[0].length;
+
+  const opts = [
+    { x: 0, y: 1 },
+    { x: 0, y: -1 },
+    { x: 1, y: 0 },
+    { x: -1, y: 0 }
+  ];
+
+  const dfs = (i, j) => {
+    if (i < 0 || j < 0 || i >= xl || j >= yl || grid[j][i] !== '1') return;
+    grid[j][i] = '0';
+    for (const opt of opts) {
+      dfs(i + opt.x, j + opt.y);
+    }
+  };
+
+  for (let y = 0; y < yl; y++) {
+    for (let x = 0; x < xl; x++) {
+      if (grid[y][x] === '1') {
+        dfs(x, y);
+        total++;
+      }
+    }
+  }
+  return total;
+};
+
